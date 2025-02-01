@@ -10,7 +10,6 @@
         gap: 10px;
     }
     @media (max-width: 768px) {
-        
         gap: 10px;
     }
     @media (max-width: 480px) {
@@ -21,8 +20,8 @@
 .responsiveButton {
     background-color: transparent;
     margin: 20px;
-    border: 1px solid rgba(255,215,0,0.2);
-    color: #c0c0c0;
+    border: 1px solid rgba(152, 255, 152, 0.2);
+    color: #e0c097;
     padding: 4px 8px;
     border-radius: 8px;
     transition: background-color 0.2s ease-in-out;
@@ -72,19 +71,18 @@
     }
   }
   .responsiveButton:hover {
-   background-color: rgba(150, 139, 79, 0.605);
-    border: 2px solid rgba(255,215,0,0.2);
-    box-shadow: 0 0 10px rgba(255,215,0,0.2);
-    color: #c0c0c0;
+   background-color: rgba(152, 255, 152, 0.1);
+    border: 2px solid rgba(152, 255, 152, 0.3);
+    box-shadow: 0 0 10px rgba(152, 255, 152, 0.2);
+    color: #ffffff;
     font-weight: 600;
   }
 
   .copyIcon {
     width: 1.25rem;
     height: 1.25rem;
-  
-
     transform: 'translateY(-50%)';
+    color: #98ff98;
     @media (max-width: 1280px) {
       margin-left: 20px;
     }
@@ -104,8 +102,8 @@
     bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    background: rgba(26, 26, 26, 0.9);
+    color: #e0c097;
     padding: 8px 16px;
     border-radius: 4px;
     font-size: 14px;

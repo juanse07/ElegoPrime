@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
@@ -14,7 +13,7 @@ export default function NavBar() {
         <Navbar expand="md" collapseOnSelect variant="dark" bg="body" sticky="top">
             <Container fluid>
                 <Navbar.Brand as={Link} href='/' className='d-flex align-items-center'>
-                    <Image
+                    {/* <Image
                         src="/denverbartendersSign.webp"
                         alt="DenverBartenders"
                         width={250}
@@ -26,7 +25,8 @@ export default function NavBar() {
                             height: 'auto',
                         }}
                         priority
-                    />
+                    /> */}
+                    <span>Elego Prime</span>
                 </Navbar.Brand>
                 
                 <Navbar.Toggle aria-controls='main-navbar' />

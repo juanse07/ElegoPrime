@@ -1,6 +1,5 @@
 import ContactSection from '@/components/ContactSection';
 import LastSection from '@/components/LastSection';
-import ServiceSection from '@/components/ServiceSection';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -51,21 +50,16 @@ export default function Home({
   const [isMobile, setIsMobile] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const mobileContent = [
-    {
-      type: 'video',
-      src: '/barwithpeople.mp4',
-      heading: 'Bar Catering, Mobile Bars, and More!',
-      subheading: 'We have the right tools for your next event.'
-    },
+  
     {
       type: 'image',
-      src: '/bartools2.webp',
+      src: '/tools.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
     {
       type: 'image',
-      src: '/champagneBottle.webp',
+      src: '/hangedShelf.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     }
@@ -166,7 +160,16 @@ export default function Home({
         ))}
       </Carousel>
 
-      {services.map((service, index) => (
+      <div className={styles.mainContent}>
+        <h1 className={styles.mainTitle}>Esta Será la página Principal</h1>
+        <p className={styles.mainDescription}>
+          aquí habrá que crear secciones, en este momento estan presentes herosection, que incluye el carousel de fotos,
+          contactsection, que incluye los botones de contacto, y lastsection, que incluye la imagen de fondo y el texto
+          con la información de la empresa.
+        </p>
+      </div>
+
+      {/* {services.map((service, index) => (
         <ServiceSection
           key={index}
           category={service.category}
@@ -189,7 +192,7 @@ export default function Home({
           buttonText={service.buttonText}
           onClickNavPath={service.onClickNavPath}
         />
-      ))}
+      ))} */}
       <ContactSection contactButtons={contactButtons} />
       <LastSection
         backgroundImage="/hand2.webp"
@@ -201,116 +204,111 @@ export default function Home({
 export const getStaticProps = async () => {
   try {
     const desktopContent = [
-      {
-        type: 'video',
-        src: '/barwithpeople.mp4',
-        heading: 'Bar Catering, Mobile Bars, and More!',
-        subheading: 'We have the right tools for your next event.'
-      },
+    
       {
         type: 'image',
-        src: '/bartools6.webp',
+        src: '/painting.webp',
         heading: 'Mobile Bars',
         subheading: 'Incredible Bar Setups'
       },
       {
         type: 'image',
-        src: '/glasschampaigne.webp',
+        src: '/tools.webp',
         heading: 'Special Events',
         subheading: 'Memorable Experiences'
       },
     ];
   
 
-    const services: Service[] = [
-      {
-        category: "BARTENDING SERVICES",
-        title: "Craft Cocktails, Unforgettable Moments!",
-        description: "Elevating events with premium mobile bartending across the metro area.",
-        imageUrl: "/coparoja.webp",
-        imagePosition: "left",
-        backgroundHandler: "#000000",
-        buttonStyle: "outline-secondary",
-        buttonText: "see our menu",
-        fontColor: "#f9f9f9",
-        hightLightsBackgroundColor: "linear-gradient(135deg,rgb(0, 0, 0),rgb(41, 41, 43))",
-        HlTitleFont: "#B8860B",
-        HLbodyFont: "#F7F7FF",
-        highLightTitle1: 'Signature Cocktails:',
-        highLightTitle2: "Private Events:",
-        highLightTitle3: 'Corporate Functions:',
-        highLightBody1: 'Experience our curated selection of handcrafted cocktails, tailored to your taste and event theme.',
-        highLightBody2: 'Transform your special occasions with our professional bartending service and custom drink menus.',
-        highLightBody3: "Impress your clients and team with sophisticated cocktail service and professional presentation.",
-        onClickNavPath: '/',
-      },
-      {
-        category: "Premium Bartenders",
-        title: "Reliable. Professional. Exceptional.",
-        description: "Experienced mixologists at your service, ready to elevate your event today.",
-        imageUrl: "/boda.webp",
-        imagePosition: "right",
-        backgroundHandler: "#D6CFC7",
-        buttonStyle: "primary",
-        buttonText: "Request an Estimate",
-        fontColor: "#4E3629",
-        hightLightsBackgroundColor: "linear-gradient(135deg,rgb(161, 162, 167), #f4f4f4)",
-        HlTitleFont: "#B8860B",
-        HLbodyFont: "#1d1d1d",
-        highLightTitle1: "Elite Bartenders",
-        highLightTitle2: "Custom Bar Service",
-        highLightTitle3: "Event Support",
-        highLightBody1: "Need exceptional service? Our bartenders will craft perfect cocktails every time.",
-        highLightBody2: "Custom drink menus, signature cocktails, and more! We'll design it for you.",
-        highLightBody3: "We'll handle your entire bar service so you can enjoy your event worry-free.",
-        onClickNavPath: '/estimate',
-      },
-      {
-        category: "MOBILE BARS",
-        title: "Premium Bars, Unforgettable Experiences!",
-        description: "Transforming events with stunning mobile bar setups across the metro area.",
-        imageUrl: "/pouring1.webp",
-        imagePosition: "left",
-        backgroundHandler: "#000000",
-        buttonStyle: "outline-secondary",
-        buttonText: "Learn More",
-        fontColor: "#f9f9f9",
-        hightLightsBackgroundColor: "linear-gradient(135deg,rgb(0, 0, 0),rgb(41, 41, 43))",
-        HlTitleFont: "#B8860B",
-        HLbodyFont: "#F7F7FF",
-        highLightTitle1: 'Classic LED Bar:',
-        highLightTitle2: "Rustic Wood Bar:",
-        highLightTitle3: 'Premium Mirror Bar:',
-        highLightBody1: 'Sleek and modern LED-illuminated bar, perfect for upscale events and nighttime celebrations.',
-        highLightBody2: 'Handcrafted wooden bar with rustic charm, ideal for weddings and outdoor gatherings.',
-        highLightBody3: "Mirror-finished luxury bar that adds glamour and sophistication to any high-end event.",
-        onClickNavPath: '/',
-      },
-      {
-        category: "Moving",
-        title: "Making Your Move Smooth and Simple",
-        description: "From packing to unloading, trust us to care for your belongings..",
-        imageUrl: "/pouring2.webp",
-        imagePosition: "right",
-        hightLightsBackgroundColor: "linear-gradient(135deg,rgb(161, 162, 167), #f4f4f4)",
-        HlTitleFont: "#B8860B",
-        HLbodyFont: "#1d1d1d",
-        highLightTitle1: "Loading and Unloading",
-        highLightTitle2: "Packing Services",
-        highLightTitle3: "Furniture Disassembly",
-        backgroundHandler: "#D6CFC7",
-        fontColor: "#4E3629",
-        buttonText: "Request an Estimate",
-        highLightBody1: "We'll load and unload your belongings with care and precision.",
-        highLightBody2: "We'll pack your belongings safely and securely for your move.",
-        highLightBody3: "We'll disassemble your furniture so it's ready for moving day.",
-        onClickNavPath: '/estimate',
-      },
-    ];
+    // const services: Service[] = [
+    //   {
+    //     category: "BARTENDING SERVICES",
+    //     title: "Craft Cocktails, Unforgettable Moments!",
+    //     description: "Elevating events with premium mobile bartending across the metro area.",
+    //     imageUrl: "/coparoja.webp",
+    //     imagePosition: "left",
+    //     backgroundHandler: "#000000",
+    //     buttonStyle: "outline-secondary",
+    //     buttonText: "see our menu",
+    //     fontColor: "#f9f9f9",
+    //     hightLightsBackgroundColor: "linear-gradient(135deg,rgb(0, 0, 0),rgb(41, 41, 43))",
+    //     HlTitleFont: "#B8860B",
+    //     HLbodyFont: "#F7F7FF",
+    //     highLightTitle1: 'Signature Cocktails:',
+    //     highLightTitle2: "Private Events:",
+    //     highLightTitle3: 'Corporate Functions:',
+    //     highLightBody1: 'Experience our curated selection of handcrafted cocktails, tailored to your taste and event theme.',
+    //     highLightBody2: 'Transform your special occasions with our professional bartending service and custom drink menus.',
+    //     highLightBody3: "Impress your clients and team with sophisticated cocktail service and professional presentation.",
+    //     onClickNavPath: '/',
+    //   },
+    //   {
+    //     category: "Premium Bartenders",
+    //     title: "Reliable. Professional. Exceptional.",
+    //     description: "Experienced mixologists at your service, ready to elevate your event today.",
+    //     imageUrl: "/boda.webp",
+    //     imagePosition: "right",
+    //     backgroundHandler: "#D6CFC7",
+    //     buttonStyle: "primary",
+    //     buttonText: "Request an Estimate",
+    //     fontColor: "#4E3629",
+    //     hightLightsBackgroundColor: "linear-gradient(135deg,rgb(161, 162, 167), #f4f4f4)",
+    //     HlTitleFont: "#B8860B",
+    //     HLbodyFont: "#1d1d1d",
+    //     highLightTitle1: "Elite Bartenders",
+    //     highLightTitle2: "Custom Bar Service",
+    //     highLightTitle3: "Event Support",
+    //     highLightBody1: "Need exceptional service? Our bartenders will craft perfect cocktails every time.",
+    //     highLightBody2: "Custom drink menus, signature cocktails, and more! We'll design it for you.",
+    //     highLightBody3: "We'll handle your entire bar service so you can enjoy your event worry-free.",
+    //     onClickNavPath: '/estimate',
+    //   },
+    //   {
+    //     category: "MOBILE BARS",
+    //     title: "Premium Bars, Unforgettable Experiences!",
+    //     description: "Transforming events with stunning mobile bar setups across the metro area.",
+    //     imageUrl: "/pouring1.webp",
+    //     imagePosition: "left",
+    //     backgroundHandler: "#000000",
+    //     buttonStyle: "outline-secondary",
+    //     buttonText: "Learn More",
+    //     fontColor: "#f9f9f9",
+    //     hightLightsBackgroundColor: "linear-gradient(135deg,rgb(0, 0, 0),rgb(41, 41, 43))",
+    //     HlTitleFont: "#B8860B",
+    //     HLbodyFont: "#F7F7FF",
+    //     highLightTitle1: 'Classic LED Bar:',
+    //     highLightTitle2: "Rustic Wood Bar:",
+    //     highLightTitle3: 'Premium Mirror Bar:',
+    //     highLightBody1: 'Sleek and modern LED-illuminated bar, perfect for upscale events and nighttime celebrations.',
+    //     highLightBody2: 'Handcrafted wooden bar with rustic charm, ideal for weddings and outdoor gatherings.',
+    //     highLightBody3: "Mirror-finished luxury bar that adds glamour and sophistication to any high-end event.",
+    //     onClickNavPath: '/',
+    //   },
+    //   {
+    //     category: "Moving",
+    //     title: "Making Your Move Smooth and Simple",
+    //     description: "From packing to unloading, trust us to care for your belongings..",
+    //     imageUrl: "/pouring2.webp",
+    //     imagePosition: "right",
+    //     hightLightsBackgroundColor: "linear-gradient(135deg,rgb(161, 162, 167), #f4f4f4)",
+    //     HlTitleFont: "#B8860B",
+    //     HLbodyFont: "#1d1d1d",
+    //     highLightTitle1: "Loading and Unloading",
+    //     highLightTitle2: "Packing Services",
+    //     highLightTitle3: "Furniture Disassembly",
+    //     backgroundHandler: "#D6CFC7",
+    //     fontColor: "#4E3629",
+    //     buttonText: "Request an Estimate",
+    //     highLightBody1: "We'll load and unload your belongings with care and precision.",
+    //     highLightBody2: "We'll pack your belongings safely and securely for your move.",
+    //     highLightBody3: "We'll disassemble your furniture so it's ready for moving day.",
+    //     onClickNavPath: '/estimate',
+    //   },
+    // ];
 
     return {
       props: {
-        services,
+        // services,
         heroContent:desktopContent,
       },
       revalidate: 86400,

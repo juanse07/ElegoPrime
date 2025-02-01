@@ -120,5 +120,30 @@ next-env.d.ts
 
 backend/dist/
 
+# Compiled JavaScript files
+**/*.js
+**/*.jsx
+!*.config.js
+!next.config.js
+!postcss.config.js
+!tailwind.config.js
+
+# Keep specific JS config files
+!jest.config.js
+!.eslintrc.js
+
+# TypeScript build output
+dist/
 
 # Rest of your existing .gitignore remains the same...
+
+# Large binary files
+*.node
+**/node_modules/@next/swc-*
+**/node_modules/sharp/
+/Users/*/Library/Caches/next-swc
+
+# Build artifacts
+.next
+dist
+build
