@@ -1,0 +1,106 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image:linear-gradient(180deg,#1e1e1e,#000000); ;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #ffd700; /* Elegant gold */
+  margin-bottom: 50px; /* Add space below the span */
+  margin-top: 10px; /* Add space above the span */
+}
+
+.brandText {
+  /* font-family: 'Playfair Display', serif; */
+  font-family: 'Poppins', sans-serif; /* or 'Montserrat', sans-serif */
+  background-image: linear-gradient(100deg, #6e5e29 0%, #C5A580 50%, #A38946 100%);
+  background-color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 2rem;
+  text-decoration: none;
+  display: inline-block; /* Ensure margin works */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* Slightly lighter black */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffd700; /* Metallic gold */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e0c097; /* Gold text color */
+}
+
+.input,
+.textarea,
+.select {
+  background-color: #2a2a2a; /* Dark gray */
+  color: #e0c097; /* Gold text color */
+  border: 1px solid #ffd700; /* Gold border */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: #ffcc00; /* Bright gold focus */
+  box-shadow: 0 0 5px #ffcc00;
+}
+
+.submitButton {
+  /* background: #66500f !important; Gold gradient */
+  background: linear-gradient(90deg, #66500f, #C5A580) !important; /* Gold gradient */
+  color: #fff !important; /* Text color */
+  border: none !important; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor */
+  transition: transform 0.3s, background-color 0.3s !important;
+  margin-top: 30px;
+  
+}
+
+.submitButton:hover {
+  background: linear-gradient(90deg, #b3a783, #c29445) !important; /* Darker gold on hover */
+  transform: scale(1.05) !important; /* Slight zoom effect */
+  color: #222 !important; /* Text color */
+}
+
+.submitButton:active {
+  transform: scale(0.95) !important; /* Slight shrink effect */
+}
+
+.textDanger {
+  color: #ff6347; /* Coral red for errors */
+  font-size: 12px;
+}

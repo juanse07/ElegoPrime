@@ -1,0 +1,346 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); */
+
+
+.parentContainer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto; /* Full viewport height */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  background-color: var(--background-color); /* Optional background color */
+  box-sizing: border-box; /* Consistent box model */
+}
+
+/* Inner content container - restricts width and centers content */
+.container {
+  position: relative; /* Ensure relative positioning */
+  width: 90%; /* Use a percentage-based width for flexibility */
+  max-width: 1600px; /* Optional: cap the maximum width */
+  margin: 0 auto; /* Center the container */
+  padding: 0 2rem;
+}
+
+.serviceSection {
+  position: relative; /* Ensure relative positioning */
+  margin: 0; /* Ensure no outer spacing */
+  padding: 4rem; /* Default padding */
+  border-radius: 8px; /* Rounded corners */
+  width: 100vw; /* Full viewport width */
+  min-height: 70vh; /* Minimum height to fill the viewport */
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Center content vertically */
+  justify-content: space-between; /* Spread out child elements */
+  box-sizing: border-box; /* Include padding in width/height */
+  transition: margin 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  visibility: hidden;
+  transition: 
+    opacity 0.6s ease-out, 
+    transform 0.6s cubic-bezier(0.17, 0.84, 0.44, 1);
+  will-change: opacity, transform, visibility;
+}
+
+.serviceSection.animate {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.serviceButton {
+  
+  min-width: 150px; /* Minimum width */
+  min-height: 50px; /* Minimum height */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 600; /* Use semi-bold for better readability */
+  font-size: 4rem; /* Adjust font size as needed */
+  display: flex; /* Use flexbox for better alignment */
+  align-items: center; /* Center text and icons vertically */
+  justify-content: center; /* Center content horizontally */
+  padding: 1rem 1.5rem; /* Add padding for spacing */
+  font-size: 1rem; /* Default font size */
+  border: none; /* Remove default borders */
+  border-radius: 5px; /* Rounded corners */
+  background:linear-gradient(90deg, #FFC107, #FFA000); /* Default button color */
+  color: #333333; /* Button text color */
+  cursor: pointer; /* Add pointer cursor */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effects */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden;/* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.5), 2px 4px 6px rgba(255, 255, 255, 0.1) ;
+}
+
+.serviceButton:hover {
+  background-color: #007b33; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* For Light Backgrounds */
+.lightBackground .serviceButton {
+  background-color: #007b33; /* Dark green */
+  color: #ffffff;
+}
+
+/* For Dark Backgrounds */
+.darkBackground .serviceButton {
+  background-color: #00c853; /* Bright green */
+  color: #ffffff;
+}
+
+
+@media (max-width: 768px) {
+  .serviceButton {
+    margin-bottom: 2rem; /* Add space below the button */
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    padding: 0.8rem 1rem; /* Adjust padding for responsiveness */
+    white-space: normal; /* Allow text to wrap for small screens */
+  }
+}
+
+ 
+  
+ 
+  
+  
+  
+
+  @media (max-width: 768px) {
+    .serviceSection {
+      margin-bottom: 0; /* Ensure no space between sections */
+      padding: 2rem; /* Reduce padding for phones */
+    }
+  }
+  @media (max-width: 1080px) {
+    .serviceSection {
+      margin-bottom: 0; /* Ensure no space between sections */
+      padding: 2rem; /* Reduce padding for phones */
+    }
+   
+    .serviceButton{
+      margin-bottom: 2rem; /* Add space below the button */
+      font-size: 0.9rem; /* Adjust font size for smaller screens */
+      padding: 0.8rem 1rem; /* Adjust padding for responsiveness */
+      white-space: normal; /* Allow text to wrap for small screens */
+    }
+    
+  }
+  
+  /* Additional styles for ultra-wide screens if needed */
+  @media (min-width: 1200px) {
+    .serviceSection {
+      padding: 5rem; /* Add more padding for large screens */
+    }
+
+    .serviceActions {
+      margin-bottom: 2rem; /* Add space below the buttons */
+      gap: 1rem; /* Add space between buttons */
+    }
+    .serviceButton{
+      margin-bottom: 2rem; /* Add space below the button */
+      font-size: 0.9rem; /* Adjust font size for smaller screens */
+      padding: 0.8rem 1rem; /* Adjust padding for responsiveness */
+      white-space: normal; /* Allow text to wrap for small screens */
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .container {
+      max-width: 1400px; /* Increase max width for ultra-wide screens */
+    }
+  }
+
+  /* Additional styles if needed */
+
+  .serviceSection h2 {
+    font-size: 2.5rem; /* Larger heading size */
+    margin-bottom: 1rem; /* Space below heading */
+  }
+
+  .serviceContent {
+    max-width: 50%; /* Restrict text width for better readability */
+  }
+  
+  .serviceContent h1 {
+    font-size: 3rem; /* Larger headline */
+    margin-bottom: 1rem; /* Add spacing after headline */
+  }
+  
+  .serviceContent p {
+    font-size: 1.25rem; /* Larger paragraph text */
+    line-height: 1.6; /* Better line spacing */
+    margin-bottom: 1.5rem; /* Add spacing below paragraph */
+  }
+  
+  .serviceImage {
+    max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+  min-width: 400px; /* Minimum width */
+  min-height: 400px; /* Minimum height */
+  object-fit: cover; /* Prevent image distortion */
+  display: block; /* Remove extra spacing caused by inline images */
+  }
+
+  @media (max-width: 768px) {
+    .serviceButton {
+      min-width: 120px; /* Smaller minimum size for mobile */
+      min-height: 40px;
+      font-size: 0.9rem; /* Slightly smaller font size */
+      padding: 0.8rem 1rem; /* Adjust padding */
+      margin-bottom: 5px; /* Add space between buttons */
+    }
+
+    .serviceImage {
+      min-width: 300px; /* Smaller minimum width for small displays */
+      min-height: 300px; /* Smaller minimum height for small displays */
+    }
+  
+
+    
+  }
+  
+  .serviceActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+    gap: 4rem; /* Add space between buttons and icons */
+  }
+ 
+  .serviceIcon {
+    color: var(--primary-color);
+    transition: color 0.2s ease;
+    vertical-align: middle;
+  }
+  
+  .serviceIcon:hover {
+    color: var(--secondary-color); /* Highlight on hover */
+  }
+  
+  .serviceTitle {
+    font-size: 2.5rem; /* Larger headline */
+    margin-bottom: 1rem;
+  }
+  .serviceDescription {
+    font-size: 1.2rem; /* Increase paragraph size */
+    line-height: 1.6; /* Better line spacing */
+    margin-bottom: 2rem;
+    color: var(--text-secondary-color);
+  }
+
+  .highlightsRow {
+    margin-top: 2rem; /* Space above the highlights section */
+    gap: 1.5rem; /* Add gap between columns */
+    row-gap: 2rem; /* Vertical spacing for stacked layout on smaller screens */
+    display: flex;
+    flex-wrap: wrap; /* Ensure responsiveness */
+    justify-content: space-between; /* Spread columns evenly */
+  }
+  
+  .highlight {
+    padding: 1rem;
+    /* background-color: #f8f9fa; Light background to differentiate */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    flex: 1 1 calc(33.333% - 1.5rem); /* Flexbox: Take up 1/3 of the row */
+    min-width: 250px; /* Ensure columns don't shrink too much */
+    max-width: 100%; /* Prevent overflow */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .highlight h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #007b33; /* Accent color */
+  }
+  
+  .highlight p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .highlight:hover {
+    transform: scale(1.05); /* Slight enlarge on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+  }
+  @media (max-width: 768px) {
+    .highlight {
+      flex: 1 1 100%; /* Stack highlights on smaller screens */
+    }
+   
+    .serviceImage{
+      flex: 1 1 100%; /* Stack highlights on smaller screens */
+    }
+    .serviceActions {
+      flex-direction: row; /* Stack buttons on smaller screens */
+      gap: 1rem; /* Add space between buttons */
+      margin-bottom: 2rem; /* Space below the buttons */
+    }
+  }
+  .category {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #B88A2f; /* Accent color */
+    /* text-transform: uppercase; Optional for all caps style */
+  }
+
+  /* Add this new class for the video container */
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Style for the video itself */
+.videoBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Optional overlay to ensure text visibility */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Adjust opacity as needed */
+  z-index: 1;
+}
+
+/* Ensure content stays above video */
+.content {
+  position: relative;
+  z-index: 2;
+}
+.overlapImage {
+  position: absolute;
+  bottom: -100px;
+  z-index: 2;
+  transform: rotate(30 deg)!important;
+  -webkit-transform: rotate(30 deg)!important;
+  -moz-transform: rotate(30 deg)!important;
+  -ms-transform: rotate(30 deg)!important;
+  -o-transform: rotate(30 deg)!important; 
+  transform-origin: center;
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
+  -o-transform-origin: center;
+ 
+
+}

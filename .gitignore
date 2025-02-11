@@ -1,0 +1,149 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+# Dependencies
+/node_modules
+/frontend/node_modules
+/backend/node_modules
+/.pnp
+.pnp.*
+
+# Next.js
+/.next/
+/frontend/.next/
+/out/
+
+# Rest of your existing .gitignore remains the same...
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment Variables (can opt-in for committing if needed)
+/.env*
+!.env.example  # Keep .env.example for shared configurations
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Node Binaries
+*.node
+
+# SWC and Sharp Caches
+**/node_modules/@next/swc-darwin*
+**/node_modules/@next/swc-darwin-arm64*
+**/node_modules/@next/swc-*
+**/node_modules/sharp/
+/Users/*/Library/Caches/next-swc
+
+# Darwin (Apple Silicon and Intel binaries)
+/*.dSYM
+*.o
+*.so
+*.dylib
+**/node_modules/@next/swc-darwin*
+**/node_modules/@next/swc-darwin-amd64*
+**/node_modules/@next/swc-darwin-arm64*
+**/node_modules/@vercel/swc-darwin*
+**/node_modules/@vercel/swc-darwin-arm64*
+
+# Build Tools Cache
+/.cache
+
+# Temporary or Large Files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# IDE and Editor Settings
+.vscode/
+.idea/
+*.iml
+
+# Large Assets and Test Data
+/assets/large_files/
+*.psd
+*.ai
+*.tiff
+*.wav
+*.flac
+*.aac
+*.avi
+*.3gp
+*.webm
+*.mkv
+*.iso
+*.dmg
+*.pkg
+*.exe
+
+# Logs and Backups
+*.log
+*.gz
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+.env
+.env.local
+
+backend/dist/
+
+# Compiled JavaScript files
+**/*.js
+**/*.jsx
+!*.config.js
+!next.config.js
+!postcss.config.js
+!tailwind.config.js
+
+# Keep specific JS config files
+!jest.config.js
+!.eslintrc.js
+
+# TypeScript build output
+dist/
+
+# Rest of your existing .gitignore remains the same...
+
+# Large binary files
+*.node
+**/node_modules/@next/swc-*
+**/node_modules/sharp/
+/Users/*/Library/Caches/next-swc
+
+# Build artifacts
+.next
+dist
+build

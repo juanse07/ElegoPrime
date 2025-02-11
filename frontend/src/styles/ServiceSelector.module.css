@@ -1,0 +1,95 @@
+/* ServiceSelector.module.css */
+.container {
+    width: 100%;
+  }
+  
+  .label {
+    font-size: 20px;
+    font-weight: 400;
+    color: #e0c097;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .checkboxContainer {
+    background-color: #121212;
+    border: 1px solid #e0c097;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e0c097;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .checkboxLabel:hover {
+    background: rgba(255, 215, 0, 0.1);
+  }
+  
+  .checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    background-color: #1e1e1e;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .checkbox:checked {
+    background: linear-gradient(90deg, #66500f, #C5A580);
+    border-color: #C5A580;
+  }
+  
+  .checkbox:checked::before {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .checkbox:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ffcc00;
+  }
+  
+  .select {
+    width: 100%;
+    background-color: #2a2a2a;
+    color: #e0c097;
+    border: 1px solid #ffd700;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .select:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px #ffcc00;
+  }
+  
+  .select option {
+    background-color: #2a2a2a;
+    color: #e0c097;
+    padding: 10px;
+  }

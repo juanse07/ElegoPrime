@@ -1,0 +1,86 @@
+.timePickerContainer {
+    position: relative;
+    width: 200px;
+  }
+  
+  .timeButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #000000;
+    color: #c0c0c0;
+    border: 2px solid rgba(147, 113, 3, 0.782); 
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 240px;
+    background-color: #000000;
+  border: 2px solid rgba(147, 113, 3, 0.782); 
+    border-radius: 8px;
+    padding: 16px;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  .hoursGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .minutesContainer,
+  .periodContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .timeOption {
+    padding: 8px;
+    background-color: transparent;
+    /* color: rgba(253, 224, 71, 0.9); */
+    color: #c0c0c0;
+    border: 1px solid rgba(253, 224, 71, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .timeOption:hover {
+    background-color: rgba(253, 224, 71, 0.1);
+  }
+  
+  .selected {
+    background-color: rgba(253, 224, 71, 0.2);
+    border-color: rgba(253, 224, 71, 0.9);
+  }
+  
+  .confirmButton {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid rgba(147, 113, 3, 0.782); 
+    color: #c0c0c0;
+   
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

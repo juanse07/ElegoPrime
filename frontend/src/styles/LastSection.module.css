@@ -1,0 +1,92 @@
+.lastSection {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* Adjust height as needed */
+    min-height: 400px; /* Full screen height */
+    max-height: 800px; /* Limit height for larger screens */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff; /* Adjust text color for better contrast */
+    padding: 50px 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.lastSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adds a dark overlay for text visibility */
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background */
+    max-width: 800px; /* Center and limit text width */
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.footertext {
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.footertext a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.footertext a:hover {
+    text-decoration: underline;
+}
+
+.lastSection h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.lastSection p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+    .lastSection h1 {
+        font-size: 2rem; /* Smaller font size for phones */
+        margin-bottom: 15px;
+        color: #f8f8ff;
+    }
+
+    .lastSection p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+        line-height: 1.4;
+        color: #f8f8ff;
+    }
+}
+
+/* Media query for very small screens (e.g., very narrow phones) */
+@media (max-width: 480px) {
+    .lastSection h1 {
+        font-size: 1.5rem;
+        color: #f8f8ff;
+    }
+
+    .lastSection p {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        color: #f8f8ff;
+    }
+}

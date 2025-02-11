@@ -1,0 +1,20 @@
+.submitButton {
+    background: #66500f !important; /* Gold gradient */
+    color: #fff !important; /* Text color */
+    border: none !important; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.3s, background-color 0.3s !important;
+
+    &:hover {
+        background: linear-gradient(90deg, #FFC107, #FFA000) !important; /* Darker gold on hover */
+        transform: scale(1.05) !important; /* Slight zoom effect */
+    }
+
+    &:active {
+        transform: scale(0.95) !important; /* Slight shrink effect */
+    }
+}

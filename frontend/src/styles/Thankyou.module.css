@@ -1,0 +1,19 @@
+.thankYou {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff; /* Adjust for contrast */
+    height: 100vh; /* Full screen height */
+    width: 100%; /* Full screen width */
+    background-image: url('/hand3.webp');
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+  }
+  
+  .content {
+    background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent overlay for better readability */
+    padding: 20px;
+    border-radius: 10px; /* Optional: Add rounded corners */
+  }

@@ -1,0 +1,483 @@
+/* Layout and Container Styles */
+.container {
+  min-height: 100vh;
+  background-color: black;
+  color: rgba(253, 224, 71, 0.9);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wrapper {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  padding-bottom: 8rem;
+  scroll-behavior: smooth;
+  flex-direction: column;
+}
+
+.contentWrapper {
+  position: relative;
+  min-height: 400px;
+  margin-bottom: 2rem;
+}
+
+.slideContent {
+  position: relative;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  padding-bottom: 2rem;
+}
+
+.slideRight {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slideLeft {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slideCurrent {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Progress Bar Styles */
+.progressContainer {
+  margin-bottom: 3rem;
+}
+
+.progressBar {
+  height: 0.25rem;
+  border-radius: 9999px;
+  overflow: visible;
+}
+
+.progressFill {
+  height: 0.25rem;
+  background-color: #b18605;
+  border-radius: 9999px;
+  transition: all 500ms;
+}
+
+/* Typography */
+.title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 300;
+  color: #B8860B;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Option Buttons Styles */
+.optionsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.optionsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionItem {
+  flex: 1 1 45%;
+}
+
+.optionButton {
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  background-color: #000000;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(147, 113, 3, 0.782);
+  color: #c0c0c0;
+  /* color: #F9F9F9; */
+  font-family: 'Poppins', sans-serif;
+  transition: all 150ms;
+}
+
+.optionButton:hover {
+  border-color: rgba(234, 179, 8, 0.3);
+  background-color: rgba(11, 9, 0, 0.714);
+  color: #bb931b;
+}
+
+.optionButtonSelected {
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  background-color: rgba(234, 179, 8, 0.2);
+  border-radius: 0.5rem;
+  border: 2px solid #eab308;
+  color: #bb931b;
+  box-shadow: 0 0 12px rgba(216, 181, 63, 0.782);
+  font-family: 'Poppins', sans-serif;
+  transition: all 150ms;
+}
+.optionButtonSelected:hover {
+  border-color: rgba(234, 179, 8, 0.5);
+  background-color: rgba(11, 9, 0, 0.514);
+  color: #bb931b;
+}
+
+/* .optionButton:hover:not(.optionButtonSelected) {
+  border-color: rgba(234, 179, 8, 0.5);
+  background-color: rgba(234, 178, 8, 0.514);
+} */
+.optionButton:focus {
+  border-color: rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.optionButton:active {
+  border-color: rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.optionButton.selected {
+  background-color: rgba(234, 179, 8, 0.2);
+  border: 2px solid #eab308;
+  color: #bb931b;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(216, 181, 63, 0.782);
+}
+.optionButton.selected:hover {
+  border-color: rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 12px rgba(216, 181, 63, 0.782);
+}
+/* Input Field Styles */
+.inputContainer {
+  position: relative;
+  width: 100%;
+  margin-top: 0.5rem;
+  background-color: #000000;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(147, 113, 3, 0.782); 
+  color: #c0c0c0;
+  font-family: 'Poppins', sans-serif;
+  background: #000000 !important;
+  -webkit-appearance: none;
+  outline: none;
+  appearance: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+
+  right: 8px;
+  top: 50% !important;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  filter: invert(70%) sepia(75%) saturate(500%) hue-rotate(360deg) brightness(100%) contrast(107%);
+  opacity: 0.9;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+.input:hover {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.input:focus {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.otherInput {
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  background-color: #000000;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(147, 113, 3, 0.782);
+  color: #c0c0c0;
+  -webkit-appearance: none;
+  outline: none;
+  appearance: none;
+  font-family: 'Poppins', sans-serif;
+  transition: all 150ms;
+}
+.otherInput:hover {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.otherInput:focus {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.otherInput:active {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+
+
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(147, 113, 3, 0.782);
+  color: #c0c0c0;
+  font-family: 'Poppins', sans-serif;
+  background: #000000 !important;
+  min-height: 8rem;
+  outline: none;
+  resize: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.textarea:hover {
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+
+/* Date and Time Input Styles */
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Season and Month Selector Styles */
+.seasonSelector,
+.monthSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  font-family: 'Poppins', sans-serif;
+}
+.monthLabel {
+  margin-top: 2rem;
+  margin-bottom: 0.3rem;
+  color: #c0c0c0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+.seasonLabel {
+  margin-top: 2rem;
+  margin-bottom: 0.3rem;
+    color: #c0c0c0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.seasonButtons,
+.monthButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+ 
+  font-family: 'Poppins', sans-serif;
+}
+
+.seasonButton,
+.monthButton {
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(147, 113, 3, 0.782);
+
+  background: transparent;
+  color: #c0c0c0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.seasonButton:hover,
+.monthButton:hover {
+  background-color: rgba(234, 179, 8, 0.2);
+  border-color: #eab308;
+  color: #bb931b;
+}
+.seasonButton:focus,
+.monthButton:focus {
+  border-color: rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.seasonButton.active,
+.monthButton.active {
+  font-weight: 600;
+  color: #bb931b;
+  border: 2px solid rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+.seasonButton:active,
+.monthButton:active {
+  border-color: rgba(216, 181, 63, 0.782);
+  box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+}
+
+.seasonButton.selected,
+.monthButton.selected {
+  background-color: rgba(234, 179, 8, 0.2);
+  border:5px solid #eab308 ;
+  /* border-color: #eab308; */
+  color: #bb931b;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(216, 181, 63, 0.782);
+}
+
+/* Navigation Button Styles */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.buttonPrev,
+.buttonNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #FFC107, #FFA000);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .input {
+    padding: 1rem 1rem;
+  }
+  .input[type="date"]::-webkit-calendar-picker-indicator {
+
+    right: 8px;
+    top: 50% !important;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    filter: invert(70%) sepia(75%) saturate(500%) hue-rotate(360deg) brightness(100%) contrast(107%);
+    opacity: 0.9;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  .optionItem {
+    flex: 1 1 35%;
+    font-size: smaller;
+    
+  }
+
+  .seasonButtons,
+  .monthButtons {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .seasonButton,
+  .monthButton {
+    padding: 1 rem 1.5rem;
+    font-size: 1rem;
+  }
+  .monthButtons {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}
+
+/* Safari-specific styles */
+@supports (-webkit-touch-callout: none) {
+  .input[type="date"] {
+    padding-right: 2rem;
+  }
+
+  .input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    filter: invert(70%) sepia(75%) saturate(500%) hue-rotate(360deg) brightness(100%) contrast(107%);
+    opacity: 0.9;
+    cursor: pointer;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+}
+.inputError {
+  border: 1px solid #dc3545;
+}
+
+.errorMessage {
+ 
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.slideright {
+  animation: slideInRight 0.3s forwards;
+}
+
+.slideleft {
+  animation: slideInLeft 0.3s forwards;
+}
+
+.slidecurrent {
+  animation: none;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

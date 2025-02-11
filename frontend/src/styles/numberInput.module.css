@@ -1,0 +1,113 @@
+/* NumberInput.module.css */
+.numberInputWrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .label {
+    font-size: 20px;
+    font-weight: 400;
+    color: #e0c097;
+    margin-bottom: 10px;
+  }
+  
+  .numberInput {
+    width: 100%;
+    background-color: #121212;
+    color: #e0c097;
+    border: 1px solid #e0c097;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+  &::placeholder {
+    color:   rgba(#e0c097, 0.65);/* Use the variable from custom-theme.scss */
+  }
+  
+  .numberInput:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px #ffcc00;
+  }
+  
+  .numberInput::-webkit-outer-spin-button,
+  .numberInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .spinButton {
+    position: absolute;
+    right: 5px;
+    width: 24px;
+    height: 20px;
+    background: linear-gradient(90deg, #66500f, #C5A580);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .spinButton:hover {
+    background: linear-gradient(90deg, #b3a783, #c29445);
+    transform: scale(1.05);
+  }
+  
+  .spinButton:active {
+    transform: scale(0.95);
+  }
+  
+  .spinUp {
+    top: 4px;
+    border-radius: 3px 3px 0 0;
+  }
+  
+  .spinDown {
+    bottom: 4px;
+    border-radius: 0 0 3px 3px;
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+    color: #fff;
+  }
+
+  .addressInput {
+    width: 100%;
+    border-radius: 8px;
+    border: 4px solid rgba(147, 113, 3, 0.782); 
+    /* border: `error ? "1px solid red" : "1px solid rgba(147, 113, 3, 0.782)"`, */
+    color: #c0c0c0;
+  font-family: 'Poppins', sans-serif;
+  background: #000000 !important;
+  outline: none;
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+  
+  .addressInput::placeholder {
+    color: #c0c0c0; /* Placeholder text color */
+    opacity: 1; /* Ensure full visibility of placeholder */
+  }
+  
+  .addressInput:focus {
+    border: 2px solid rgba(216, 181, 63, 0.782);
+    box-shadow: 0 0 5px rgba(216, 181, 63, 0.782);
+    outline: none;
+  }
+
+  .addressLink {
+    color: #e0ef13;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .addressLink:hover {
+    color: #a5c81b; /* Darker blue on hover */
+  }
