@@ -1,0 +1,39 @@
+// Luxury Theme with Black and Gold Tones
+
+$surface-bg: #f9f9f9; // Light gray/white for surfaces
+$primary: #98ff98; // Light mint green
+$secondary: #ffffff; // White
+$danger: #ff6347; // Coral red for alerts
+$body-color: #c0c0c0 !default; // Light gold for text
+$body-bg: #f2f2f2 !default; // Darker background to contrast with light colors
+$text-muted: #b4b4b4; // Neutral gray for subtle text
+$card-bg: #242424; // Dark gray for card backgrounds
+$modal-content-bg: #1f1f1f; // Dark background for modals
+$dropdown-bg: #1f1f1f; // Matching modal background
+$dropdown-link-color: #98ff98; // Using primary color for dropdown links
+$dropdown-link-hover-bg: #2a2a2a; // Slightly lighter gray for hover
+$dropdown-link-hover-color: #ffffff; // White for hover text
+$dropdown-link-active-bg: #2a2a2a; // Same as hover
+$dropdown-link-active-color: #98ff98; // Primary color for active items
+$input-bg: transparent; // Keep transparent inputs
+$form-file-button-bg: #242424; // Match card background
+$navbar-dark-color: #e0c097; // Light gold for navbar text
+$navbar-dark-hover-color: #98ff98; // Primary color for hover
+$navbar-dark-active-color: #98ff98; // Primary color for active
+$tooltip-bg: #242424; // Match card background
+$tooltip-color: #e0c097; // Light gold for tooltip text
+$pagination-bg: #1f1f1f; // Dark background for pagination
+$pagination-hover-bg: #2a2a2a; // Lighter on hover
+$pagination-focus-bg: #2a2a2a; // Match hover
+$pagination-border-color: transparent; // Keep clean look
+$pagination-hover-border-color: transparent; // No hover borders
+$pagination-active-bg: #98ff98; // Primary color for active page
+$pagination-active-color: #1a1a1a; // Dark text on active page
+$pagination-color: #e0c097; // Light gold for pagination text
+$pagination-hover-color: #ffffff; // White text on hover
+$pagination-focus-color: #ffffff; // Match hover
+$input-placeholder-color: rgba(#e0c097, 0.65); // Muted gold for placeholders
+
+$enable-negative-margins: true;
+
+@import "~bootstrap/scss/bootstrap";

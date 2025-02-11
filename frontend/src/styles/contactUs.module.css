@@ -1,0 +1,277 @@
+.desktop1 {
+  position: relative;
+    width: 100vw;
+    height: 100vw; /* Full viewport height */
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    background-color: #fdf5e6;
+
+
+    box-sizing: border-box; /*Full viewport height */
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+
+
+.imageContainer {
+    position: relative;
+    display: flex;
+  
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Ensures the image doesn't overflow */
+}
+
+  .contactUsButtonContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Ensures the image doesn't overflow */
+}
+  
+  
+  .imagelayerIcon {
+    height: 100%; /* Takes full height of the container */
+    width: auto; /* Maintains the aspect ratio */
+    object-fit: cover; /* Adjusts how the image fits inside the container */
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.imageside {
+position: relative;
+    justify-content: center;
+    align-items: center;
+  padding: 20px;
+    height: 100vw;
+    width: 50vw;
+}
+
+ .buttonside {
+    position: relative;
+    
+    
+    
+  
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+    height:100vw; 
+    width: 50vw;
+}
+
+
+
+
+
+.contactUsContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%; /* Ensure it takes the full height of its parent */
+    padding: 20px; /* Optional: Add some padding for spacing */
+    z-index: 1;
+}
+
+.wedLoveTo {
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    color: #ffffff; /* Update to match theme text color */
+ 
+    text-align: center; /* Center text */
+    padding: 20px; /* Add padding for better readability */
+    box-sizing: border-box; /* Include padding in width/height */
+   
+   
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    line-height: 2.25rem;
+    font-family: 'Poppins', sans-serif;
+    z-index: 2;
+    @media (max-width: 1024px) {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+.contactUs {
+   
+ 
+    font-size: 3.75rem;
+    letter-spacing: 0.03em;
+    line-height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Center horizontally */
+    color: #98ff98; /* Update to use primary mint green */
+    z-index: 2;
+    @media (max-width: 1024px) {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+.socialMediaContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.pageContainer {
+  min-height: 100vh;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.heroSection {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallaxOverlay {
+  position: relative;
+  height: 100%;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+  }
+}
+
+.heroContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.titleContainer {
+  font-family: 'Poppins', sans-serif;
+}
+
+.titleContainer .title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #98ff98 !important;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: inherit;
+}
+
+.titleContainer .subtitle {
+  font-size: 1.5rem;
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  font-family: inherit;
+}
+
+.contentSection {
+  display: flex;
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 4rem;
+}
+
+.leftColumn, .rightColumn {
+  flex: 1;
+}
+
+.messageCard {
+  background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(36,36,36,0.9)); /* Using $body-bg and $card-bg */
+  padding: 3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(152,255,152,0.2); /* Using $primary with opacity */
+  box-shadow: 0 10px 30px rgba(152,255,152,0.1); /* Using $primary with opacity */
+}
+
+.welcomeMessage {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.socialIcon {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.contactButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  
+
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #98ff98, #5fcc5f);
+  transform: scale(1.05);
+}
+
+.secondaryButton {
+  background: rgba(152,255,152,0.1); /* Using $primary with opacity */
+  border: 1px solid rgba(152,255,152,0.3); /* Using $primary with opacity */
+}
+
+@media (max-width: 768px) {
+  .contentSection {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+
+

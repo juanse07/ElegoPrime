@@ -1,0 +1,202 @@
+@import "custom-theme";
+@import 'react-markdown-editor-lite/lib/index.css';
+
+:root {
+  --popup-box-shadow: 3px 3px 13px 4px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  scroll-behavior: auto; /* Adds smooth scrolling */
+  box-sizing: border-box; /* Consistent box model */
+}
+
+#_next {
+  height: auto; /* Ensures no height restriction */
+  overflow: visible; /* Avoids hidden scrollbars */
+}
+
+h1 {
+  color: white;
+  font-weight: 600;
+}
+
+a,
+.btn-link {
+  text-decoration: none;
+  padding: 0;
+}
+
+.btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.page-link {
+  margin: 0 5px;
+  border-radius: 8px;
+}
+
+.page-link:not(:focus-visible) {
+  box-shadow: none;
+}
+
+.page-item.active .page-link {
+  font-weight: bold;
+}
+
+/* Editor styles */
+.rc-md-editor {
+  border-radius: 0.375rem;
+
+  .rc-md-navigation {
+    background-color: var(--body-bg);
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+
+    .button-wrap .button {
+      color: var(--body-color);
+
+      &:hover {
+        color: white;
+      }
+
+      &.button.disabled {
+        color: gray;
+      }
+    }
+
+    .drop-wrap {
+      background-color: var(--surface-bg);
+    }
+
+    .header-list .list-item {
+      color: var(--body-color);
+    }
+
+    .header-list .list-item:hover {
+      color: white;
+      background: transparent;
+    }
+  }
+
+  .editor-container {
+    .section-container.input {
+      border-bottom-left-radius: 0.375rem;
+
+      &::placeholder {
+        color: var(--input-placeholder-color);
+      }
+    }
+
+    .section-container.html-wrap {
+      border-bottom-right-radius: 0.375rem;
+    }
+
+    .section-container.input,
+    .section-container.html-wrap {
+      background-color: var(--body-bg);
+      color: var(--body-color);
+    }
+
+    .custom-html-style > * {
+      color: var(--body-color);
+    }
+  }
+
+  a {
+    color: var(--bs-link-color);
+  }
+
+  a:hover {
+    color: var(--bs-link-hover-color);
+  }
+
+  &.is-invalid {
+    border-color: var(--danger);
+  }
+
+  &.full {
+    z-index: 1030;
+  }
+}
+
+code,
+pre,
+.rc-md-editor .custom-html-style code,
+.rc-md-editor .custom-html-style pre {
+  background-color: var(--surface-bg);
+  color: var(--body-color);
+}
+
+pre,
+.rc-md-editor .custom-html-style pre {
+  display: block;
+  padding: 20px;
+  line-height: 28px;
+}
+
+blockquote,
+.rc-md-editor .custom-html-style blockquote {
+  position: relative;
+  margin: 16px 0;
+  padding: 5px 8px 5px 30px;
+  background: rgba(102, 128, 153, 0.05);
+  border-left: 10px solid #d6dbdf;
+
+  p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 8px 0;
+  }
+}
+
+/* Tooltip and dropdown styles */
+.tooltip.show {
+  opacity: 1;
+  display: block;
+}
+
+.tooltip-inner {
+  background-color: var(--bs-tooltip-bg);
+  color: var(--bs-tooltip-color);
+  box-shadow: var(--popup-box-shadow);
+}
+
+.dropdown-menu {
+  box-shadow: var(--popup-box-shadow);
+}
+
+/* Section reset */
+section {
+  margin: 0;
+  padding: 0;
+}
+
+/* Scroll Animation Classes */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(50px);
+  visibility: hidden;
+  transition: 
+    opacity 0.6s ease-out, 
+    transform 0.6s cubic-bezier(0.17, 0.84, 0.44, 1),
+    visibility 0.6s ease-out;
+  will-change: opacity, transform, visibility;
+}
+
+.fade-in-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
