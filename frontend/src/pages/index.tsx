@@ -53,7 +53,7 @@ export default function Home({
   
     {
       type: 'image',
-      src: '/tools.webp',
+      src: '/slideb2.jpg',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
@@ -129,7 +129,7 @@ export default function Home({
             ) : (
               <div className={styles.imageWrapper}>
                 <Image
-                  src={content.src}
+                  src="/slideb2.jpg"
                   alt={content.heading}
                   layout="fill"
                   objectFit="cover"
@@ -161,11 +161,11 @@ export default function Home({
       </Carousel>
 
       <div className={styles.mainContent}>
-        <h1 className={styles.mainTitle}>Esta Será la página Principal</h1>
+        <h1 className={styles.mainTitle}>UNFORGETTABLE <span><br></br>experience</span></h1>
         <p className={styles.mainDescription}>
-          aquí habrá que crear secciones, en este momento estan presentes herosection, que incluye el carousel de fotos,
-          contactsection, que incluye los botones de contacto, y lastsection, que incluye la imagen de fondo y el texto
-          con la información de la empresa.
+        We offer a variety of services that can be to your liking, our work is impeccable, and your home will be a cozy place.
+        Whether you need regular maintenance or a one-time deep cleaning, we have the expertise and resources to get the job done right.
+        Contact us today to experience the Elego difference!
         </p>
       </div>
 

@@ -43,15 +43,30 @@
 
 .navbar {
     background: rgba(0, 0, 0, 0.9) !important;
-    padding: 0.5rem 1rem;
+    padding:1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .contactButton {
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 215, 0, 0.3);
-    color: #ffd700;
-   
+    color: #ffd700; 
+}
+
+.NavStyle {
+  background-color: #2e3c49;
+  margin:10px;
+  border-radius: 20px;
+  color:#f8f3d5 !important;
+  padding: 7px 14px !important;
+}
+
+.NavStyle:hover {
+  background-color: #ff8730;
+  color:#f8f3d5 !important;
+  box-shadow: 0px 0px 10px#ff86304a; 
+  border: transparent;
+  
 }
 
 .contactButton:hover {

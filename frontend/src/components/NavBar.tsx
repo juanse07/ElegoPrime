@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import styles from '@/styles/NavBar.module.css';
+
 
 export default function NavBar() {
     const router = useRouter();
@@ -10,7 +12,7 @@ export default function NavBar() {
     };
 
     return (
-        <Navbar expand="md" collapseOnSelect variant="dark" bg="body" sticky="top">
+        <Navbar expand="md" collapseOnSelect variant="dark" bg="body" sticky="top" className="shadow-sm">
             <Container fluid>
                 <Navbar.Brand as={Link} href='/' className='d-flex align-items-center'>
                     {/* <Image
@@ -26,25 +28,49 @@ export default function NavBar() {
                         }}
                         priority
                     /> */}
-                    <span>Elego Prime</span>
+                    <span style={{ fontSize: '2.5rem', fontWeight:'bolder', padding:'1rem 3rem'}}>ELEGO PRIME</span>
                 </Navbar.Brand>
                 
                 <Navbar.Toggle aria-controls='main-navbar' />
                 
-                <Navbar.Collapse id='main-navbar' className='justify-content-between'>
-                    <Nav className="me-auto">
-                        <Nav.Link 
+                <Navbar.Collapse id='main-navbar'>
+                    <Nav className="ms-auto">
+                        <Nav.Link
+                            className={styles.NavStyle}
                             as={Link}
                             href='/' 
                             active={router.pathname === "/"}>
                             Home
                         </Nav.Link>
                         <Nav.Link 
+                            className={styles.NavStyle}
+                            as={Link}
+                            href='/' 
+                            active={router.pathname === "/"}>
+                            All services
+                        </Nav.Link>
+                        <Nav.Link 
+                            className={styles.NavStyle}
+                            as={Link}
+                            href='/' 
+                            active={router.pathname === "/"}>
+                            Reserve
+                        </Nav.Link>
+                        <Nav.Link 
+                            className={styles.NavStyle}
                             as={Link}
                             href='/contactUs' 
                             active={router.pathname === "/contactUs"}>
                             Contact Us
                         </Nav.Link>
+                        {/* Desktop-only button */}
+                    <div className="d-none d-md-block">
+                        <Button
+                            onClick={handleContactClick}
+                            className={styles.NavStyle}>
+                            Get an Estimate
+                        </Button>
+                    </div>
                         {/* Mobile-only button */}
                         <div className="d-md-none mt-3 me-3 ">
                             <Button
@@ -57,16 +83,7 @@ export default function NavBar() {
                         </div>
                     </Nav>
                     
-                    {/* Desktop-only button */}
-                    <div className="d-none d-md-block">
-                        <Button
-                            onClick={handleContactClick}
-                            variant="outline-warning"
-                            className="px-4"
-                        >
-                            Get an Estimate
-                        </Button>
-                    </div>
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
