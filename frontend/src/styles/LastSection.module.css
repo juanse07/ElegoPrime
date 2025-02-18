@@ -1,40 +1,27 @@
 .lastSection {
     position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 20vh; /* Adjust height as needed */
-    min-height: 400px; /* Full screen height */
-    max-height: 800px; /* Limit height for larger screens */
+    height: 20vh;
+    min-height: 400px;
+    max-height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff; /* Adjust text color for better contrast */
+    color: #fff;
     padding: 50px 20px;
     overflow: hidden;
     width: 100%;
-}
-
-.lastSection::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adds a dark overlay for text visibility */
-    z-index: 0;
+    background-color: #2e3c49;
+    clip-path: ellipse(100% 100% at 50% 100%);
 }
 
 .content {
     position: relative;
-    z-index: 1; /* Ensures content is above the background */
-    max-width: 800px; /* Center and limit text width */
+    z-index: 1;
+    max-width: 800px;
     padding: 20px;
     border-radius: 8px;
-    background: rgba(0, 0, 0, 0.5);
 }
 
 .footertext {
@@ -64,6 +51,15 @@
 
 /* Media query for smaller screens (e.g., phones) */
 @media (max-width: 768px) {
+    .lastSection {
+        min-height: 300px;
+    }
+
+    .footertext {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
     .lastSection h1 {
         font-size: 2rem; /* Smaller font size for phones */
         margin-bottom: 15px;
@@ -77,8 +73,18 @@
     }
 }
 
-/* Media query for very small screens (e.g., very narrow phones) */
+/* Media query for very small screens */
 @media (max-width: 480px) {
+    .lastSection {
+        min-height: 250px;
+        padding: 30px 15px;
+    }
+
+    .footertext {
+        font-size: 0.7rem;
+        line-height: 1.3;
+    }
+
     .lastSection h1 {
         font-size: 1.5rem;
         color: #f8f8ff;

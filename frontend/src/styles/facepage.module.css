@@ -43,16 +43,27 @@
     position: relative;
     width: 100%;
     height: 65vh;
+    margin-bottom: 50px;
   }
   
   .carousel {
+    position: relative;
     height: 65vh;
     width: 100%;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 50px),
+      85% 100%,
+      15% 100%,
+      0 calc(100% - 50px)
+    );
   }
   
   .carouselItem {
     height: 65vh;
     position: relative;
+    clip-path: inherit;
   }
   
   .videoWrapper,
@@ -61,6 +72,7 @@
     width: 100%;
     height: 65vh;
     overflow: hidden;
+    clip-path: inherit;
   }
   
   .video {
@@ -132,13 +144,14 @@
     }
   }
 
-  .contactUsHome{
-    background-color: #000;
+  .contactUsHome {
+    position: relative;
+    background-color: #fff;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
     padding: 10px;
-
+    z-index: 1;
   }
   @media (max-width: 2700px) {
     .contactUsHome{
@@ -236,17 +249,21 @@
   }
 
   .mainContent {
+    position: relative;
     padding: 2rem;
     border-radius: 8px;
     margin: 2.5rem 9rem 1rem 9rem;
     max-width: 1200px;
+    z-index: 1;
   }
 
   .mainsubContent {
+    position: relative;
     padding: 2rem;
     border-radius: 8px;
     margin: 0rem 9rem 4rem 9rem;
     max-width: 100%;
+    z-index: 1;
   }
 
   .mainTitle {

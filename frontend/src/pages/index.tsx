@@ -2,7 +2,6 @@ import ContactSection from '@/components/ContactSection';
 import LastSection from '@/components/LastSection';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
 
@@ -46,26 +45,24 @@ export default function Home({
   services = [], 
   heroContent: desktopContent = []
 }: HomeProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+
   const mobileContent = [
-  
     {
       type: 'image',
-      src: '/slideb2.jpg',
+      src: '/herramientasmovil.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
     {
       type: 'image',
-      src: '/hangedShelf.webp',
+      src: '/salaportrait.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     }
   ];
 
-  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1090);
@@ -77,9 +74,6 @@ export default function Home({
   }, []);
 
   const heroContent = isMobile ? mobileContent : desktopContent;
-  const handleSlideChange = (selectedIndex: number) => {
-    setActiveIndex(selectedIndex);
-  };
 
   const contactButtons = [
     {
@@ -110,35 +104,19 @@ export default function Home({
 
   return (
     <div className={styles.container}>
-      <Carousel interval={5000} className={styles.carousel} onSlide={handleSlideChange}>
+      <Carousel interval={5000} className={styles.carousel}>
         {heroContent.map((content, index) => (
           <Carousel.Item key={index} className={styles.carouselItem}>
-            {index === activeIndex && content.type === 'video' ? (
-              <div className={styles.videoWrapper}>
-                <video
-                  autoPlay={index === 0}
-                  muted
-                  loop
-                  playsInline
-                  className={styles.video}
-                  poster="patiolights.webp"
-                >
-                  <source src={content.src} type="video/mp4" />
-                </video>
-              </div>
-            ) : (
-              <div className={styles.imageWrapper}>
-                <Image
-                  src="/slideb2.jpg"
-                  alt={content.heading}
-                  layout="fill"
-                  objectFit="cover"
-                  // priority={index === 0}
-                  loading="lazy"
-                />
-              </div>
-            )}
-            <Carousel.Caption className={styles.carouselCaption}>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={content.src}
+                alt={content.heading}
+                layout="fill"
+                objectFit="cover"
+                priority={index === 0}
+              />
+            </div>
+            {/* <Carousel.Caption className={styles.carouselCaption}>
               <div className={styles.captionOverlay}>
                 <h1>{content.heading}</h1>
                 <p>{content.subheading}</p>
@@ -155,7 +133,7 @@ export default function Home({
                   Start here
                 </button>
               </div>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </Carousel.Item>
         ))}
       </Carousel>
@@ -201,9 +179,7 @@ export default function Home({
         />
       ))} */}
       <ContactSection contactButtons={contactButtons} />
-      <LastSection
-        backgroundImage="/hand2.webp"
-      />
+      <LastSection />
     </div>
   );
 }
@@ -214,16 +190,22 @@ export const getStaticProps = async () => {
     
       {
         type: 'image',
-        src: '/painting.webp',
-        heading: 'Mobile Bars',
-        subheading: 'Incredible Bar Setups'
+        src: '/tools.webp',
+        heading: 'Premium Service',
+        subheading: 'Professional Bartenders'
       },
       {
         type: 'image',
-        src: '/tools.webp',
+        src: '/sala.webp',
         heading: 'Special Events',
         subheading: 'Memorable Experiences'
       },
+      {
+        type: 'image',
+        src: '/fan.webp',
+        heading: 'Special Events',
+        subheading: 'Memorable Experiences'
+      }
     ];
   
 
