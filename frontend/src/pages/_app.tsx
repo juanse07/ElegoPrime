@@ -30,10 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
      
       <Head>
-        <title>DenverBartenders </title>
+        <title>Elego Prime</title>
         <meta name="description" content="DenverBartenders is a professional bartender service that provides bartending services for events and parties." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Icon-App32x32.ico" />
+        <link rel="icon" href="logoelegotab.svg" sizes="32x32" />
       </Head>
       <NextNProgress
           color="#29D"

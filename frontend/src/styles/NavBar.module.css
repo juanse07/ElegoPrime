@@ -22,78 +22,57 @@
     gap: 2px;
 
 }
-/* Logo container */
-.logo-container {
-    margin-left: 1rem; /* Adds some spacing to the left of the logo */
-    display: flex;
-    justify-content: center; /* Centers the logo horizontally */
-    align-items: center; /* Centers the logo vertically */
-    max-width: 100%; /* Prevents overflow */
-    padding: 10px; /* Adds some spacing around the logo */
-}
-
-/* Logo image */
-.logo-container img {
-    max-width: 100%; /* Ensures the logo scales with the container */
-    height: auto; /* Maintains the aspect ratio */
-    max-height: 50px; /* Adjust the maximum height to ensure it isn't too tall */
-    object-fit: contain; /* Ensures it scales properly within its container */
-    margin: 0 auto; /* Centers the logo in its container */
-}
-
-.navbar {
-    background: rgba(0, 0, 0, 0.9) !important;
-    padding:1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .contactButton {
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    color: #ffd700; 
+    color: #ff8730; 
 }
 
 .NavStyle {
   background-color: #2e3c49;
-  margin:10px;
+  margin:30px 10px;
   border-radius: 20px;
-  color:#f8f3d5 !important;
+  color:#ffffff !important;
   padding: 7px 14px !important;
+  font-size: 1.1rem;
 }
 
 .NavStyle:hover {
   background-color: #ff8730;
-  color:#f8f3d5 !important;
+  color:#ffffff !important;
   box-shadow: 0px 0px 10px#ff86304a; 
   border: transparent;
   
 }
 
 .contactButton:hover {
-    background: rgba(255, 215, 0, 0.1);
-    border-color: #ffd700;
+    background: #ff8730;
     transform: translateY(-2px);
 }
 
+.NavIcon{
+  width: 70px;
+  height: 90px;
+  margin: 15px 0px 15px 40px;
+}
+
 @media (max-width: 768px) {
-    .navbar {
+    .Navbar {
         padding: 0.3rem 0.5rem;
+        font-size: 10px;
     }
-}
 
-.mobileButton {
-    margin-top: 1rem;
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    background-color: transparent;
-    color: #ffd700;
-    transition: all 0.3s ease;
-}
+    .NavIcon{
+      width: 40px;
+      height: 60px;
+      margin: 10px 0px 10px 20px;
+    }
 
-.mobileButton:hover {
-    background-color: rgba(255, 215, 0, 0.1);
-    border-color: #ffd700;
+    .NavStyle {
+      margin:10px 10px;
+      font-size: 1rem;
+    }
+
 }
 
 /* Add these new styles */
@@ -104,7 +83,7 @@
 
 .navbar :global(.navbar-collapse.collapse) {
   opacity: 1;
-  transform: scaleY(1);
+  transform: scaleY(1); 
 }
 
 .navbar :global(.navbar-collapse.collapse.show) {

@@ -169,6 +169,13 @@ export default function Home({
         </p>
       </div>
 
+      <div className={styles.mainsubContent}>
+        <p className={styles.subText}>
+        We offer a quality service as a solution to our customers by keeping their spaces below their expectations.
+        We make people feel in a pleasant and well-maintained place while they make the most of their time in activities of their own interest.
+        </p>
+      </div>
+
       {/* {services.map((service, index) => (
         <ServiceSection
           key={index}

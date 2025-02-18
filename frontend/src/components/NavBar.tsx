@@ -28,7 +28,8 @@ export default function NavBar() {
                         }}
                         priority
                     /> */}
-                    <span style={{ fontSize: '2.5rem', fontWeight:'bolder', padding:'1rem 3rem'}}>ELEGO PRIME</span>
+                    <img src="/logoelego.svg" alt="Icono" className={styles.NavIcon}/>
+                    <span style={{ fontSize: '2rem', fontWeight:'bolder', padding:'0rem 1rem', lineHeight:'1'}}>ELEGO <br></br> PRIME</span>
                 </Navbar.Brand>
                 
                 <Navbar.Toggle aria-controls='main-navbar' />
@@ -76,7 +77,7 @@ export default function NavBar() {
                             <Button
                                 onClick={handleContactClick}
                                 variant="outline-warning"
-                                className="w-100"
+                                className={styles.NavStyle}
                             >
                                 Get an Estimate
                             </Button>
