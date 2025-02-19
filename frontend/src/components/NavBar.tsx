@@ -1,15 +1,14 @@
+import styles from '@/styles/NavBar.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import styles from '@/styles/NavBar.module.css';
 
+interface NavBarProps {
+    onEstimateClick: () => void;
+}
 
-export default function NavBar() {
+export default function NavBar({ onEstimateClick }: NavBarProps) {
     const router = useRouter();
-
-    const handleContactClick = () => {
-        router.push('/estimate');
-    };
 
     return (
         <Navbar expand="md" collapseOnSelect variant="dark" bg="body" sticky="top" className="shadow-sm">
@@ -65,17 +64,17 @@ export default function NavBar() {
                             Contact Us
                         </Nav.Link>
                         {/* Desktop-only button */}
-                    <div className="d-none d-md-block">
-                        <Button
-                            onClick={handleContactClick}
-                            className={styles.NavStyle}>
-                            Get an Estimate
-                        </Button>
-                    </div>
-                        {/* Mobile-only button */}
-                        <div className="d-md-none mt-3 me-3 ">
+                        <div className="d-none d-md-block">
                             <Button
-                                onClick={handleContactClick}
+                                onClick={onEstimateClick}
+                                className={styles.NavStyle}>
+                                Get an Estimate
+                            </Button>
+                        </div>
+                        {/* Mobile-only button */}
+                        <div className="d-md-none mt-3 me-3">
+                            <Button
+                                onClick={onEstimateClick}
                                 variant="outline-warning"
                                 className={styles.NavStyle}
                             >

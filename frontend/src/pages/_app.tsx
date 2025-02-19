@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "@/styles/globals.scss";
 
 import NavBar from '@/components/NavBar';
+import ServiceRequestModal from '@/components/ServiceRequestModal';
 import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
 import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 // Correct initialization
@@ -20,7 +21,7 @@ const poppinsFont = Poppins({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  // const router = useRouter();
+  const [showServiceModal, setShowServiceModal] = useState(false);
   
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -46,8 +47,11 @@ export default function App({ Component, pageProps }: AppProps) {
     
       <div className={` ${poppinsFont.className}`}
       style={{minHeight: '100vh', position: 'relative'}}>
-        <NavBar />
-
+        <NavBar onEstimateClick={() => setShowServiceModal(true)} />
+        <ServiceRequestModal 
+          show={showServiceModal}
+          onHide={() => setShowServiceModal(false)}
+        />
         <main >
          
            <Component {...pageProps} />

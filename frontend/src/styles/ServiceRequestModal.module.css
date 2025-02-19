@@ -1,0 +1,36 @@
+.modal {
+    --bs-modal-bg: white;
+    --bs-modal-border-color: rgba(0, 0, 0, 0.1);
+    --bs-modal-color: #333;
+}
+
+.modal :global(.modal-content) {
+    background-color: var(--bs-modal-bg);
+    border: 1px solid var(--bs-modal-border-color);
+    color: var(--bs-modal-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal :global(.modal-header) {
+    border-bottom: 1px solid var(--bs-modal-border-color);
+    padding: 1.5rem;
+}
+
+.modal :global(.modal-title) {
+    color: var(--bs-modal-color);
+    font-weight: 600;
+}
+
+.modal :global(.modal-body) {
+    padding: 1.5rem;
+}
+
+.modal :global(.btn-close) {
+    filter: none;
+    opacity: 0.5;
+}
+
+.modal :global(.btn-close:hover) {
+    opacity: 1;
+} 

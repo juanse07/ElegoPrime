@@ -48,9 +48,17 @@ const NewServiceRequestSchema = new Schema({
         default: 'pending',
         required: true,
     },
-    furnitureImageUrl: {
+    imageUrl1: {
         type: String,
         trim: true,
+    },
+    imageUrl2: {
+        type: String,
+        trim: true,
+    },
+    requestedDate: {
+        type: Date,
+        required: false,
     },
 }, { timestamps: true });
 

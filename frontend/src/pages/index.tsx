@@ -1,5 +1,6 @@
 import ContactSection from '@/components/ContactSection';
 import LastSection from '@/components/LastSection';
+import NewServiceRequestForm from '@/components/NewServiceRequestForm';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -153,6 +154,8 @@ export default function Home({
         We make people feel in a pleasant and well-maintained place while they make the most of their time in activities of their own interest.
         </p>
       </div>
+
+      <NewServiceRequestForm />
 
       {/* {services.map((service, index) => (
         <ServiceSection
