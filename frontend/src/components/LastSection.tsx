@@ -1,5 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/LastSection.module.css';
+import { Container } from 'react-bootstrap';
 
 const LastSection = () => {
   const animationRef = useScrollAnimation({
@@ -9,19 +10,22 @@ const LastSection = () => {
   });
 
   return (
-    <div 
+    <footer 
       ref={animationRef}
       className={`${styles.lastSection} fade-in-section`}
+      style={{ marginTop: 'auto' }}
     >
-      <div className={styles.content}>
-        <div className={styles.footertext}>
-          <p>© 2025 Elego Prime. All rights reserved.</p>
-          <p>Privacy Policy | Terms of Service</p>
-          <p>Email: booking@elegoprime.com</p>
-          <p>Website by <a href="https://pymesoft.com" target="_blank" rel="noopener noreferrer">PyMESoft</a></p>
+      <Container>
+        <div className={`${styles.content} py-4`}>
+          <div className={`${styles.footertext} text-center`}>
+            <p className="mb-2">© 2025 Elego Prime. All rights reserved.</p>
+            <p className="mb-2">Privacy Policy | Terms of Service</p>
+            <p className="mb-2">Email: booking@elegoprime.com</p>
+            <p className="mb-0">Website by <a href="https://pymesoft.com" target="_blank" rel="noopener noreferrer">PyMESoft</a></p>
+          </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </footer>
   );
 };
 

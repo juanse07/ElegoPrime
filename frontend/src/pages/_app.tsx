@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "@/styles/globals.scss";
 
+
 import NavBar from '@/components/NavBar';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import type { AppProps } from "next/app";
@@ -45,17 +46,16 @@ export default function App({ Component, pageProps }: AppProps) {
          />
       <SpeedInsights />
     
-      <div className={` ${poppinsFont.className}`}
-      style={{minHeight: '100vh', position: 'relative'}}>
+      <div className={poppinsFont.className}>
         <NavBar onEstimateClick={() => setShowServiceModal(true)} />
         <ServiceRequestModal 
           show={showServiceModal}
           onHide={() => setShowServiceModal(false)}
         />
-        <main >
-         
-           <Component {...pageProps} />
-       </main>
+        <div style={{ paddingBottom: '200px' }}>
+          <Component {...pageProps} />
+        </div>
+     
       </div>
     </>
     

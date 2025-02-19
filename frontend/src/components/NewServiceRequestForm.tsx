@@ -179,10 +179,15 @@ export default function NewServiceRequestForm() {
                             <option value="">Select a service</option>
                             {['Fan/lamp ceiling mounting', 'Furniture assembly', 'Hanging pictures and shelves', 'TV mounting'].map((service) => (
                                 <option key={service} value={service}>
-                                    {getServiceIcon(service)} {service}
+                                    {service}
                                 </option>
                             ))}
                         </select>
+                        {formData.serviceType && (
+                            <div className={styles.selectedServiceIcon}>
+                                {getServiceIcon(formData.serviceType)}
+                            </div>
+                        )}
                         {errors.serviceType && (
                             <div className={styles.errorMessage}>{errors.serviceType}</div>
                         )}
@@ -199,6 +204,7 @@ export default function NewServiceRequestForm() {
                             value={formData.zipCode}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your zip code"
                         />
                         {errors.zipCode && (
                             <div className={styles.errorMessage}>{errors.zipCode}</div>
@@ -218,6 +224,7 @@ export default function NewServiceRequestForm() {
                             value={formData.name}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your full name"
                         />
                         {errors.name && (
                             <div className={styles.errorMessage}>{errors.name}</div>
@@ -235,6 +242,7 @@ export default function NewServiceRequestForm() {
                             value={formData.phone}
                             onChange={handleChange}
                             required
+                            placeholder="(123) 456-7890"
                         />
                         {errors.phone && (
                             <div className={styles.errorMessage}>{errors.phone}</div>
@@ -253,6 +261,7 @@ export default function NewServiceRequestForm() {
                             className={styles.input}
                             value={formData.ceilingHeight}
                             onChange={handleChange}
+                            placeholder="e.g., 8 feet"
                         />
                         {errors.ceilingHeight && (
                             <div className={styles.errorMessage}>{errors.ceilingHeight}</div>
@@ -272,6 +281,7 @@ export default function NewServiceRequestForm() {
                             value={formData.numberOfItems}
                             onChange={handleChange}
                             min="1"
+                            placeholder="Enter number of items"
                         />
                     </div>
                 )}
@@ -287,6 +297,7 @@ export default function NewServiceRequestForm() {
                             className={styles.input}
                             value={formData.tvInches}
                             onChange={handleChange}
+                            placeholder="e.g., 55 inches"
                         />
                         {errors.tvInches && (
                             <div className={styles.errorMessage}>{errors.tvInches}</div>
@@ -318,6 +329,7 @@ export default function NewServiceRequestForm() {
                         value={formData.additionalInfo}
                         onChange={handleChange}
                         rows={4}
+                        placeholder="Add any additional details about your service request...for instance, if you have a link to the product you want to be installed, please include it here."
                     />
                 </div>
 

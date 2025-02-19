@@ -1,27 +1,18 @@
 .lastSection {
     position: relative;
-    height: 20vh;
-    min-height: 400px;
-    max-height: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    padding: 50px 20px;
-    overflow: hidden;
-    width: 100%;
+    min-height: 200px;
     background-color: #2e3c49;
+    color: #fff;
+    width: 100%;
+    margin-top: auto;
     clip-path: ellipse(100% 100% at 50% 100%);
 }
 
 .content {
     position: relative;
     z-index: 1;
-    max-width: 800px;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 2rem 0;
+    margin-bottom: 0;
 }
 
 .footertext {
@@ -55,8 +46,7 @@
 /* Media query for smaller screens (e.g., phones) */
 @media (max-width: 768px) {
     .lastSection {
-        min-height: 300px;
-         clip-path: ellipse(100% 100% at 50% 100%);
+        min-height: 180px;
     }
 
     .footertext {
@@ -78,8 +68,7 @@
 /* Media query for very small screens */
 @media (max-width: 480px) {
     .lastSection {
-        min-height: 250px;
-        padding: 30px 15px;
+        min-height: 160px;
         clip-path: polygon(0 5%, 50% 0, 100% 5%, 100% 100%, 0 100%);
     }
 

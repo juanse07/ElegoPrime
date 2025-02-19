@@ -1,5 +1,6 @@
 import ContactContent from '@/components/ContactContent';
 import HeroSection from '@/components/HeroSection';
+import LastSection from '@/components/LastSection';
 import type { NextPage } from 'next';
 import styles from '../styles/contactUs.module.css';
 
@@ -27,12 +28,22 @@ interface ContactPageProps {
 const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
   return (
     <div className={styles.pageContainer}>
+
+      <div >
+
+
       <HeroSection 
         image={heroContent.image}
         title={heroContent.title}
         subtitle={heroContent.subtitle}
       />
       <ContactContent contactInfo={contactInfo} />
+
+      </div>
+      <div >
+
+      <LastSection />
+      </div>
     </div>
   );
 };
@@ -40,9 +51,9 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
 export const getStaticProps = async () => {
   try {
     const heroContent = { 
-      image: "/chat.webp",
+      image: "/contactUsBanner.webp",
       title: "Contact Us",
-      subtitle: "Elevate Your Experience"
+      subtitle: "let the Pros handle it"
     };
 
     const contactInfo = {

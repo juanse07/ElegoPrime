@@ -1,5 +1,6 @@
 import ContactSection from '@/components/ContactSection';
 import LastSection from '@/components/LastSection';
+
 import NewServiceRequestForm from '@/components/NewServiceRequestForm';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
@@ -182,9 +183,8 @@ export default function Home({
         />
       ))} */}
       <ContactSection contactButtons={contactButtons} />
-      <LastSection
-     
-      />
+      <LastSection />
+
     </div>
   );
 }
