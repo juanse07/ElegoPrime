@@ -2,7 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import env from "./env";
-import BarServicequotationRoutes from "./routes/BarServiceQuotation";
+import NewServiceRequestRoute from "./routes/ElegoRoute";
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(cors({
 
 // Routes
 
-app.use("/new-estimate", BarServicequotationRoutes);
+app.use("/new-service-request", NewServiceRequestRoute);
 
 // app.use("/bar-service-quotations", BarServicequotationRoutes);
 

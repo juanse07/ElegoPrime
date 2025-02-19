@@ -39,8 +39,8 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
 
 export const getStaticProps = async () => {
   try {
-    const heroContent = {
-      image: "/23779.webp",
+    const heroContent = { 
+      image: "/chat.webp",
       title: "Contact Us",
       subtitle: "Elevate Your Experience"
     };

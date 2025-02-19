@@ -179,7 +179,9 @@ export default function Home({
         />
       ))} */}
       <ContactSection contactButtons={contactButtons} />
-      <LastSection />
+      <LastSection
+     
+      />
     </div>
   );
 }

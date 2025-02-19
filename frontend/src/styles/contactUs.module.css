@@ -85,34 +85,51 @@ position: relative;
     z-index: 1;
 }
 
+.messageCard {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Light gradient from white to light grey */
+  padding: 3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.messageCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.welcomeMessage {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: #333333;
+}
+
 .wedLoveTo {
-   
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    color: #ffffff; /* Update to match theme text color */
- 
-    text-align: center; /* Center text */
-    padding: 20px; /* Add padding for better readability */
-    box-sizing: border-box; /* Include padding in width/height */
-   
-   
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    line-height: 2.25rem;
-    font-family: 'Poppins', sans-serif;
-    z-index: 2;
-    @media (max-width: 1024px) {
-        font-size: 1.2rem;
-        line-height: 1.8rem;
-    }
-    @media (max-width: 768px) {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #333333;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  line-height: 2.25rem;
+  font-family: 'Poppins', sans-serif;
+  z-index: 2;
+  @media (max-width: 1024px) {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .contactUs {
@@ -147,8 +164,8 @@ position: relative;
 
 .pageContainer {
   min-height: 100vh;
-  background: #1a1a1a;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 
 .heroSection {
@@ -167,7 +184,7 @@ position: relative;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    background: linear-gradient(to bottom, rgba(36, 36, 36, 0.946), rgba(133, 133, 133, 0.7));
   }
 }
 
@@ -210,21 +227,6 @@ position: relative;
 
 .leftColumn, .rightColumn {
   flex: 1;
-}
-
-.messageCard {
-  background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(36,36,36,0.9)); /* Using $body-bg and $card-bg */
-  padding: 3rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(152,255,152,0.2); /* Using $primary with opacity */
-  box-shadow: 0 10px 30px rgba(152,255,152,0.1); /* Using $primary with opacity */
-}
-
-.welcomeMessage {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  color: #ffffff;
 }
 
 .socialLinks {

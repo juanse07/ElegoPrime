@@ -1,30 +1,21 @@
-import { NewEstimate } from "@/models/newEstimate";
 import api from "@/network/axiosInstance";
 import { AxiosError } from "axios";
-interface CreateNewEstimateValues{
-    
-    eventType: string;
-    eventTypeOther?: string;
-    guestCount: string;
-    guestCountOther?: string;
-    eventDate: Date;
-    eventDateOther?: string;
-    eventTime: string;
-    contactName: string;
-    contactEmail: string;
-    contactPhone: string;
-    eventLocation?: string;
-    notes?: string;
-    
-    // Add this line
-  
+
+interface CreateNewEstimateValues {
+    serviceType: string;
+    zipCode: string;
+    name: string;
+    phone: string;
+    ceilingHeight?: string;
+    numberOfItems?: number;
+    tvInches?: string;
+    additionalInfo?: string;
+    furnitureImageUrl?: string;
 }
 
 export async function createNewEstimate(input: CreateNewEstimateValues) {
-    // const endpoint = process.env.NODE_ENV=== 'production'? '/api/new-estimate': '/new-estimates';
-
     try {
-        const response = await api.post<NewEstimate>('/new-estimate', input);
+        const response = await api.post('/api/new-service-request', input);
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError) {

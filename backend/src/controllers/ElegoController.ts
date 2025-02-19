@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import BarServiceQuotationModel from '../models/BarServiceQuotation';
-import NewEstimateModel from '../models/NewEstimate';
+import NewServiceRequestModel from '../models/NewServiceRequest';
 import { io } from "../server";
 
 export const getBarServiceQuotations: RequestHandler = async (req, res, next) => {
@@ -27,20 +27,22 @@ export const getBarServiceQuotations: RequestHandler = async (req, res, next) =>
 //     }
 //   };
 
-export const getNewEstimatesbystate: RequestHandler = async (req, res, next) => {
+export const getNewServiceRequestsByState: RequestHandler = async (req, res, next) => {
   try {
     const { state } = req.query; // Extract the `state` query parameter
 
     // Build the filter based on the `state` parameter
     const filter = state ? { state } : {};
 
-    const barServiceQuotations = await NewEstimateModel.find(filter).exec();
+    // Replace `NewEstimateModel` with your actual service request model name
+    const newServiceRequests = await NewServiceRequestModel.find(filter).exec();
 
-    res.status(200).json(barServiceQuotations);
+    res.status(200).json(newServiceRequests);
   } catch (error) {
     next(error);
   }
 };
+
 
 
 
@@ -62,64 +64,71 @@ export const getNewEstimatesbystate: RequestHandler = async (req, res, next) => 
 //   }
 // };
 
-export const createNewEstimate: RequestHandler = async (req, res, next) => {
+export const createNewServiceRequest: RequestHandler = async (req, res, next) => {
   try {
-// Log the incoming request
-console.log("Received POST request to /new-estimate");
-console.log("Headers:", req.headers);
-const estimateData = req.body;
-console.log("Estimate data before creation:", estimateData);
+    // Log the incoming request
+    console.log("Received POST request to /new-service-request");
+    console.log("Headers:", req.headers);
 
-const newEstimate = await NewEstimateModel.create(estimateData);
-console.log("Created estimate:", newEstimate);
+    const serviceRequestData = req.body;
+    console.log("Service request data before creation:", serviceRequestData);
 
-res.status(201).json(newEstimate);
-console.log('About to emit socket event for estimate:', newEstimate._id);
-io.emit("newBarServiceQuotation", newEstimate);
-console.log('Socket event emitted successfully');
-}catch (error) {
-console.error("Error creating estimate:", error);
+    // Use your actual model name here, e.g. `NewServiceRequestModel`
+    const newServiceRequest = await NewServiceRequestModel.create(serviceRequestData);
+    console.log("Created service request:", newServiceRequest);
 
-next(error);
-}
+    res.status(201).json(newServiceRequest);
+
+    console.log("About to emit socket event for service request:", newServiceRequest._id);
+    // Adjust the event name if you also wish to rename it
+    io.emit("newBarServiceRequest", newServiceRequest);
+    console.log("Socket event emitted successfully");
+  } catch (error) {
+    console.error("Error creating service request:", error);
+    next(error);
+  }
 };
 
-export const updateNewEstimate: RequestHandler = async (req, res, next) => {
+
+export const updateNewServiceRequest: RequestHandler = async (req, res, next) => {
   try {
-    const quotationId = req.params.id;
+    const serviceRequestId = req.params.id;
     const { state } = req.body;
 
+    // Validate state
     if (!["pending", "answered", "approved"].includes(state)) {
       res.status(400).json({
-        error: "Invalid state value. Must be 'pending', 'answered', or 'approved'"
+        error: "Invalid state value. Must be 'pending', 'answered', or 'approved'",
       });
       return;
     }
 
-    const updatedQuotation = await NewEstimateModel.findByIdAndUpdate(
-      quotationId,
+    // Replace `NewEstimateModel` with your actual service request model name
+    const updatedServiceRequest = await NewServiceRequestModel.findByIdAndUpdate(
+      serviceRequestId,
       { state },
       { new: true }
     );
 
-    if (!updatedQuotation) {
-      res.status(404).json({ error: "Quotation not found" });
+    if (!updatedServiceRequest) {
+      res.status(404).json({ error: "Service request not found" });
       return;
     }
 
     // Emit socket event for the update
-    io.emit('quotationUpdated', updatedQuotation);
-    
-    res.json(updatedQuotation);
+    io.emit('serviceRequestUpdated', updatedServiceRequest);
+
+    res.json(updatedServiceRequest);
   } catch (error) {
     next(error);
-    console.error("Error updating quotation:", error);
+    console.error("Error updating service request:", error);
     res.status(500).json({
-      error: "Failed to update quotation",
-      details: error instanceof Error ? error.message : "Unknown error"
+      error: "Failed to update service request",
+      details: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };
+
 
 // export const updateBarServiceQuotation: RequestHandler = async (req, res, next) => {
 //   try {
