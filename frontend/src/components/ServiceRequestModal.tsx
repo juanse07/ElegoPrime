@@ -19,7 +19,7 @@ export default function ServiceRequestModal({ show, onHide }: ServiceRequestModa
         >
             <Modal.Header closeButton>
                 <Modal.Title id="service-request-modal">
-                   We'll get back to you as soon as possible
+                   We&apos;ll get back to you as soon as possible
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
