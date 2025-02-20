@@ -1,3 +1,4 @@
+import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import { useState } from 'react';
 import { FaCheck, FaCouch, FaImage, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
@@ -128,9 +129,24 @@ export default function NewServiceRequestForm() {
 
         if (validateForm()) {
             try {
-                // TODO: Add your API call here
-                console.log(formData);
+                const requestData = {
+                    serviceType: formData.serviceType,
+                    zipCode: formData.zipCode,
+                    name: formData.name,
+                    phone: formData.phone,
+                    ceilingHeight: formData.ceilingHeight || undefined,
+                    numberOfItems: formData.numberOfItems || undefined,
+                    tvInches: formData.tvInches || undefined,
+                    additionalInfo: formData.additionalInfo || undefined,
+                    furnitureImageUrl: formData.imageUrl1 || undefined,
+                    requestedDate: formData.requestedDate || undefined,
+                    state: 'pending'
+                };
+
+                const response = await createServiceRequest(requestData);
+                console.log('Service request submitted:', response);
                 setSubmitSuccess(true);
+
                 // Reset form after successful submission
                 setTimeout(() => {
                     setFormData({
@@ -147,13 +163,22 @@ export default function NewServiceRequestForm() {
                         imageUrl2: '',
                         requestedDate: '',
                     });
+                    setPreviewUrls({});
                     setSubmitSuccess(false);
                 }, 3000);
             } catch (error) {
                 console.error('Error submitting form:', error);
+                const errorMessage = error instanceof Error ? error.message : 'Failed to submit service request. Please try again.';
+                setErrors(prev => ({
+                    ...prev,
+                    submit: errorMessage
+                }));
+            } finally {
+                setIsSubmitting(false);
             }
+        } else {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     const showCeilingHeight = formData.serviceType === 'Fan/lamp ceiling mounting';

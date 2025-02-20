@@ -195,7 +195,7 @@ export const getStaticProps = async () => {
     
       {
         type: 'image',
-        src: '/tools.webp',
+        src: '/toolsBanner2.webp',
         heading: 'Premium Service',
         subheading: 'Professional Bartenders'
       },
@@ -207,7 +207,7 @@ export const getStaticProps = async () => {
       },
       {
         type: 'image',
-        src: '/fan.webp',
+        src: '/scooterHandyMan.webp',
         heading: 'Special Events',
         subheading: 'Memorable Experiences'
       }
