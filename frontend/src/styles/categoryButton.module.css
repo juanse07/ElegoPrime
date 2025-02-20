@@ -1,0 +1,13 @@
+/* /styles/categoryButton.module.css */
+.categoryItem {
+  cursor: pointer;
+  margin: 15px 0;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  color: #2e3c49;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.categoryItem:hover {
+  color: #45c3d4;
+}

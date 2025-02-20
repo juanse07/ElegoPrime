@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+.categoriesContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 9rem;
+}
+
+.categoriesLeft {
+  max-width: 300px;
+  padding: 1rem;
+  border-right: 2px solid #e1e1e1;
+}
+
+.categoryItem {
+  padding: 8px 15px;
+  cursor: pointer;
+  margin: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.categoryItem:hover {
+  background-color: #f5f5f5;
+}
+
+.categoryLabel {
+  font-size: 1.1rem;
+  color: #2e3c49;
+}
+
+.categoriesRight {
+  width: 1000px;
+}
+
+.subservicesContainer {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:3rem;
+}
+
+.subserviceItem {
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px 1px #e3e3e3;
+}
+
+.subserviceLabel {
+  font-size: 1.2rem;
+  color: #ff8730;
+}
+
+.subserviceDescription {
+  font-size: 1rem;
+  color: #555;
+}
