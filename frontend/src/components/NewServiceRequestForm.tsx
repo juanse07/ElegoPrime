@@ -58,7 +58,7 @@ export default function NewServiceRequestForm() {
         if (!formData.serviceType) newErrors.serviceType = 'Service type is required';
         if (!formData.zipCode) newErrors.zipCode = 'Zip code is required';
         if (!formData.name) newErrors.name = 'Name is required';
-        if (!formData.phone) newErrors.phone = 'Phone is required';
+        if (!formData.phone) newErrors.phone = 'Phone is required for this service';
         
         // Conditional validation based on service type
         if (formData.serviceType === 'Fan/lamp ceiling mounting' && !formData.ceilingHeight) {
