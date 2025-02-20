@@ -27,6 +27,7 @@ interface ContactPageProps {
 
 const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
   return (
+    
     <div className={styles.pageContainer}>
 
       <div >
