@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
      
       <Head>
         <title>Elego Prime</title>
-        <meta name="description" content="Elego Prime is a professional service that provides a variety of handyman services to the Denver area home owners and businesses." />
+        <meta name="description" content="Elego Prime is a experienced handyman service that provides a variety of services to the Denver area home owners and businesses." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="logoelegotab.svg" sizes="32x32" />
       </Head>
