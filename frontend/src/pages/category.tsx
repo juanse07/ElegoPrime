@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import CategoryButton from '@/components/CategoryButton';
-import CategoryContent from '@/components/CategoryContent';
+
 import styles from '../styles/categories.module.css';
 
 const Category: React.FC = () => {
