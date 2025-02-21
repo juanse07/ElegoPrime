@@ -36,12 +36,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="Elego Prime is a experienced handyman service that provides a variety of services to the Denver area home owners and businesses." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="logoelegotab.svg" sizes="32x32" />
+        <meta property="og:image" content="https://elegoprime.com/elegoCard.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Elego Prime" />
+        <meta name="twitter:description" content="Elego Prime is a experienced handyman service that provides a variety of services to the Denver area home owners and businesses." />
+        <meta name="twitter:image" content="https://elegoprime.com/elegoCard.png" />
       </Head>
       <NextNProgress
           color="#29D"
           startPosition={0.3}
           stopDelayMs={200}
-          height={3}
+          height={3}   
           showOnShallow={true}    
          />
       <SpeedInsights />
