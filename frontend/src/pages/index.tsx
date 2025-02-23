@@ -53,13 +53,13 @@ export default function Home({
   const mobileContent = [
     {
       type: 'image',
-      src: '/herramientasmovil.webp',
+      src: '/toolsorange.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
     {
       type: 'image',
-      src: '/salaportrait.webp',
+      src: '/scooterHandySmall.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     }
