@@ -17,12 +17,46 @@ const LastSection = () => {
     >
       <Container>
         <div className={`${styles.content} py-4`}>
-          <div className={`${styles.footertext} text-center`}>
-            <p className="mb-2">© 2025 Elego Prime. All rights reserved.</p>
-            <p className="mb-2">Privacy Policy | Terms of Service</p>
-            <p className="mb-2">Email: booking@elegoprime.com</p>
-            <p className="mb-0">Website by <a href="https://pymesoft.com" target="_blank" rel="noopener noreferrer">PyMESoft</a></p>
+          <div className={styles.footertext}>
+            <div className={styles.footerleft}>
+              <p className="mb-2">© 2025 Elego Prime. All rights reserved.</p>
+              <p className="mb-2">Documentation</p>
+              <p className="mb-2">About</p>
+              <p className="mb-2">Home</p>
+              <p className="mb-2">Contact us</p>
+              <p className="mb-2">Reserve</p>
+              <p className="mb-2">Services</p>
+              <p className="mb-2">Get an estimate</p>
+              <p className="mb-0">Website by <a href="https://pymesoft.com" target="_blank" rel="noopener noreferrer">PyMESoft</a></p>
+            </div>
+            <div className={`${styles.footermid} text-muted`}>
+              <h6 className="mb-2">LOCATIONS</h6>
+              <p className="mb-2">Denver</p>
+              <p className="mb-2">Aurora</p>
+              <p className="mb-2">Castle Rock</p>
+              <p className="mb-2">Parker</p>
+              <p className="mb-2">Lone Tree</p>
+              <p className="mb-2">Castle Pines</p>
+              <p className="mb-2">Littleton</p>
+              <p className="mb-2">DTC</p>
+              <p className="mb-2">Castle Rock</p>
+              <p className="mb-2">Highlands Ranch</p>
+              <p className="mb-2">Centennial</p>
+              <p className="mb-2">Englewood</p>
+            </div>
+            <div className={`${styles.footerright} text-muted`}>
+              <h6 className="mb-2">SOCIAL</h6>
+              <p className="mb-2">Email: booking@elegoprime.com</p>
+              <p className="mb-2">Phone: (720) 123-4567</p>
+              <p className="mb-2">Text: (720) 123-4567</p>
+            </div>
           </div>
+        </div>
+        <div className={`${styles.termscontent} py-4 text-muted`}>
+          <p className="mb-2 border-end">Privacy Policy</p>
+          <p className="mb-2 border-end">Terms & Conditions</p>
+          <p className="mb-2 border-end">Accessibility Tools</p>
+          <p className="mb-2">Do Not Sell or Share My Personal Information</p>
         </div>
       </Container>
     </footer>

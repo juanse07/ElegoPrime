@@ -327,4 +327,8 @@
       padding: 0rem;
       margin: 2.5rem 2rem;
     }
+
+    .carousel{
+      height: 70%;
+    }
   }

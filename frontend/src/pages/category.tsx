@@ -4,14 +4,14 @@ import CategoryContent from '@/components/CategoryContent';
 import styles from '../styles/categories.module.css';
 
 const Category: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('Security');
   // Categorías con subservicios
   const categories = [
     {
       label: 'Security',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.' },
+        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/security-system.webp'},
         { label: 'Doorbell install', description: 'Install and maintain doorbell systems.' },
       ]
     },
@@ -78,10 +78,13 @@ const Category: React.FC = () => {
   return (
     <div className={styles.categoriesContainer}>
       <div className={styles.categoriesLeft}>
+        {/* Usamos CategoryButton para cada categoría */}
         {categories.map((category, index) => (
-          <div key={index} className={styles.categoryItem} onClick={() => handleCategoryClick(category.label)}>
-            <span className={styles.categoryLabel}>{category.label}</span>
-          </div>
+          <CategoryButton 
+            key={index} 
+            label={category.label} 
+            onClick={() => handleCategoryClick(category.label)} 
+          />
         ))}
       </div>
 
@@ -90,8 +93,15 @@ const Category: React.FC = () => {
           <div className={styles.subservicesContainer}>
             {selectedCategoryContent.subservices.map((subservice, index) => (
               <div key={index} className={styles.subserviceItem}>
+                {subservice.image && (
+                  <img 
+                    src={subservice.image} 
+                    alt={subservice.label} 
+                    className={styles.subserviceImage}
+                  />
+                )}
                 <h4 className={styles.subserviceLabel}>{subservice.label}</h4>
-                <p className={styles.subserviceDescription}>{subservice.description}</p>
+                <CategoryContent description={subservice.description} /> {/* Usamos CategoryContent para mostrar la descripción */}
               </div>
             ))}
           </div>

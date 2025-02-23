@@ -3,11 +3,18 @@
   cursor: pointer;
   margin: 15px 0;
   font-size: 1.1rem;
+  padding-right: 10px;
   font-family: 'Poppins', sans-serif;
   color: #2e3c49;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .categoryItem:hover {
-  color: #45c3d4;
+  color: #ff8730;
+}
+
+@media (max-width: 768px) {
+  .categoryItem {
+    font-size: 15px;
+  }
 }

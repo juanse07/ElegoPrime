@@ -1,4 +1,3 @@
-// /components/CategoryButton.tsx
 import React from 'react';
 import styles from '@/styles/categoryButton.module.css';
 

@@ -5,7 +5,8 @@
 .categoriesContainer {
   display: flex;
   justify-content: space-between;
-  margin: 3rem 9rem;
+  margin: 4rem 1rem;
+  padding: 0rem 8rem;
 }
 
 .categoriesLeft {
@@ -42,12 +43,15 @@
 }
 
 .subserviceItem {
+  position: relative;
   padding: 1rem;
   border-radius: 15px;
   box-shadow: 0px 0px 5px 1px #e3e3e3;
+  overflow: hidden;
 }
 
 .subserviceLabel {
+  margin: 20px 0 10px 10px;
   font-size: 1.2rem;
   color: #ff8730;
 }
@@ -55,4 +59,46 @@
 .subserviceDescription {
   font-size: 1rem;
   color: #555;
+  margin: 0px 0 10px 10px;
+}
+
+.subserviceImage {
+  width: 445px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .categoriesContainer {
+    flex-direction: column;
+    padding: 0rem 1rem;
+  }
+
+  .categoriesLeft {
+    max-width: none;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+    border-right: 0;
+  }
+
+  .categoriesRight {
+    width: 100%;
+  }
+
+  .subservicesContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryLabel {
+    font-size: 15px;
+  }
+
+  .subserviceDescription {
+    font-size: 15px;
+  }
+
+  .subserviceImage {
+    width: 295px;
+  }
 }

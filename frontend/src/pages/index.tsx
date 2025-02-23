@@ -143,16 +143,18 @@ export default function Home({
       <div className={styles.mainContent}>
         <h1 className={styles.mainTitle}>UNFORGETTABLE <span><br></br>experience</span></h1>
         <p className={styles.mainDescription}>
-        We offer a variety of services that can be to your liking, our work is impeccable, and your home will be a cozy place.
-        Whether you need regular maintenance or a one-time deep cleaning, we have the expertise and resources to get the job done right.
-        Contact us today to experience the Elego difference!
+        We offer a wide range of personalized services tailored to your needs. Our work is of exceptional quality,
+        ensuring that your home becomes a cozy and well-maintained space. Whether you need regular maintenance or specific repairs,
+        we have the experience and resources to get the job done right. Contact us today and experience the difference with our trusted services.
         </p>
       </div>
 
       <div className={styles.mainsubContent}>
         <p className={styles.subText}>
-        We offer a quality service as a solution to our customers by keeping their spaces below their expectations.
-        We make people feel in a pleasant and well-maintained place while they make the most of their time in activities of their own interest.
+        We provide a comprehensive selection of services designed to fit your unique requirements.
+        Our commitment to high-quality craftsmanship guarantees that your home will remain inviting and in top condition.
+        Whether it's routine upkeep or specialized repairs, we have the knowledge and tools to handle any task with precision.
+        Reach out today and discover how our reliable services can make a positive impact on your home.
         </p>
       </div>
 

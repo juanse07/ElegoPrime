@@ -24,16 +24,13 @@
 .responsiveButton {
     background-color: transparent;
     margin: 20px;
-    border: 3px solid rgb(255, 115, 0);
+    border: 3px solid #ff8730;
     color: #2e3c49;
-
-    padding: 4px 8px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease-in-out;
-    font-family: 'Anton', sans-serif;
-    
-    font-weight: 500;
- 
+    padding: 4px 15px;
+    border-radius: 15px;
+    transition: 0.2s ease-in-out;
+    font-family: 'poppins', sans-serif;
+    font-weight: 600;
     min-height: 100px;
     width: 600px;
     max-width: 600px;
@@ -75,13 +72,14 @@
      
 
     }
-  }
+}
   .responsiveButton:hover {
-   background-color: rgba(255, 115, 0, 0.1);
-    border: 2px solid rgba(255, 115, 0, 0.6);
-    box-shadow: 0 0 10px rgba(255, 115, 0, 0.3);
+    background-color: #ff8730;
+    border: transparent;
+    box-shadow: 0px 0px 10px#ff86304a; 
     color: #03101c;
-    font-weight: 600;
+    transition: 0.1s ease-in-out;
+    color: #fff;
     @media (max-width: 1280px) {
         font-size: 22px;
     }

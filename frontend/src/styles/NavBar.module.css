@@ -75,6 +75,60 @@
 
 }
 
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  width: 250px;
+  border-radius: 4px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+}
+
+.dropdownMenu .NavStyle {
+  background: transparent;
+  color: #2e3c49!important;
+}
+
+.dropdownMenu a {
+  padding: 12px 16px;
+  color: #2e3c49 !important;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownMenu a:hover {
+  background-color: #ff8730;
+  color: #ffffff !important;
+}
+
+.dropdownWrapper:hover .dropdownMenu {
+  display: block;
+}
+
+.Navbar .NavStyle {
+  display: inline-block;
+  position: relative;
+}
+
+.Navbar .NavStyle:hover {
+  background-color: red;
+}
+
+.NavIcon {
+  width: 40px;
+  height: auto;
+  margin-right: 0.5rem;
+}
+
+
 /* Add these new styles */
 .navbar :global(.navbar-collapse) {
   transition: all 0.3s ease-in-out;
