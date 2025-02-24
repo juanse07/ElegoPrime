@@ -153,7 +153,7 @@ export default function Home({
         <p className={styles.subText}>
         We provide a comprehensive selection of services designed to fit your unique requirements.
         Our commitment to high-quality craftsmanship guarantees that your home will remain inviting and in top condition.
-        Whether it's routine upkeep or specialized repairs, we have the knowledge and tools to handle any task with precision.
+        Whether it&apos;s routine upkeep or specialized repairs, we have the knowledge and tools to handle any task with precision.
         Reach out today and discover how our reliable services can make a positive impact on your home.
         </p>
       </div>

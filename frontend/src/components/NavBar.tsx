@@ -1,7 +1,7 @@
 import styles from '@/styles/NavBar.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button, Container, Nav, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
 interface NavBarProps {
     onEstimateClick: () => void;
