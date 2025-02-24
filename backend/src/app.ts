@@ -12,12 +12,19 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
-const allowedOrigins = env.WEBSITE_URL;
+
 // CORS configuration
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? [env.WEBSITE_URL] // In production, only allow the production URL
+    : ['http://localhost:3000']; // In development, allow localhost:3000
+
+console.log('Environment:', process.env.NODE_ENV);
+console.log('Allowed Origins:', allowedOrigins);
+
 app.use(cors({
     origin: allowedOrigins,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
 // Routes

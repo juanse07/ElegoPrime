@@ -8,9 +8,13 @@ import env from "./env";
 const server = http.createServer(app);
 
 console.log("Initializing Socket.IO server...");
+const allowedOrigins = process.env.NODE_ENV === 'production'
+    ? [env.WEBSITE_URL] // In production, only allow the production URL
+    : ['http://localhost:3000']; // In development, allow localhost:3000
+
 const io = new Server(server, {
   cors: {
-    origin: env.WEBSITE_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
