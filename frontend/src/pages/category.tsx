@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import CategoryButton from '@/components/CategoryButton';
+import CategoryContent from '@/components/CategoryContent';
 import styles from '../styles/categories.module.css';
 
 const Category: React.FC = () => {
@@ -23,6 +25,7 @@ const Category: React.FC = () => {
     },
     {
       label: 'TV',
+      
       subservices: [
         { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.' },
         { label: 'Overhead TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.' },
