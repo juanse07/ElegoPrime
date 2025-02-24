@@ -62,6 +62,12 @@ export default function Home({
       src: '/handySenor.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
+    },
+    {
+      type: 'image',
+      src: '/scooterHandySmall.webp',
+      heading: 'Special Events',
+      subheading: 'Memorable Experiences'
     }
   ];
 
