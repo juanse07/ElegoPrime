@@ -53,13 +53,13 @@ export default function Home({
   const mobileContent = [
     {
       type: 'image',
-      src: '/toolsorange.webp',
+      src: '/muchasherramientas.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
     {
       type: 'image',
-      src: '/scooterHandySmall.webp',
+      src: '/handySenor.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     }
@@ -113,9 +113,15 @@ export default function Home({
               <Image
                 src={content.src}
                 alt={content.heading}
-                layout="fill"
-                objectFit="cover"
+                width={isMobile ? 750 : 1920}
+                height={isMobile ? 600 : 1080}
+                quality={90}
                 priority={index === 0}
+                className={styles.carouselImage}
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
               />
             </div>
             {/* <Carousel.Caption className={styles.carouselCaption}>
