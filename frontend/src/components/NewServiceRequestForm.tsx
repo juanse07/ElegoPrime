@@ -55,7 +55,7 @@ export default function NewServiceRequestForm() {
 
     const validateForm = () => {
         const newErrors: Partial<FormData> = {};
-        if (!formData.serviceType) newErrors.serviceType = 'Service type is required';
+        if (!formData.serviceType) newErrors.serviceType = 'Service type is required'
         if (!formData.zipCode) newErrors.zipCode = 'Zip code is required';
         if (!formData.name) newErrors.name = 'Name is required';
         if (!formData.phone) newErrors.phone = 'Phone is required for this service';
@@ -143,8 +143,9 @@ export default function NewServiceRequestForm() {
                     state: 'pending'
                 };
 
+                console.log('Submitting service request:', requestData);
                 const response = await createServiceRequest(requestData);
-                console.log('Service request submitted:', response);
+                console.log('Service request response:', response);
                 setSubmitSuccess(true);
 
                 // Reset form after successful submission
