@@ -129,7 +129,8 @@ export default function Home({
                 width={isMobile ? 750 : 1920}
                 height={isMobile ? 600 : 1080}
                 quality={90}
-                priority={index === 0}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                // priority={index === 0}
                 className={styles.carouselImage}
                 style={{
                   objectFit: 'cover',

@@ -196,6 +196,7 @@
     gap: 10px;
     padding: 10px;
     z-index: 1;
+    margin-bottom: 0 9rem;
   }
   @media (max-width: 2700px) {
     .contactUsHome{
