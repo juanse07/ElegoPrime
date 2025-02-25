@@ -1,4 +1,5 @@
 import ContactSection from '@/components/ContactSection';
+import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
 
 import NewServiceRequestForm from '@/components/NewServiceRequestForm';
@@ -157,6 +158,7 @@ export default function Home({
           </Carousel.Item>
         ))}
       </Carousel>
+      <HandyServiceSection />
 
       <div className={styles.mainContent}>
         <div className={styles.contentIllustration}>
@@ -191,6 +193,8 @@ export default function Home({
         but busy schedules often make it difficult to accomplish all the tasks, and sometimes an extra helping hand is needed.
         </p>
       </div>
+
+     
 
       <NewServiceRequestForm />
 
