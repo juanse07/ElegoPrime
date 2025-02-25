@@ -162,15 +162,18 @@ export default function Home({
 
       <div className={styles.mainContent}>
         <div className={styles.contentIllustration}>
-          <h1 className={styles.mainTitle}>UNFORGETTABLE <span><br></br>experience</span></h1>
+          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
             <div className={styles.ilusindexcontent}>
               <Image src="/Ilustracion.webp" alt="Imagen de storyset en Freepik" width={400} height={400}
               className={styles.ilusindeximage}/>
             </div>
               <p className={styles.mainDescription}>
-                A wide range of personalized services is offered, tailored to meet your specific needs. Our work is of exceptional quality,
-                ensuring that your home becomes a cozy and well-maintained space. Whether you need regular maintenance or specific repairs,
-                we have the experience and resources to get the job done right. Contact us today and experience the difference with our trusted services.
+              We are a dynamic team dedicated to providing practical solutions that allow families to reclaim their time for other activities,
+        while we take care of maintaining clean and harmonious spaces that meet their expectations.
+        At Elego Prime LLC, we firmly believe that family, work, and recreational spaces should be clean, peaceful,
+        and enjoyable for everyone to truly make the most of them. We understand that many people in Colorado strive to maintain these conditions,
+        but busy schedules often make it difficult to accomplish all the tasks, and sometimes an extra helping hand is needed.
+              
             </p>
         </div>
       </div>
@@ -184,7 +187,7 @@ export default function Home({
         </p>
       </div>
 
-      <div className={styles.aboutContent}>
+      {/* <div className={styles.aboutContent}>
         <p className={styles.aboutText}>
         We are a dynamic team dedicated to providing practical solutions that allow families to reclaim their time for other activities,
         while we take care of maintaining clean and harmonious spaces that meet their expectations.
@@ -192,7 +195,7 @@ export default function Home({
         and enjoyable for everyone to truly make the most of them. We understand that many people in Colorado strive to maintain these conditions,
         but busy schedules often make it difficult to accomplish all the tasks, and sometimes an extra helping hand is needed.
         </p>
-      </div>
+      </div> */}
 
      
 
