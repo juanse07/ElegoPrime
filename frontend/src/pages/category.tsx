@@ -12,61 +12,61 @@ const Category: React.FC = () => {
     {
       label: 'Security',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/security-system.webp'},
-        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.' },
+        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/camerainstall.webp'},
+        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/security-system.webp' },
       ]
     },
     {
       label: 'Videobeam',
       subservices: [
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation' },
-        { label: 'Videobeam projectors', description: 'High-quality projectors.' }
+        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '' },
+        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: ''}
       ]
     },
     {
       label: 'TV',
       
       subservices: [
-        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.' },
-        { label: 'Overhead TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.' },
-        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.' },
-        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.' }
+        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '' },
+        { label: 'Overhead TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '' },
+        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '' },
+        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '' }
       ]
     },
     {
         label: 'Fans and Lighting',
         subservices: [
-          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.' },
-          { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.' }
+          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '' },
+          { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '' }
         ]
       },
       {
         label: 'Assembling',
         subservices: [
-          { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.' },
-          { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.' }
+          { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.', image: '' },
+          { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.', image: '' }
         ]
       },
       {
         label: 'Wall Fixture Setup',
         subservices: [
-          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.' },
-          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.' },
-          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.' }
+          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '' },
+          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '' },
+          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '' }
         ]
       },
       {
         label: 'Faucet and toilet',
         subservices: [
-          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.' },
-          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.' }
+          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '' },
+          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '' }
         ]
       },
       {
         label: 'Painting',
         subservices: [
-          { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.' },
-          { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.' }
+          { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '' },
+          { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '' }
         ]
       },
   ];
@@ -80,7 +80,6 @@ const Category: React.FC = () => {
   return (
     <div className={styles.categoriesContainer}>
       <div className={styles.categoriesLeft}>
-        {/* Usamos CategoryButton para cada categoría */}
         {categories.map((category, index) => (
           <CategoryButton 
             key={index} 
@@ -92,23 +91,10 @@ const Category: React.FC = () => {
 
       <div className={styles.categoriesRight}>
         {selectedCategoryContent && (
-          <div className={styles.subservicesContainer}>
-            {selectedCategoryContent.subservices.map((subservice, index) => (
-              <div key={index} className={styles.subserviceItem}>
-                {subservice.image && (
-                  <img 
-                    src={subservice.image} 
-                    alt={subservice.label} 
-                    className={styles.subserviceImage}
-                  />
-                )}
-                <h4 className={styles.subserviceLabel}>{subservice.label}</h4>
-                <CategoryContent description={subservice.description} /> {/* Usamos CategoryContent para mostrar la descripción */}
-              </div>
-            ))}
-          </div>
+          <CategoryContent subservices={selectedCategoryContent.subservices} />
         )}
       </div>
+
     </div>
   );
 };
