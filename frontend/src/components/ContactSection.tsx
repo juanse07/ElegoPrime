@@ -9,9 +9,10 @@ interface ContactSectionProps {
     iconType: 'gauge' | 'mail' | 'phone' | 'messageCircle';
     label?: string;
   }>;
+  onEstimateClick?: () => void;
 }
 
-const ContactSection = memo(function ContactSection({ contactButtons }: ContactSectionProps) {
+const ContactSection = memo(function ContactSection({ contactButtons, onEstimateClick }: ContactSectionProps) {
   const animationRef = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '50px 0px',
@@ -29,6 +30,7 @@ const ContactSection = memo(function ContactSection({ contactButtons }: ContactS
           body={button.body}
           iconType={button.iconType}
           label={button.label || ''}
+          onEstimateClick={button.iconType === 'gauge' ? onEstimateClick : undefined}
         />
       ))}
     </div>

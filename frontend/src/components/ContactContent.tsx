@@ -17,9 +17,10 @@ interface ContactContentProps {
       iconType: string;
     }>;
   };
+  onEstimateClick?: () => void;
 }
 
-export default function ContactContent({ contactInfo }: ContactContentProps) {
+export default function ContactContent({ contactInfo, onEstimateClick }: ContactContentProps) {
   const leftColumnRef = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '50px 0px',
@@ -68,6 +69,7 @@ export default function ContactContent({ contactInfo }: ContactContentProps) {
               label={button.label}
               body={button.body}
               iconType={button.iconType}
+              onEstimateClick={button.iconType === 'gauge' ? onEstimateClick : undefined}
             />
           ))}
         </div>

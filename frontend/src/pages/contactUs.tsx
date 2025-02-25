@@ -1,7 +1,10 @@
 import ContactContent from '@/components/ContactContent';
 import HeroSection from '@/components/HeroSection';
 import LastSection from '@/components/LastSection';
+import ServiceRequestModal from '@/components/ServiceRequestModal';
 import type { NextPage } from 'next';
+import { useState } from 'react';
+
 import styles from '../styles/contactUs.module.css';
 
 interface ContactPageProps {
@@ -26,25 +29,28 @@ interface ContactPageProps {
 }
 
 const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
+  const [showServiceModal, setShowServiceModal] = useState(false);
+
   return (
-    
     <div className={styles.pageContainer}>
-
       <div >
-
-
-      <HeroSection 
-        image={heroContent.image}
-        title={heroContent.title}
-        subtitle={heroContent.subtitle}
+        <HeroSection 
+          image={heroContent.image}
+          title={heroContent.title}
+          subtitle={heroContent.subtitle}
+        />
+        <ContactContent 
+          contactInfo={contactInfo} 
+          onEstimateClick={() => setShowServiceModal(true)}
+        />
+      </div>
+      <div >
+        <LastSection />
+      </div>
+      <ServiceRequestModal 
+        show={showServiceModal}
+        onHide={() => setShowServiceModal(false)}
       />
-      <ContactContent contactInfo={contactInfo} />
-
-      </div>
-      <div >
-
-      <LastSection />
-      </div>
     </div>
   );
 };

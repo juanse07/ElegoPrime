@@ -4,13 +4,15 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
+
 interface ContactUsButtonProps {
     body: string;
     label: string;
     iconType?: string;
+    onEstimateClick?: () => void;
 }
 
-const ContactUsButton = ({ label, body, iconType = "mail" }: ContactUsButtonProps) => {
+const ContactUsButton = ({ label, body, iconType = "mail", onEstimateClick }: ContactUsButtonProps) => {
     const [isCopied, setIsCopied] = useState(false);
     const [showTag, setShowTag] = useState(false);
     const router = useRouter();
@@ -74,6 +76,8 @@ const ContactUsButton = ({ label, body, iconType = "mail" }: ContactUsButtonProp
                 window.open(`sms:${body}?body=`, '_blank');
                 handleCopy();
             }
+        } else if (iconType === "gauge" && onEstimateClick) {
+            onEstimateClick();
         } else {
             router.push(`/estimate`);
         }

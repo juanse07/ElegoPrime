@@ -3,6 +3,7 @@ import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
 
 import NewServiceRequestForm from '@/components/NewServiceRequestForm';
+import ServiceRequestModal from '@/components/ServiceRequestModal';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -50,6 +51,7 @@ export default function Home({
 }: HomeProps) {
   // const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
 
   const mobileContent = [
     {
@@ -226,8 +228,13 @@ export default function Home({
           onClickNavPath={service.onClickNavPath}
         />
       ))} */}
-      <ContactSection contactButtons={contactButtons} />
+      <ContactSection contactButtons={contactButtons} onEstimateClick={() => setShowServiceModal(true)} />
       <LastSection />
+
+      <ServiceRequestModal 
+        show={showServiceModal}
+        onHide={() => setShowServiceModal(false)}
+      />
 
     </div>
   );
