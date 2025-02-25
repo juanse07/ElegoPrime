@@ -78,17 +78,18 @@
 
 .selectedServiceIcon {
     position: absolute;
-    right: 2.5rem;
-    top: 50%;
+    right: 40px;
+    top: calc(50% + 15px);
     transform: translateY(-50%);
     display: flex;
     align-items: center;
     pointer-events: none;
+    z-index: 1;
 }
 
 .serviceTypeIcon {
     font-size: 1.2rem;
-    color: #ff8730;
+    color: #6b7280;
 }
 
 .formRow {
@@ -250,4 +251,9 @@
     color: #718096;
     font-size: 0.95rem;
     margin-bottom: 1.25rem;
+}
+
+.select {
+    position: relative;
+    padding-right: 3.5rem;
 } 

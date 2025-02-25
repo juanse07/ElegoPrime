@@ -1,6 +1,6 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import { useState } from 'react';
-import { FaCheck, FaCouch, FaImage, FaTools, FaTv, FaUpload } from 'react-icons/fa';
+import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 
 interface FormData {
@@ -48,6 +48,16 @@ export default function NewServiceRequestForm() {
                 return <FaImage className={styles.serviceTypeIcon} />;
             case 'TV mounting':
                 return <FaTv className={styles.serviceTypeIcon} />;
+            case 'Security':
+                return <FaLock className={styles.serviceTypeIcon} />;
+            case 'SoundBars':
+                return <FaMusic className={styles.serviceTypeIcon} />;
+            case 'TV':
+                return <FaTv className={styles.serviceTypeIcon} />;
+            case 'Fans and Lighting':
+                return <FaFan className={styles.serviceTypeIcon} />;
+            case 'Home Theater':
+                return <FaHome className={styles.serviceTypeIcon} />;
             default:
                 return null;
         }
@@ -203,7 +213,7 @@ export default function NewServiceRequestForm() {
                             required
                         >
                             <option value="">Select a service</option>
-                            {['Fan/lamp ceiling mounting', 'Furniture assembly', 'Hanging pictures and shelves', 'TV mounting'].map((service) => (
+                            {['Fan/lamp ceiling mounting', 'Furniture assembly', 'Hanging pictures and shelves', 'TV mounting', 'Security', 'SoundBars', 'TV', 'Fans and Lighting', 'Home Theater'].map((service) => (
                                 <option key={service} value={service}>
                                     {service}
                                 </option>
