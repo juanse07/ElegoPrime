@@ -4,7 +4,7 @@
 }
 
 .servicesTitle {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 0;
@@ -12,11 +12,12 @@
 
 .servicesDescription {
   color: #718096;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  margin: 30px 0;
 }
 
 .serviceCard {
-  background: #1a1a1a !important;
+  background: #2d3748 !important;
   border: none !important;
   border-radius: 12px !important;
   overflow: hidden;
@@ -32,7 +33,6 @@
 .imageWrapper {
   position: relative;
   padding-bottom: 150%;
-  overflow: hidden;
   border-radius: 8px;
   margin: 12px;
   background: #2a2a2a;
@@ -46,11 +46,11 @@
 
 .content {
   padding: 1rem;
-  background: #1a1a1a;
+  background: transparent;
 }
 
 .label {
-  color: #ff8730;
+  color: #ffcf00;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -65,7 +65,7 @@
 
 .description {
   color: #a0aec0;
-  font-size: 0.9rem;
+  font-size: rem;
   line-height: 1.5;
   margin-bottom: 0;
 }

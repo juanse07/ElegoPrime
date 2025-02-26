@@ -2,6 +2,16 @@ import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
+import { faToolbox } from "@fortawesome/free-solid-svg-icons";
+import { faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faHelmetSafety } from "@fortawesome/free-solid-svg-icons";
+
 import NewServiceRequestForm from '@/components/NewServiceRequestForm';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import styles from '@/styles/facepage.module.css';
@@ -163,6 +173,8 @@ export default function Home({
       </Carousel>
       <HandyServiceSection />
 
+      
+
       <div className={styles.mainContent}>
         <div className={styles.contentIllustration}>
           <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
@@ -182,12 +194,51 @@ export default function Home({
       </div>
       
       <div className={styles.mainsubContent}>
-        <p className={styles.subText}>
-        A comprehensive selection of services is available, designed to fit your unique requirements.
-        Our commitment to high-quality craftsmanship guarantees that your home will remain inviting and in top condition.
-        Whether it&apos;s routine upkeep or specialized repairs, we have the knowledge and tools to handle any task with precision.
-        Reach out today and discover how our reliable services can make a positive impact on your home.
-        </p>
+        <div className={styles.listContainer}>
+          <h4 className={styles.subTitle}>Why Choose Us</h4>
+            <ul className={styles.subText}>
+              <div className={styles.listRow}></div>
+              <li className={styles.borderCustom}>
+                <FontAwesomeIcon icon={faCheck} className={styles.iconCustom}/>
+                Commitment to excellence and attention to detail.
+              </li >
+              <li className={styles.borderCustom}>
+                <FontAwesomeIcon icon={faComments} className={styles.iconCustom}/>
+                Reliable and customized solutions for every need.
+              </li>
+              <li className={styles.borderCustom}>
+                <FontAwesomeIcon icon={faScrewdriverWrench} className={styles.iconCustom}/>
+                Experienced professionals in maintenance and repairs.
+              </li>
+              <li >
+                <FontAwesomeIcon icon={faListCheck} className={styles.iconCustom}/>
+                Efficient and professional service tailored to your requirements.
+              </li>
+            </ul>
+        </div>
+
+        <div className={styles.listContainer}> 
+          <h4 className={styles.subTitle}>Benefits of Choosing Us</h4>
+              <ul className={styles.subText}>
+                <li className={styles.borderCustom}>
+                  <FontAwesomeIcon icon={faRankingStar} className={styles.iconCustom}/>
+                  High-quality craftsmanship for long-lasting results.
+                </li>
+                <li className={styles.borderCustom}>
+                  <FontAwesomeIcon icon={faHelmetSafety} className={styles.iconCustom}/>
+                  Expertise in both routine maintenance and specialized repairs.
+                </li>
+                <li className={styles.borderCustom}>
+                  <FontAwesomeIcon icon={faToolbox} className={styles.iconCustom}/>
+                  Equipped with the right tools to handle any task with precision.
+                </li>
+
+                 <li>
+                  <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconCustom}/>
+                  Focused on customer satisfaction for a stress-free experience
+                </li>
+            </ul>
+        </div>
       </div>
 
       {/* <div className={styles.aboutContent}>
@@ -202,9 +253,8 @@ export default function Home({
 
      
 
-      <NewServiceRequestForm />
-
-      {/* {services.map((service, index) => (
+      {/*<NewServiceRequestForm />*
+      /* {services.map((service, index) => (
         <ServiceSection
           key={index}
           category={service.category}
