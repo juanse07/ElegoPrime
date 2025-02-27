@@ -1,171 +1,196 @@
 .brandText{
-    background-image: linear-gradient(100deg, #a99606 0%, #535202 100%);
-    background-color: white;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    font-weight: bold;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-    
-    ;
+  background-image: linear-gradient(100deg, #a99606 0%, #535202 100%);
+  background-color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  
+  ;
 }
 
 .accountDropdown :global(.dropdown-toggle){
-    padding-top: 0;
-    padding-bottom: 0;
-    d-flex: align-items-center;
-    gap: 2px;
+  padding-top: 0;
+  padding-bottom: 0;
+  d-flex: align-items-center;
+  gap: 2px;
 
 }
 
 .contactButton {
-    transition: all 0.3s ease;
-    color: #ff8730; 
+  transition: all 0.3s ease;
+  color: #ff8730; 
 }
 
 .NavStyle {
-  background-color: #2e3c49;
-  margin:30px 10px;
-  border-radius: 20px;
-  color:#ffffff !important;
-  padding: 7px 14px !important;
-  font-size: 1.1rem;
+background-color: #2e3c49;
+margin:30px 10px;
+border-radius: 20px;
+color:#ffffff !important;
+padding: 7px 14px !important;
+font-size: 1.1rem;
 }
 
 .NavStyle:hover {
-  background-color: #ff8730;
-  color:#ffffff !important;
-  box-shadow: 0px 0px 10px#ff86304a; 
-  border: transparent;
-  
+background-color: #ff8730;
+color:#ffffff !important;
+box-shadow: 0px 0px 10px#ff86304a; 
+border: transparent;
+
 }
 
 .contactButton:hover {
-    background: #ff8730;
-    transform: translateY(-2px);
+  background: #ff8730;
+  transform: translateY(-2px);
 }
 
 .NavIcon{
-  width: 70px;
-  height: 90px;
-  margin: 15px 0px 15px 40px;
+width: 70px;
+height: 90px;
+margin: 15px 0px 15px 40px;
 }
 
 @media (max-width: 768px) {
-    .Navbar {
-        padding: 0.3rem 0.5rem;
-        font-size: 10px;
-    }
+  .Navbar {
+      padding: 0.3rem 0.5rem;
+      font-size: 10px;
+  }
 
-    .NavIcon{
-      width: 40px;
-      height: 60px;
-      margin: 10px 0px 10px 20px;
-    }
+  .NavIcon{
+    width: 40px;
+    height: 60px;
+    margin: 10px 0px 10px 20px;
+  }
 
-    .NavStyle {
-      margin:10px 10px;
-      font-size: 1rem;
-    }
+  .NavStyle {
+    margin:10px 10px;
+    font-size: 1rem;
+  }
 
 }
 
 .dropdownWrapper {
-  position: relative;
-  display: inline-block;
+position: relative;
+display: inline-block;
 }
 
 .dropdownMenu {
-  display: none;
-  position: absolute;
-  width: 250px;
-  border-radius: 4px;
-  z-index: 1;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  top: 100%;
-  left: 0;
-  background-color: #ffffff;
+display: none;
+position: absolute;
+width: 250px;
+border-radius: 4px;
+z-index: 1;
+box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+top: 100%;
+left: 0;
+background-color: #ffffff;
+}
+
+/* Show dropdown menu on hover for desktop only */
+@media (min-width: 768px) {
+  .dropdownWrapper:hover .dropdownMenu {
+    display: block;
+  }
+}
+
+/* For mobile, use JS to control dropdown visibility instead of hover */
+@media (max-width: 767px) {
+  .dropdownMenu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    margin-left: 15px;
+  }
+  
+  /* Remove hover effect on mobile */
+  .dropdownWrapper:hover .dropdownMenu {
+    display: none;
+  }
+  
+  /* The d-block class added via JS will handle visibility on mobile */
 }
 
 .dropdownMenu .NavStyle {
-  background: transparent;
-  color: #2e3c49!important;
+background: transparent;
+color: #2e3c49!important;
 }
 
 .dropdownMenu a {
-  padding: 12px 16px;
-  color: #2e3c49 !important;
-  text-decoration: none;
-  display: block;
+padding: 12px 16px;
+color: #2e3c49 !important;
+text-decoration: none;
+display: block;
 }
 
 .dropdownMenu a:hover {
-  background-color: #ff8730;
-  color: #ffffff !important;
+background-color: #ff8730;
+color: #ffffff !important;
 }
 
-.dropdownWrapper:hover .dropdownMenu {
-  display: block;
-}
+/* Remove this as we're handling it differently for mobile/desktop now */
+/* .dropdownWrapper:hover .dropdownMenu {
+display: block;
+} */
 
 .Navbar .NavStyle {
-  display: inline-block;
-  position: relative;
+display: inline-block;
+position: relative;
 }
 
 .Navbar .NavStyle:hover {
-  background-color: red;
+background-color: red;
 }
 
 .NavIcon {
-  width: 40px;
-  height: auto;
-  margin-right: 0.5rem;
+width: 40px;
+height: auto;
+margin-right: 0.5rem;
 }
 
 
 /* Add these new styles */
 .navbar :global(.navbar-collapse) {
-  transition: all 0.3s ease-in-out;
-  transform-origin: top;
+transition: all 0.3s ease-in-out;
+transform-origin: top;
 }
 
 .navbar :global(.navbar-collapse.collapse) {
-  opacity: 1;
-  transform: scaleY(1); 
+opacity: 1;
+transform: scaleY(1); 
 }
 
 .navbar :global(.navbar-collapse.collapse.show) {
-  animation: slideDown 0.3s ease forwards;
+animation: slideDown 0.3s ease forwards;
 }
 
 .navbar :global(.navbar-collapse.collapsing) {
-  animation: slideUp 0.3s ease forwards;
+animation: slideUp 0.3s ease forwards;
 }
 
 @keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+0% {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 
 @keyframes slideUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+0% {
+  opacity: 1;
+  transform: translateY(0);
+}
+100% {
+  opacity: 0;
+  transform: translateY(-10px);
+}
 }

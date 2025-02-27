@@ -1,6 +1,8 @@
 import styles from '@/styles/NavBar.module.css';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
 interface NavBarProps {
@@ -9,6 +11,43 @@ interface NavBarProps {
 
 export default function NavBar({ onEstimateClick }: NavBarProps) {
     const router = useRouter();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Check if we're on mobile
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []);
+
+    // Handle dropdown click and close navbar on mobile
+    const handleDropdownClick = () => {
+        if (isMobile) {
+            // Toggle dropdown on mobile
+            setShowDropdown(!showDropdown);
+        }
+    };
+
+    // Handle service item click on mobile
+    const handleServiceClick = () => {
+        if (isMobile) {
+            // Hide dropdown and collapse navbar on mobile
+            setShowDropdown(false);
+            const navbar = document.getElementById('main-navbar');
+            if (navbar && navbar.classList.contains('show')) {
+                const toggleButton = document.querySelector('.navbar-toggler') as HTMLElement;
+                if (toggleButton) toggleButton.click();
+            }
+        }
+    };
 
     return (
         <Navbar expand="md" collapseOnSelect variant="dark" bg="body" sticky="top" className="shadow-sm">
@@ -26,8 +65,15 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             height: 'auto',
                         }}
                         priority
-                    /> */}
-                    <img src="/logoelego.svg" alt="Icono" className={styles.NavIcon}/>
+                    /> */}ß
+                    <Image 
+                        src="/logoelego.svg" 
+                        alt="Icono" 
+                        width={70} 
+                        height={90}
+                        className={styles.NavIcon}
+                        priority
+                    />
                     <span style={{ fontSize: '2rem', fontWeight:'bolder', padding:'0rem 1rem', lineHeight:'1'}}>ELEGO <br></br> PRIME</span>
                 </Navbar.Brand>
                 
@@ -48,33 +94,34 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                                 className={styles.NavStyle}
                                 as={Link}
                                 href='/services'
-                                active={router.pathname === "/services"}>
+                                active={router.pathname === "/services"}
+                                onClick={handleDropdownClick}>
                                 All Services
                             </Nav.Link>
-                            {/* Menú desplegable para servicios (con hover) */}
-                            <div className={styles.dropdownMenu}>
-                                <Link href="/services">
+                            {/* Menú desplegable para servicios */}
+                            <div className={`${styles.dropdownMenu} ${(showDropdown && isMobile) ? 'd-block' : ''}`}>
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Security</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Videobeam</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>TV</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Fans and Lighting</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Assembling</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Wall Fixture Setup</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Faucet and Toilet</span>
                                 </Link>
-                                <Link href="/services">
+                                <Link href="/services" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Painting</span>
                                 </Link>
                             </div>
@@ -112,13 +159,10 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             </Button>
                         </div>
                     </Nav>
-                    
-                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     );
 }
-
 
 
