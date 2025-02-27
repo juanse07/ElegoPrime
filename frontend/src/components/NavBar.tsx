@@ -65,7 +65,7 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             height: 'auto',
                         }}
                         priority
-                    /> */}ß
+                    /> */}
                     <Image 
                         src="/logoelego.svg" 
                         alt="Icono" 

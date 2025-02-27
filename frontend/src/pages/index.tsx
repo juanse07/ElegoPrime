@@ -2,17 +2,10 @@ import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
 
+import { faCheck, faComments, faFaceSmileBeam, faHelmetSafety, faListCheck, faRankingStar, faScrewdriverWrench, faToolbox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
-import { faToolbox } from "@fortawesome/free-solid-svg-icons";
-import { faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
-import { faListCheck } from "@fortawesome/free-solid-svg-icons";
-import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { faHelmetSafety } from "@fortawesome/free-solid-svg-icons";
 
-import NewServiceRequestForm from '@/components/NewServiceRequestForm';
+
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import styles from '@/styles/facepage.module.css';
 import Image from 'next/image';
