@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import CategoryButton from '@/components/CategoryButton';
 import CategoryContent from '@/components/CategoryContent';
@@ -7,20 +9,29 @@ import styles from '../styles/categories.module.css';
 const Category: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>('Security');
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.asPath.includes('#')) {
+      const categoryFromHash = decodeURIComponent(router.asPath.split('#')[1]);
+      setSelectedCategory(categoryFromHash);
+    }
+  }, [router.asPath]);
   // Categorías con subservicios
   const categories = [
     {
       label: 'Security',
       subservices: [
         { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/camerainstall.webp'},
-        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/security-system.webp' },
+        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/doorbell.webp' },
       ]
     },
     {
       label: 'Videobeam',
       subservices: [
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '' },
-        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: ''}
+        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbar.webp' },
+        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/videobeam.webp' },
       ]
     },
     {
@@ -29,14 +40,14 @@ const Category: React.FC = () => {
       subservices: [
         { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp' },
         { label: 'Oversized TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/oversizedTv.webp' },
-        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '' },
-        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '' }
+        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/cables.webp' },
+        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/electricbase.webp' }
       ]
     },
     {
         label: 'Fans and Lighting',
         subservices: [
-          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/' },
+          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp' },
           { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp' }
         ]
       },
@@ -50,16 +61,16 @@ const Category: React.FC = () => {
       {
         label: 'Wall Fixture Setup',
         subservices: [
-          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '' },
-          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '' },
-          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '' }
+          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '/shelf.webp' },
+          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '/mirror.webp' },
+          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '/art.webp' }
         ]
       },
       {
         label: 'Faucet and toilet',
         subservices: [
-          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '' },
-          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '' }
+          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp' },
+          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp' }
         ]
       },
       {
@@ -72,7 +83,8 @@ const Category: React.FC = () => {
   ];
 
   const handleCategoryClick = (label: string) => {
-    setSelectedCategory(selectedCategory === label ? null : label);
+    router.push(`/services#${label}`, undefined, { shallow: true }); // Actualiza la URL sin recargar la página
+    setSelectedCategory(label);
   };
 
   const selectedCategoryContent = categories.find(category => category.label === selectedCategory);
@@ -97,6 +109,7 @@ const Category: React.FC = () => {
 
     </div>
   );
+
 };
 
 export default Category;

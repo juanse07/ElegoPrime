@@ -100,28 +100,28 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             </Nav.Link>
                             {/* Menú desplegable para servicios */}
                             <div className={`${styles.dropdownMenu} ${(showDropdown && isMobile) ? 'd-block' : ''}`}>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Security" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Security</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Videobeam" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Videobeam</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#TV" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>TV</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Fans and Lighting" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Fans and Lighting</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Assembling" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Assembling</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Wall Fixture Setup" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Wall Fixture Setup</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Faucet and Toilet" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Faucet and Toilet</span>
                                 </Link>
-                                <Link href="/services" onClick={handleServiceClick}>
+                                <Link href="/services#Painting" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Painting</span>
                                 </Link>
                             </div>

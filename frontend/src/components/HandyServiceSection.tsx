@@ -20,21 +20,21 @@ const HandyServiceSection: React.FC = () => {
     {
       label: 'Security',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/camerainstall.webp'},
+        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/camerahome.webp'},
         // { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/security-system.webp' },
       ]
     },
     {
       label: 'SoundBars',
       subservices: [
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/herramientasmovil2.webp' },
+        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbarhome.webp' },
         // { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/herramientasmovil2.webp'}
       ]
     },
     {
       label: 'TV',
       subservices: [
-        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp' },
+        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tvinstallhome.webp' },
         // { label: 'Overhead TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/camerainstall.webp' },
         // { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/herramientasmovil2.webp' },
         // { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/muchasherramientas.webp' }
@@ -43,7 +43,7 @@ const HandyServiceSection: React.FC = () => {
     {
       label: 'Fans and Lighting',
       subservices: [
-        { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/lightingInstallation.webp' },
+        { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fanshome.webp' },
         // { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/muchasherramientas.webp' }
       ]
     }

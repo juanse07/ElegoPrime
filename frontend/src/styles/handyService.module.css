@@ -65,7 +65,7 @@
 
 .description {
   color: #a0aec0;
-  font-size: rem;
+  font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 0;
 }
@@ -84,10 +84,22 @@
 
 @media (max-width: 768px) {
   .servicesSection {
-    padding: 2rem 0;
+    padding: 2rem 1rem;
   }
 
   .title {
     font-size: 1.25rem;
   }
+
+  .servicesTitle {
+    font-size: 1.5rem;
+  }
+
+  .servicesDescription {
+    font-size: 15px;
+  }
+
+  .description {
+  font-size: 15px;
+}
 } 
