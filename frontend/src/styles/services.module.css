@@ -7,3 +7,83 @@
   flex-direction: column;
   align-content: space-between;
 }
+
+.reviewSection {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 70px;
+}
+
+.reviewTitle {
+    background-color: #2e3c49;
+    color: #fff;
+    width: 700px;
+    margin-left:0;
+    padding: 170px 0;
+    border-radius: 0 40px 40px 0;
+}
+
+.carouselContainer {
+  width: 800px;
+  height: 420px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviewText {
+  position: absolute;
+  width: 100%;
+  color: #2e3c49;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reviewItem {
+  position: relative;
+  text-align: left;
+  padding: 20px 100px 20px 30px;
+  background-color: #fff;
+  display: flex;
+  min-height: 250px;
+  max-height: auto;
+  align-items: center;
+  max-width: 500px;
+  box-shadow: 0px 0px 10px 1px #e3e3e3;
+  margin-right: 50px;
+}
+
+.customerContainer {
+  position: absolute;
+  height: 160px;
+  width: 125px;
+  right: -16%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffcf00;
+  color: #2e3c49;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 44% 44% 0 0;
+  text-align: center;
+}
+
+.reviewText.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.customerImage {
+  width: 100px;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
