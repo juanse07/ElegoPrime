@@ -18,7 +18,7 @@ const Category: React.FC = () => {
       setSelectedCategory(categoryFromHash);
     }
   }, [router.asPath]);
-  // Categorías con subservicios
+
   const categories = [
     {
       label: 'Security',

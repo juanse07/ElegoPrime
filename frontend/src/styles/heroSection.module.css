@@ -1,18 +1,17 @@
 .heroSection {
   position: relative;
-  height: 60vh;
+  height: 20vh;
   width: 100%;
   overflow: hidden;
   padding: 2rem;
+  margin-top: 2rem;
 }
 
 .parallaxOverlay {
   position: relative;
   height: 100%;
   width: 100%;
-  
   clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 85% 75%, 85% 100%, 70% 75%, 0% 75%);
-  
   border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -26,27 +25,22 @@
   color: #c0c0c0;
   z-index: 1;
   width: 100%;
-  padding: 0 2rem;
 }
 
 .title {
   font-size: 3rem;
   color: #2e3c49 !important;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
+    margin-bottom: 0;
   }
 
-  .subtitle {
-    font-size: 1.2rem;
+  .heroSection{
+    height: 10vh;  
+    padding: 20px 0 0 0;
   }
 } 

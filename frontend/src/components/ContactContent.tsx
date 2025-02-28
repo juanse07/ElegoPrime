@@ -21,11 +21,6 @@ interface ContactContentProps {
 }
 
 export default function ContactContent({ contactInfo, onEstimateClick }: ContactContentProps) {
-  const leftColumnRef = useScrollAnimation({
-    threshold: 0.1,
-    rootMargin: '50px 0px',
-    once: true
-  });
 
   const rightColumnRef = useScrollAnimation({
     threshold: 0.1,
@@ -35,32 +30,10 @@ export default function ContactContent({ contactInfo, onEstimateClick }: Contact
 
   return (
     <div className={styles.contentSection}>
-      <div 
-        ref={leftColumnRef}
-        className={`${styles.leftColumn} fade-in-section`}
-      >
-        <div className={styles.messageCard}>
-          <p className={styles.welcomeMessage}>
-            {contactInfo.welcomeMessage}
-          </p>
-          <div className={styles.socialLinks}>
-            {contactInfo.socialLinks.map((link, index) => (
-              <a key={index} href={link.url} className={styles.socialIcon}>
-                <Image 
-                  width={30} 
-                  height={30} 
-                  alt={link.platform} 
-                  src={link.icon} 
-                />
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
 
       <div 
         ref={rightColumnRef}
-        className={`${styles.rightColumn} fade-in-section`}
+        className={styles.rightColumn}
       >
         <div className={styles.contactButtons}>
           {contactInfo.buttons.map((button, index) => (
@@ -74,6 +47,7 @@ export default function ContactContent({ contactInfo, onEstimateClick }: Contact
           ))}
         </div>
       </div>
+
     </div>
   );
 } 

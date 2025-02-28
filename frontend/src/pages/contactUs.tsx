@@ -58,9 +58,8 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
 export const getStaticProps = async () => {
   try {
     const heroContent = { 
-      image: "/contactUsBanner.webp",
       title: "Contact Us",
-      subtitle: "let the Pros handle it"
+      subtitle: ""
     };
 
     const contactInfo = {
