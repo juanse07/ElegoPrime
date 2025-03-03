@@ -6,33 +6,33 @@ import { useState, useEffect } from "react";
 
 const reviews = [
   <div key={1} className={styles.reviewItem}>
-    <span className={styles.customerContainer}>
-      <img src="/emily.webp" alt="" className={styles.customerImage} />
-      Emily R.
-    </span>
-    "Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
-    but they handled everything quickly and professionally. The team was punctual, courteous, and explained every step of the process.
-    My home looks fantastic now, and I wouldn&apos;t hesitate to hire them again!""
+    <p>
+      "Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
+      but they handled everything quickly and professionally."
+    </p>
+    <div className={styles.customerContainer}>
+      <img src="/emily.webp" alt="Emily R." className={styles.customerImage} />
+      <span>Emily R.</span>  
+    </div>
   </div>,
-
   <div key={2} className={styles.reviewItem}>
-    <span className={styles.customerContainer}>
-      <img src="/mark.webp" alt="" className={styles.customerImage} />
-      Mark T.
-    </span>  
-    They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
-    and I was amazed by their attention to detail. The work was completed on time, within budget, and with outstanding quality.
-    It&apos;s refreshing to work with a company that truly cares about its customers!
+    <p>
+      "They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
+      and I was amazed by their attention to detail."
+    </p>
+    <div className={styles.customerContainer}>
+      <img src="/mark.webp" alt="Mark T." className={styles.customerImage} />
+      <span>Mark T.</span>  
+    </div>
   </div>,
-  
   <div key={3} className={styles.reviewItem}>
-    <span className={styles.customerContainer}>
-      <img src="/sarah.webp" alt="" className={styles.customerImage} />
-      Sarah L.
-    </span>
-    Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.
-    Not only did they fix the issue quickly, but they also provided helpful maintenance tips to prevent future problems. 
-    heir expertise and professionalism are unmatched!"
+    <p>
+      "Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately."
+    </p>
+    <div className={styles.customerContainer}>
+      <img src="/sarah.webp" alt="Sarah L." className={styles.customerImage} />
+      <span>Sarah L.</span>  
+    </div>
   </div>
 ];
 const Services: React.FC = () => {

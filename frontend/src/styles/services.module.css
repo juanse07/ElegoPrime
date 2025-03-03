@@ -16,12 +16,16 @@
 }
 
 .reviewTitle {
-    background-color: #2e3c49;
-    color: #fff;
-    width: 700px;
-    margin-left:0;
-    padding: 170px 0;
-    border-radius: 0 40px 40px 0;
+  background-color: #2e3c49;
+  color: #fff;
+  width: 700px;
+  margin-left:0;
+  padding: 170px 0;
+  border-radius: 0 40px 40px 0;
+}
+
+.reviewTitle h2{
+  font-weight: bold;
 }
 
 .carouselContainer {
@@ -87,3 +91,51 @@
   border-radius: 100%;
   margin-bottom: 10px;
 }
+
+@media (max-width: 768px) {
+  .reviewSection {
+  flex-direction: column;
+}
+
+  .reviewTitle {
+    width: 90%;
+    padding: 50px 0;
+    border-radius: 0 40px 40px 0;
+    font-size: 15px;
+  }
+
+  .reviewTitle h2{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .carouselContainer {
+    width: 100%;
+    height: 420px;
+    margin: 0 auto;
+  }
+
+  .reviewText {
+    font-size: 15px;
+  }
+
+  .reviewItem {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+    margin: 0 2rem;
+    margin-top: 2rem;
+  }
+
+  .customerContainer {
+    position: relative;
+    width: auto;
+    height: 95px;
+    padding: 0;
+    margin: 3.5rem 5rem 0 0;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+  }
+} 
