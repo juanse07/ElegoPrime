@@ -9,7 +9,6 @@ import styles from '../styles/contactUs.module.css';
 
 interface ContactPageProps {
   heroContent: {
-    image: string;
     title: string;
     subtitle: string;
   };
@@ -19,6 +18,7 @@ interface ContactPageProps {
       platform: string;
       icon: string;
       url: string;
+      label: string;
     }>;
     buttons: Array<{
       label: string;
@@ -35,7 +35,6 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
     <div className={styles.pageContainer}>
       <div >
         <HeroSection 
-          image={heroContent.image}
           title={heroContent.title}
           subtitle={heroContent.subtitle}
         />
@@ -67,13 +66,15 @@ export const getStaticProps = async () => {
       socialLinks: [
         {
           platform: "Facebook",
-          icon: "/facebook_svgrepo.com.svg",
-          url: "#"
+          icon: "",
+          url: "#",
+          label: "Follow us on Facebook"
         },
         {
           platform: "Instagram",
-          icon: "/instagram_svgrepo.com.svg",
-          url: "#"
+          icon: "",
+          url: "#",
+          label: "Follow us on Instagram"
         }
       ],
       buttons: [
@@ -112,7 +113,6 @@ export const getStaticProps = async () => {
     return {
       props: {
         heroContent: {
-          image: "/23779.webp",
           title: "Contact Us",
           subtitle: "Elevate Your Experience"
         },

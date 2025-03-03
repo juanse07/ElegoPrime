@@ -100,6 +100,9 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             </Nav.Link>
                             {/* Menú desplegable para servicios */}
                             <div className={`${styles.dropdownMenu} ${(showDropdown && isMobile) ? 'd-block' : ''}`}>
+                                <Link href="/services#All" onClick={handleServiceClick}>
+                                    <span className={styles.NavStyle}>All</span>
+                                </Link>
                                 <Link href="/services#Security" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Security</span>
                                 </Link>

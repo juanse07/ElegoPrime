@@ -3,6 +3,10 @@ import Image from "next/image";
 import styles from '../styles/contactUs.module.css';
 import ContactUsButton from './contactButton';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+
+
 interface ContactContentProps {
   contactInfo: {
     welcomeMessage: string;
@@ -10,6 +14,7 @@ interface ContactContentProps {
       platform: string;
       icon: string;
       url: string;
+      label: string;
     }>;
     buttons: Array<{
       label: string;
@@ -19,7 +24,10 @@ interface ContactContentProps {
   };
   onEstimateClick?: () => void;
 }
-
+const socialIcons: Record<string, any> = {
+  facebook: faSquareFacebook,
+  instagram: faInstagram,
+};
 export default function ContactContent({ contactInfo, onEstimateClick }: ContactContentProps) {
 
   const rightColumnRef = useScrollAnimation({
@@ -30,11 +38,8 @@ export default function ContactContent({ contactInfo, onEstimateClick }: Contact
 
   return (
     <div className={styles.contentSection}>
-
-      <div 
-        ref={rightColumnRef}
-        className={styles.rightColumn}
-      >
+      <div ref={rightColumnRef} className={styles.rightColumn}>
+        
         <div className={styles.contactButtons}>
           {contactInfo.buttons.map((button, index) => (
             <ContactUsButton 
@@ -46,8 +51,25 @@ export default function ContactContent({ contactInfo, onEstimateClick }: Contact
             />
           ))}
         </div>
-      </div>
 
+        <div className={styles.socialLinks}>
+          {contactInfo.socialLinks.map((link, index) => (
+            <a 
+              key={index} 
+              href={link.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.socialButton}
+            >
+              <FontAwesomeIcon 
+                icon={socialIcons[link.platform.toLowerCase()]} 
+                className={styles.iconCustomContact} 
+              />
+              <span className={styles.socialLabel}>{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
-} 
+}

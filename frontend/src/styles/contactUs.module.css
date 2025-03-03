@@ -101,9 +101,9 @@
 .socialMediaContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content:space-around;
     z-index: 2;
+    background-color: bisque;
 }
 
 .pageContainer {
@@ -172,16 +172,58 @@
 }
 
 .socialLinks {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 1100px;
+  margin-bottom: 6rem;
 }
 
-.socialIcon {
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-5px);
-  }
+.socialButton {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 400px;
+  height: 95px;
+  color: #2e3c49;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  border-radius: 0 30px 0px 30px;
+  background: white;
+  box-shadow: 0px 0px 18px #2e3c492c;
+  transition: 0.2s ease-in-out, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-left: 2.8rem;
+  padding-left: 15px;
+  z-index: 1;
+}
+
+.iconCustomContact {
+  width: 25px;
+  height: auto;
+  margin-right: 3rem;
+}
+
+.socialButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #ff8730;
+  transition: height 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.socialButton:hover::before {
+  height: 100%;
+}
+
+.socialButton:hover {
+  color: #fff;
+  transition: 0.2s;
 }
 
 .contactButtons {
@@ -189,6 +231,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 1100px;
+  margin-bottom: 3.5rem;
 }
 
 .contactButtons button {
@@ -199,7 +242,7 @@
   box-shadow: 0px 0px 18px #2e3c492c;
   background: white;
   overflow: hidden;
-  transition: color 0.4s ease-in-out;
+  transition: 0.2s ease-in-out, transform 0.3s ease;
   z-index: 1;
 }
 
@@ -209,19 +252,19 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 6px; /* Empieza como una línea superior */
+  height: 6px;
   background: #ff8730;
   transition: height 0.4s ease-in-out !important;
   z-index: -1;
 }
 
 .contactButtons button:hover::before {
-  height: 100% !important; /* Se expande hasta cubrir el botón */
+  height: 100% !important;
 
 }
 
 .contactButtons button:hover {
-  color: white; /* Cambia el color del texto */
+  color: white;
   font-size: 1.1rem;
 }
 
