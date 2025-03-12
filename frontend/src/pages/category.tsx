@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import CategoryButton from '@/components/CategoryButton';
 import CategoryContent from '@/components/CategoryContent';
@@ -24,6 +25,8 @@ const Category: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>('Security');
 
   const router = useRouter();
+
+  const categoryRef = useScrollAnimation();
 
   useEffect(() => {
     if (router.asPath.includes('#')) {
@@ -127,7 +130,7 @@ const Category: React.FC = () => {
   const selectedCategoryContent = categories.find(category => category.label === selectedCategory);
 
   return (
-    <div className={styles.categoriesContainer}>
+    <div ref={categoryRef} className={`${styles.categoriesContainer} ${`fade-in-section`}`}>
       <div className={styles.categoriesLeft}>
         {categories.map((category, index) => (
           <CategoryButton 

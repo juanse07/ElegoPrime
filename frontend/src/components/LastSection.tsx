@@ -1,6 +1,7 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/LastSection.module.css';
 import { Container } from 'react-bootstrap';
+import Link from "next/link";
 
 const LastSection = () => {
   const animationRef = useScrollAnimation({
@@ -21,11 +22,11 @@ const LastSection = () => {
             <div className={styles.footerleft}>
               <p className="mb-2">© 2025 Elego Prime. All rights reserved.</p>
               <p className="mb-2">Documentation</p>
-              <p className="mb-2">About</p>
-              <p className="mb-2">Home</p>
-              <p className="mb-2">Contact us</p>
+              <p className="mb-2"> <Link href="/index">About</Link></p>
+              <p className="mb-2"> <Link href="/index">Home</Link></p>
+              <p className="mb-2"> <Link href="/contactUs">Contact Us</Link></p>
               <p className="mb-2">Reserve</p>
-              <p className="mb-2">Services</p>
+              <p className="mb-2"> <Link href="/services">Services</Link></p>
               <p className="mb-2">Get an estimate</p>
               <p className="mb-0">Website by <a href="https://pymesoft.com" target="_blank" rel="noopener noreferrer">PyMESoft</a></p>
             </div>
@@ -53,8 +54,8 @@ const LastSection = () => {
           </div>
         </div>
         <div className={`${styles.termscontent} py-4 text-muted`}>
-          <p className="mb-2 border-end">Privacy Policy</p>
-          <p className="mb-2 border-end">Terms & Conditions</p>
+          <p className="mb-2 border-end "> <Link href="/privacy">Privacy Policy</Link></p>
+          <p className="mb-2 border-end "> <Link href="/terms">Terms & Conditions</Link></p>
           <p className="mb-2 border-end">Accessibility Tools</p>
           <p className="mb-2">Do Not Sell or Share My Personal Information</p>
         </div>

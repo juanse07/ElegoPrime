@@ -4,6 +4,8 @@ import LastSection from '@/components/LastSection';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 
 import styles from '../styles/contactUs.module.css';
 
@@ -30,10 +32,13 @@ interface ContactPageProps {
 
 const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
   const [showServiceModal, setShowServiceModal] = useState(false);
+  const heroRef = useScrollAnimation();
+  const contactRef = useScrollAnimation();
+  const lastSectionRef = useScrollAnimation();
 
   return (
     <div className={styles.pageContainer}>
-      <div >
+      <div ref={heroRef} className={`fade-in-section`}>
         <HeroSection 
           title={heroContent.title}
           subtitle={heroContent.subtitle}

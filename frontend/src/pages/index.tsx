@@ -1,8 +1,10 @@
 import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-import { faCheck, faComments, faFaceSmileBeam, faHelmetSafety, faListCheck, faRankingStar, faScrewdriverWrench, faToolbox } from "@fortawesome/free-solid-svg-icons";
+
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -52,6 +54,11 @@ export default function Home({
   services = [], 
   heroContent: desktopContent = []
 }: HomeProps) {
+
+  const mainContentRef = useScrollAnimation();
+  const mainSubContentRef = useScrollAnimation();
+  const handyServiceRef = useScrollAnimation();
+
   // const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [showServiceModal, setShowServiceModal] = useState(false);
@@ -164,11 +171,11 @@ export default function Home({
           </Carousel.Item>
         ))}
       </Carousel>
-      <HandyServiceSection />
+      <div ref={handyServiceRef} className={`fade-in-section`}>
+        <HandyServiceSection />
+      </div>
 
-      
-
-      <div className={styles.mainContent}>
+      <div ref={mainContentRef} className={`${styles.mainContent} ${`fade-in-section`}`}>
         <div className={styles.contentIllustration}>
           <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
             <div className={styles.ilusindexcontent}>
@@ -186,25 +193,25 @@ export default function Home({
         </div>
       </div>
       
-      <div className={styles.mainsubContent}>
+      <div ref={mainSubContentRef} className={`${styles.mainsubContent} ${`fade-in-section`}`}>
         <div className={styles.listContainer}>
           <h4 className={styles.subTitle}>Why Choose Us</h4>
             <ul className={styles.subText}>
               <div className={styles.listRow}></div>
               <li className={styles.borderCustom}>
-                <FontAwesomeIcon icon={faCheck} className={styles.iconCustom}/>
+                <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                 Commitment to excellence and attention to detail.
               </li >
               <li className={styles.borderCustom}>
-                <FontAwesomeIcon icon={faComments} className={styles.iconCustom}/>
+                <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                 Reliable and customized solutions for every need.
               </li>
               <li className={styles.borderCustom}>
-                <FontAwesomeIcon icon={faScrewdriverWrench} className={styles.iconCustom}/>
+                <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                 Experienced professionals in maintenance and repairs.
               </li>
               <li >
-                <FontAwesomeIcon icon={faListCheck} className={styles.iconCustom}/>
+                <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                 Efficient and professional service tailored to your requirements.
               </li>
             </ul>
@@ -214,20 +221,20 @@ export default function Home({
           <h4 className={styles.subTitle}>Benefits of Choosing Us</h4>
               <ul className={styles.subText}>
                 <li className={styles.borderCustom}>
-                  <FontAwesomeIcon icon={faRankingStar} className={styles.iconCustom}/>
+                  <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                   High-quality craftsmanship for long-lasting results.
                 </li>
                 <li className={styles.borderCustom}>
-                  <FontAwesomeIcon icon={faHelmetSafety} className={styles.iconCustom}/>
+                  <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                   Expertise in both routine maintenance and specialized repairs.
                 </li>
                 <li className={styles.borderCustom}>
-                  <FontAwesomeIcon icon={faToolbox} className={styles.iconCustom}/>
+                  <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                   Equipped with the right tools to handle any task with precision.
                 </li>
 
                  <li>
-                  <FontAwesomeIcon icon={faFaceSmileBeam} className={styles.iconCustom}/>
+                  <FontAwesomeIcon icon={faStar} className={styles.iconCustom}/>
                   Focused on customer satisfaction for a stress-free experience
                 </li>
             </ul>

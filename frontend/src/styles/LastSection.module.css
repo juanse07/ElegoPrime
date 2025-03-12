@@ -28,6 +28,16 @@
 
 .termscontent p {
     padding: 0px 10px;
+    color: #a6a6a6;
+}
+
+.termscontent a {
+    padding: 0px 10px;
+    color: #a6a6a6;
+}
+
+.termscontent a:hover {
+    text-decoration: underline;
 }
 
 .footertext {
@@ -44,6 +54,14 @@
     color: #ffcf00;
     text-decoration: none;
     transition: color 0.3s ease;
+}
+
+.footerleft p a[href^="/"] {
+    color:#fff
+}
+
+.footerleft p a[href^="/"]:hover {
+    color:#a6a6a6
 }
 
 .footertext a:hover {

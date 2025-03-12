@@ -3,6 +3,7 @@ import Category from '@/pages/category';
 import LastSection from '@/components/LastSection';
 import styles from '@/styles/services.module.css';
 import { useState, useEffect } from "react";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const reviews = [
   <div key={1} className={styles.reviewItem}>
@@ -37,6 +38,7 @@ const reviews = [
 ];
 const Services: React.FC = () => {
   const [index, setIndex] = useState(0);
+  const reviewSectionRef = useScrollAnimation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,7 +52,7 @@ const Services: React.FC = () => {
     <div className={styles.servicesPage}>
       <Category />
 
-      <section className={styles.reviewSection}>
+      <section ref={reviewSectionRef} className={`${styles.reviewSection} ${`fade-in-section`}`}>
         <div className={styles.reviewTitle}>
           <h2>Customer Testimonials</h2>
           <p>Opiniones de nuestros clientes</p>

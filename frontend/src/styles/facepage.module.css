@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 
 
 
@@ -347,32 +349,53 @@
 
   .mainsubContent {
     position: relative;
-    border-radius: 8px;
     margin: 4rem 6rem;
     max-width: 100%;
     z-index: 1;
     display: flex;
   }
 
+  .listContainer {
+    background-color: #2e3c49;
+    margin: auto;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 25px;
+    min-height: 610px;
+    position: relative;
+    text-align: center;
+}
+
+.subText {
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 0 8px 1px #2e3c495e;
+    width: 110%;
+    min-width: 600px;
+    border-radius: 25px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: left;
+}
+
   .subTitle {
-    margin: 0 10rem;
-    padding-left: 8px;
-    color: #2e3c49;
+    margin: 0 2rem;
+    padding: 40px 8px;
+    text-align: center;
+    color: #fff;
     font-weight: bold;
+    font-size: 1.6rem;
   }
 
   .subText li {
     list-style-type:none;
     color:#2e3c49;
     font-size: 1.2rem;
-    padding: 15px 45px;
-    margin: 10px 0;
+    padding: 25px 45px;
     display: flex;
     align-items: center;
-  }
-
-  .subText {
-    padding: 30px 55px 0;
   }
 
   .iconCustom {
@@ -382,11 +405,19 @@
     padding:0 30px 10px 0;
     transition: transform 0.2s ease-in-out;
   }
-
   .borderCustom {
     border-bottom: 2px solid #2e3c4920;
   }
 
+  .subText li {
+    font-family: 'Lexend', sans-serif;
+    font-variation-settings: "wght" 350;
+    transition: font-variation-settings 0.5s ease-out;
+}
+
+.subText li:hover {
+    font-variation-settings: "wght" 600;
+}
   .iconCustom:hover {
     transform: scale(1.2);
   }
@@ -413,6 +444,7 @@
     border-radius: 0;
     justify-content: right;
   }
+
 
   @media (max-width: 768px) {
 

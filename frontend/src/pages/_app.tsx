@@ -57,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
           show={showServiceModal}
           onHide={() => setShowServiceModal(false)}
         />
-        <div style={{ paddingBottom: '200px' }}>
+        <div style={{ paddingBottom: '0px' }}>
           <Component {...pageProps} />
         </div>
      
