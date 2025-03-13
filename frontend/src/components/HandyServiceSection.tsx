@@ -54,7 +54,7 @@ const HandyServiceSection: React.FC = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2 className={styles.servicesTitle}>Professional Services</h2>
-          <Link href="/category" className={styles.seeAllLink}>
+          <Link href="/services" className={styles.seeAllLink}>
             See All Services &gt;
           </Link>
         </div>
@@ -65,9 +65,9 @@ const HandyServiceSection: React.FC = () => {
           {services.map((service) => (
             <Col key={service.label} xs={12} sm={6} md={3}>
               <Link 
-                href={`/category?service=${encodeURIComponent(service.label)}`}
-                className="text-decoration-none"
-              >
+  href={`/category?service=${encodeURIComponent(service.label)}&subservice=${encodeURIComponent(service.subservices[0].label)}`}
+  className="text-decoration-none"
+>
                 <Card className={styles.serviceCard}>
                   <div className={styles.imageWrapper}>
                     <Image

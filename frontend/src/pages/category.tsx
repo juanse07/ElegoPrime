@@ -15,7 +15,6 @@ const CategoryPage = () => {
     <div>
       <h1>Service: {service}</h1>
       <h2>Subservice: {subservice}</h2>
-      {/* Aquí podrías mostrar la información del subservicio */}
     </div>
   );
 };
