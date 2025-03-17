@@ -1,6 +1,9 @@
 // /components/Services.tsx
 import Category from '@/pages/category';
+import InfiniteCarousel from "@/components/slider";
+
 import LastSection from '@/components/LastSection';
+
 import styles from '@/styles/services.module.css';
 import { useState, useEffect } from "react";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -71,7 +74,7 @@ const Services: React.FC = () => {
           ))}
         </div>
       </section>
-
+      <InfiniteCarousel />
       <LastSection />
     </div>
   );

@@ -2,6 +2,8 @@ import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import { useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
+import { LassoSelect, LassoSelectIcon } from 'lucide-react';
+import LastSection from '@/components/LastSection';
 
 interface FormData {
     serviceType: string;
@@ -197,6 +199,7 @@ export default function NewServiceRequestForm() {
     const showNumberOfItems = ['Furniture assembly', 'Hanging pictures and shelves'].includes(formData.serviceType);
 
     return (
+        <div>
         <div className={styles.formContainer}>
             <h2 className={styles.formTitle}>Request a Service</h2>
             <form onSubmit={handleSubmit}>
@@ -446,6 +449,8 @@ export default function NewServiceRequestForm() {
                     </div>
                 )}
             </form>
+        </div>
+        <LastSection/>
         </div>
     );
 } 
