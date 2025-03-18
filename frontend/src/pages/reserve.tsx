@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
-import { LassoSelect, LassoSelectIcon } from 'lucide-react';
+// import { LassoSelect, LassoSelectIcon } from 'lucide-react';
 import LastSection from '@/components/LastSection';
 
 interface FormData {

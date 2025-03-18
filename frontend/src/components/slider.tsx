@@ -1,6 +1,7 @@
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Image from "next/image";
 import React from "react";
 import styles from "../styles/slider.module.css";
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 
 const InfiniteSlider: React.FC = () => {
@@ -18,7 +19,14 @@ const InfiniteSlider: React.FC = () => {
            <div className={styles.slideTrack}>
            {[...images, ...images].map((src, index) => (
     <div className={styles.slide} key={index}>
-        <img src={src} alt={`slide-${index % images.length + 1}`} aria-hidden={index >= images.length} />
+        <Image 
+            src={`/${src}`} 
+            alt={`slide-${index % images.length + 1}`} 
+            width={300} 
+            height={200} 
+            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+            aria-hidden={index >= images.length} 
+        />
     </div>
 ))}
            </div>

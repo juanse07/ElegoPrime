@@ -1,21 +1,11 @@
 // /components/Services.tsx
-<<<<<<< HEAD
-import Category from '@/pages/category';
-import InfiniteCarousel from "@/components/slider";
-
 import LastSection from '@/components/LastSection';
-
-import styles from '@/styles/services.module.css';
-import { useState, useEffect } from "react";
-=======
-import LastSection from '@/components/LastSection';
->>>>>>> ea109ddaecf7f2bfe3d43a319ce27e18116f762d
+import InfiniteCarousel from '@/components/slider';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
- import Category from '@/pages/category';
+import Category from '@/pages/category';
 import styles from '@/styles/services.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from "react";
-
 const reviews = [
   <div key={1} className={styles.reviewItem}>
       <p>
