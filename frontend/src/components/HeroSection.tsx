@@ -1,5 +1,5 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Image from "next/image";
+
 import styles from '../styles/heroSection.module.css';
 
 interface HeroSectionProps {

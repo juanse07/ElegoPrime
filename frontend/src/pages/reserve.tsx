@@ -1,4 +1,5 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
+import Image from 'next/image';
 import { useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
@@ -397,7 +398,13 @@ export default function NewServiceRequestForm() {
                                 </label>
                                 {previewUrls.imageUrl1 && (
                                     <div className={styles.imagePreview}>
-                                        <img src={previewUrls.imageUrl1} alt="Preview 1" />
+                                        <Image 
+                                            src={previewUrls.imageUrl1} 
+                                            alt="Preview 1" 
+                                            width={100} 
+                                            height={100}
+                                            style={{ objectFit: 'cover' }}
+                                        />
                                         <FaCheck className={styles.checkIcon} />
                                     </div>
                                 )}
@@ -423,7 +430,13 @@ export default function NewServiceRequestForm() {
                                 </label>
                                 {previewUrls.imageUrl2 && (
                                     <div className={styles.imagePreview}>
-                                        <img src={previewUrls.imageUrl2} alt="Preview 2" />
+                                        <Image 
+                                            src={previewUrls.imageUrl2} 
+                                            alt="Preview 2" 
+                                            width={100} 
+                                            height={100}
+                                            style={{ objectFit: 'cover' }}
+                                        />
                                         <FaCheck className={styles.checkIcon} />
                                     </div>
                                 )}

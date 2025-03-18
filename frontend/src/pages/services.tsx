@@ -1,37 +1,38 @@
 // /components/Services.tsx
-import Category from '@/pages/category';
 import LastSection from '@/components/LastSection';
-import styles from '@/styles/services.module.css';
-import { useState, useEffect } from "react";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Category from '@/pages/category';
+import styles from '@/styles/services.module.css';
+import Image from 'next/image';
+import { useEffect, useState } from "react";
 
 const reviews = [
   <div key={1} className={styles.reviewItem}>
       <p>
-        "Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
-        but they handled everything quickly and professionally."
+        &ldquo;Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
+        but they handled everything quickly and professionally.&rdquo;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/emily.webp" alt="Emily R." className={styles.customerImage} />
+      <Image src="/emily.webp" alt="Emily R." className={styles.customerImage} width={50} height={50} />
       <span>Emily R.</span>  
     </div>
   </div>,
   <div key={2} className={styles.reviewItem}>
       <p>
-        "They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
-        and I was amazed by their attention to detail."
+        &ldquo;They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
+        and I was amazed by their attention to detail.&rdquo;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/mark.webp" alt="Mark T." className={styles.customerImage} />
+      <Image src="/mark.webp" alt="Mark T." className={styles.customerImage} width={50} height={50} />
       <span>Mark T.</span>  
     </div>
   </div>,
   <div key={3} className={styles.reviewItem}>
       <p>
-        "Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately."
+        &ldquo;Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.&rdquo;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/sarah.webp" alt="Sarah L." className={styles.customerImage} />
+      <Image src="/sarah.webp" alt="Sarah L." className={styles.customerImage} width={50} height={50} />
       <span>Sarah L.</span>  
     </div>
   </div>

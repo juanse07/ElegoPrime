@@ -33,8 +33,8 @@ interface ContactPageProps {
 const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
   const [showServiceModal, setShowServiceModal] = useState(false);
   const heroRef = useScrollAnimation();
-  const contactRef = useScrollAnimation();
-  const lastSectionRef = useScrollAnimation();
+  // const contactRef = useScrollAnimation();
+  // const lastSectionRef = useScrollAnimation();
 
   return (
     <div className={styles.pageContainer}>
