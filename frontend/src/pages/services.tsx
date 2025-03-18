@@ -1,7 +1,7 @@
 // /components/Services.tsx
 import LastSection from '@/components/LastSection';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Category from '@/pages/category';
+// import Category from '@/pages/category';
 import styles from '@/styles/services.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from "react";
