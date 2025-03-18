@@ -55,7 +55,7 @@ const LastSection = () => {
         </div>
         <div className={`${styles.termscontent} py-4 text-muted`}>
           <p className="mb-2 border-end "> <Link href="/privacy">Privacy Policy</Link></p>
-          <p className="mb-2 border-end "> <Link href="/terms">Terms & Conditions</Link></p>
+          <p className={`${styles.terms} mb-2 border-end`}> <Link href="/terms">Terms & Conditions</Link></p>
           <p className="mb-2 border-end">Accessibility Tools</p>
           <p className="mb-2">Do Not Sell or Share My Personal Information</p>
         </div>

@@ -124,7 +124,6 @@
         /* Clean modern design */
         border-top: none;
         box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-        padding-bottom: 1rem;
         margin-top: auto;
     }
 
@@ -133,14 +132,15 @@
     }
 
     .content {
-        padding: 1.5rem 0;
+        padding: 1.5rem 0 0 0;
         margin: 0px 15px;
     }
 
     .termscontent {
-        margin: 0rem 1rem 4rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 3rem 1rem 4rem 1rem;
         padding: 1rem 0;
-        flex-direction: column;
         align-items: center;
         text-align: center;
     }
@@ -151,8 +151,9 @@
 
     .footertext {
         font-size: 0.7rem;
-        line-height: 1.3;
-        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        text-align: left;
         margin: 20px 0 10px;
     }
 
@@ -172,5 +173,33 @@
     .lastSection p {
         font-size: 0.9rem;
         line-height: 1.3;
+    }
+
+    .footerleft {
+        max-height: 250px;
+    }
+
+    .footermid {
+        margin-bottom: 2rem;
+        margin-left: 40px;
+    }
+
+    .footermid h6{
+        text-align: left;
+    }
+
+    .footerright {
+        grid-row:2;
+        width: 100px;
+        position: absolute;
+        top:300px;
+    }
+    
+    .footerright h6 {
+        text-align: left;
+    }
+
+    .terms {
+        border-right: solid 2px #2e3c49 !important;
     }
 }
