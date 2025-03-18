@@ -1,23 +1,10 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 import CategoryButton from '@/components/CategoryButton';
 import CategoryContent from '@/components/CategoryContent';
 import styles from '../styles/categories.module.css';
-
-const CategoryPage = () => {
-  const router = useRouter();
-  const { service, subservice } = router.query;
-
-  return (
-    <div>
-      <h1>Service: {service}</h1>
-      <h2>Subservice: {subservice}</h2>
-    </div>
-  );
-};
 
 const Category: React.FC = () => {
 

@@ -1,10 +1,11 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import Image from "next/image";
+
 import styles from '../styles/contactUs.module.css';
 import ContactUsButton from './contactButton';
 
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { faInstagram, faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 
 interface ContactContentProps {
@@ -24,10 +25,12 @@ interface ContactContentProps {
   };
   onEstimateClick?: () => void;
 }
-const socialIcons: Record<string, any> = {
+
+const socialIcons: Record<string, IconDefinition> = {
   facebook: faSquareFacebook,
   instagram: faInstagram,
 };
+
 export default function ContactContent({ contactInfo, onEstimateClick }: ContactContentProps) {
 
   const rightColumnRef = useScrollAnimation({
