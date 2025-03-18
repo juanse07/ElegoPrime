@@ -401,7 +401,7 @@
   .iconCustom {
     width: 40px;
     height: auto;
-    color: #ffcf00;
+    color: #ff8730;
     padding:0 30px 10px 0;
     transition: transform 0.2s ease-in-out;
   }
@@ -519,4 +519,19 @@
     .carousel{
       height: 70%;
     }
+
+    .mainsubContent {
+      margin-bottom: 6rem;
+    }
+
+    .listContainer {
+      max-width: 250px;
+      margin-top: 4rem;
+  }
+
+    .subText {
+      min-width: 340px;
+      top: 120px;
+      padding: 10px 25px;
+  }
   }

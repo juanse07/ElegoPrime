@@ -179,7 +179,7 @@ export default function Home({
         <div className={styles.contentIllustration}>
           <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
             <div className={styles.ilusindexcontent}>
-              <Image src="/Ilustracion.webp" alt="Imagen de storyset en Freepik" width={400} height={400}
+              <Image src="" alt="foto" width={400} height={400}
               className={styles.ilusindeximage}/>
             </div>
               <p className={styles.mainDescription}>
