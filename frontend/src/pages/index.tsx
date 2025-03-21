@@ -66,7 +66,7 @@ export default function Home({
   const mobileContent = [
     {
       type: 'image',
-      src: '/crew1.webp',
+      src: '/crew3.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
@@ -138,15 +138,15 @@ export default function Home({
               <Image
                 src={content.src}
                 alt={content.heading}
-                width={isMobile ? 480 : 1920}
-                height={isMobile ? 270 : 1080}
+                width={isMobile ? 750 : 1920}
+                height={isMobile ? 600 : 1080}
                 quality={90}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 // priority={index === 0}
                 className={styles.carouselImage}
                 style={{
-                  objectFit: isMobile ? 'fill' : 'cover',
-                  objectPosition: isMobile ? 'center' : 'center',
+                  objectFit: isMobile ? 'cover' : 'cover',
+                  objectPosition: isMobile ? 'right' : 'center',
                   transform: 'none',
                   transformOrigin: 'center center',
                 }}
