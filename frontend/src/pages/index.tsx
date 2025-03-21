@@ -138,8 +138,8 @@ export default function Home({
               <Image
                 src={content.src}
                 alt={content.heading}
-                width={isMobile ? 750 : 1920}
-                height={isMobile ? 600 : 1080}
+                width={isMobile ? 850 : 1920}
+                height={isMobile ? 700 : 1080}
                 quality={90}
                 loading={index === 0 ? 'eager' : 'lazy'}
                
@@ -148,7 +148,7 @@ export default function Home({
                 
                 style={{
                   objectFit: isMobile ? 'cover' : 'cover',
-                  objectPosition: isMobile ? 'right' : 'bottom',
+                  objectPosition: isMobile ? 'center' : 'center',
                   transform: 'none',
                   
              
