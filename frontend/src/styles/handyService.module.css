@@ -88,7 +88,7 @@
   }
 
   .title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 
   .servicesTitle {
@@ -96,12 +96,8 @@
   }
 
   .servicesDescription {
-    font-size: 15px;
+    font-size: 14px;
     margin: 20px 0;
-  }
-
-  .description {
-    font-size: 15px;
   }
   
   .imageWrapper {
@@ -118,22 +114,59 @@
   }
   
   .label {
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #ff8730;
+    font-weight: 600;
   }
   
   .title {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    color: #ffffff;
+  }
+  
+  /* Hide description by default on mobile */
+  .description {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+  
+  /* Show description when card is expanded */
+  .serviceCard.expanded .description {
+    display: block;
+    height: auto;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #d0d0d0;
   }
 }
 
 @media (max-width: 480px) {
   .imageWrapper {
-    padding-bottom: 80%;
+    padding-bottom: 120%; /* Make images larger */
   }
   
   .content {
     padding: 0.5rem;
+  }
+  
+  .label {
+    font-size: 0.7rem;
+    color: #ff8730;
+  }
+  
+  .title {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    color: #ffffff;
+  }
+  
+  .serviceCard.expanded .description {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: #d0d0d0;
   }
 } 
