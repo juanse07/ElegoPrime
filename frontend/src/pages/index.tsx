@@ -179,8 +179,15 @@ export default function Home({
 
       <div ref={mainContentRef} className={`${styles.mainContent} ${`fade-in-section`}`}>
         <div className={styles.contentIllustration}>
-          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
-            <div className={styles.ilusindexcontent}>
+          <div className={styles.titleContainer}>
+            <h1 className={styles.mainTitle}>
+              Who We Are? <span className={styles.companyName}>Elego Prime LLC</span>
+            </h1>
+            <div className={styles.titleUnderline}></div>
+          </div>
+          
+          <div className={styles.ilusindexcontent}>
+            <div className={styles.imageWrapper}>
               <Image 
                 src="/crew2.webp" 
                 alt="Elego Prime Team" 
@@ -190,15 +197,31 @@ export default function Home({
                 priority={true}
                 quality={90}
               />
+              <div className={styles.imageOverlay}></div>
             </div>
-              <p className={styles.mainDescription}>
-              We are a dynamic team dedicated to providing practical solutions that allow families to reclaim their time for other activities,
-        while we take care of maintaining clean and harmonious spaces that meet their expectations.
-        At Elego Prime LLC, we firmly believe that family, work, and recreational spaces should be clean, peaceful,
-        and enjoyable for everyone to truly make the most of them. We understand that many people in Colorado strive to maintain these conditions,
-        but busy schedules often make it difficult to accomplish all the tasks, and sometimes an extra helping hand is needed.
-              
+          </div>
+          
+          <div className={styles.descriptionContainer}>
+            <p className={styles.mainDescription}>
+              We are a <span className={styles.highlight}>dynamic team</span> dedicated to providing practical solutions 
+              that allow families to reclaim their time for other activities.
             </p>
+            
+            <p className={styles.mainDescription}>
+              At Elego Prime LLC, we firmly believe that family, work, and recreational spaces should be 
+              <span className={styles.highlight}> clean, peaceful, and enjoyable</span> for everyone to truly make the most of them.
+            </p>
+            
+            <p className={styles.mainDescription}>
+              We understand that many people in Colorado strive to maintain these conditions,
+              but busy schedules often make it difficult to accomplish all the tasks, and sometimes 
+              <span className={styles.highlight}> an extra helping hand is needed</span>.
+            </p>
+            
+            <button className={styles.learnMoreButton} onClick={() => setShowServiceModal(true)}>
+              Get Started
+            </button>
+          </div>
         </div>
       </div>
       
