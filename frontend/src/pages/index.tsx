@@ -66,7 +66,7 @@ export default function Home({
   const mobileContent = [
     {
       type: 'image',
-      src: '/carrousel1.webp',
+      src: '/crew1.webp',
       heading: 'Premium Service',
       subheading: 'Professional Bartenders'
     },
@@ -177,10 +177,17 @@ export default function Home({
 
       <div ref={mainContentRef} className={`${styles.mainContent} ${`fade-in-section`}`}>
         <div className={styles.contentIllustration}>
-          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
+          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>ß
             <div className={styles.ilusindexcontent}>
-              <Image src="" alt="foto" width={400} height={400}
-              className={styles.ilusindeximage}/>
+              <Image 
+                src="/crew2.webp" 
+                alt="Elego Prime Team" 
+                width={400} 
+                height={600}
+                className={styles.ilusindeximage}
+                priority={true}
+                quality={90}
+              />
             </div>
               <p className={styles.mainDescription}>
               We are a dynamic team dedicated to providing practical solutions that allow families to reclaim their time for other activities,
@@ -296,12 +303,12 @@ export const getStaticProps = async () => {
     
       {
         type: 'image',
-        src: '/carrousel1.webp',
+        src: '/crew1.webp',
         heading: 'Premium Service',
       },
       {
         type: 'image',
-        src: '/carousel2.webp',
+        src: '/carousel1.webp',
         heading: 'Special Events',
       },
       {

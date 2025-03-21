@@ -2,9 +2,9 @@ import ContactContent from '@/components/ContactContent';
 import HeroSection from '@/components/HeroSection';
 import LastSection from '@/components/LastSection';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 
 import styles from '../styles/contactUs.module.css';
@@ -84,8 +84,8 @@ export const getStaticProps = async () => {
       ],
       buttons: [
         {
-          label: "Begin Your Journey",
-          body: "Get Started",
+          label: "Get an Estimate",
+          body: "",
           iconType: "gauge"
         },
         {
