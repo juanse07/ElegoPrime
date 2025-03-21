@@ -177,7 +177,7 @@ export default function Home({
 
       <div ref={mainContentRef} className={`${styles.mainContent} ${`fade-in-section`}`}>
         <div className={styles.contentIllustration}>
-          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>ß
+          <h1 className={styles.mainTitle}>Who We Are? <span><br></br>Elego Prime LLC</span></h1>
             <div className={styles.ilusindexcontent}>
               <Image 
                 src="/crew2.webp" 
