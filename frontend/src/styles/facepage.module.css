@@ -130,8 +130,8 @@
     .carousel,
     .carouselItem,
     .imageWrapper {
-      height: 45vh;
-    }
+      height: 55vh;
+    }ß
 
     .carousel {
       clip-path: polygon(
@@ -163,7 +163,7 @@
     .carousel,
     .carouselItem,
     .imageWrapper {
-      height: 60vh;
+      height: 56vh;
     }
 
     .carousel {
