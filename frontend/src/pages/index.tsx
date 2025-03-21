@@ -142,14 +142,17 @@ export default function Home({
                 height={isMobile ? 600 : 1080}
                 quality={90}
                 loading={index === 0 ? 'eager' : 'lazy'}
-                // priority={index === 0}
+               
                 className={styles.carouselImage}
+                priority={index === 0}
+                
                 style={{
                   objectFit: isMobile ? 'cover' : 'cover',
-                  objectPosition: isMobile ? 'right' : 'center',
+                  objectPosition: isMobile ? 'right' : 'bottom',
                   transform: 'none',
-                  transformOrigin: 'center center',
-                }}
+                  
+             
+                 }}
               />
             </div>
             {/* <Carousel.Caption className={styles.carouselCaption}>
@@ -328,7 +331,7 @@ export const getStaticProps = async () => {
     
       {
         type: 'image',
-        src: '/crew3.webp',
+        src: '/crew31920.webp',
         heading: 'Premium Service',
       },
       {

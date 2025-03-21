@@ -88,7 +88,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.01); /* Prevents white edges during transitions */
+    transform: none !important;
   }
 
   .carouselCaption {
@@ -347,7 +347,7 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     width: 100%;
     height: auto;
   }
@@ -373,6 +373,8 @@
     justify-content: center;
     align-items: flex-start;
     width: 100%;
+    max-width: 500px;
+    margin-left: auto;
   }
 
   .ilusindeximage {
@@ -383,6 +385,7 @@
     border-radius: 12px;
     transform: perspective(1000px) rotateY(-5deg);
     transition: all 0.3s ease-in-out;
+    transform-origin: center center;
   }
 
   .descriptionContainer {
@@ -670,7 +673,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
   height: auto;
 }
@@ -696,6 +699,8 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  max-width: 500px;
+  margin-left: auto;
 }
 
 .ilusindeximage {
@@ -706,6 +711,7 @@
   border-radius: 12px;
   transform: perspective(1000px) rotateY(-5deg);
   transition: all 0.3s ease-in-out;
+  transform-origin: center center;
 }
 
 .descriptionContainer {
@@ -758,6 +764,11 @@
       "description";
     gap: 2rem;
   }
+
+  .ilusindexcontent {
+    max-width: 100%;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -772,4 +783,10 @@
   .mainDescription {
     font-size: 1rem;
   }
+}
+
+/* Ensure consistent image aspect ratio */
+.carousel .carouselItem {
+  height: 80vh;
+  overflow: hidden;
 }
