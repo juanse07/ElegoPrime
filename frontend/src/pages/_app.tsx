@@ -7,7 +7,7 @@ import "@/styles/globals.scss";
 import NavBar from '@/components/NavBar';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import type { AppProps } from "next/app";
-import { Poppins } from "next/font/google";
+import { Outfit } from "next/font/google";
 import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect, useState } from "react";
@@ -15,10 +15,12 @@ import { useEffect, useState } from "react";
 
 // Correct initialization
 
-
-const poppinsFont = Poppins({
+const outfitFont = Outfit({
   subsets: ["latin"],
-  weight: ["400", "700"], // Add desired font weights here
+  // Outfit supports variable font weight from 100-900
+  weight: "variable",
+  display: "swap", // Ensures text remains visible during font load
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"], // Fallback fonts
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -51,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
          />
       <SpeedInsights />
     
-      <div className={poppinsFont.className}>
+      <div className={outfitFont.className}>
         <NavBar onEstimateClick={() => setShowServiceModal(true)} />
         <ServiceRequestModal 
           show={showServiceModal}
