@@ -308,7 +308,7 @@ export const getStaticProps = async () => {
       },
       {
         type: 'image',
-        src: '/carousel1.webp',
+        src: '/carrousel1.webp',
         heading: 'Special Events',
       },
       {
