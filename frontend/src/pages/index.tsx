@@ -72,7 +72,7 @@ export default function Home({
     },
     {
       type: 'image',
-      src: '/carousel2.webp',
+      src: '/carrousel1.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     },
