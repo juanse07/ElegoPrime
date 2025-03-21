@@ -90,7 +90,7 @@ export const getStaticProps = async () => {
         },
         {
           label: "Email",
-          body: "eventAgent@DenBar.online",
+          body: "booking@elegoprime.com",
           iconType: "mail"
         },
         {

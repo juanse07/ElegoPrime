@@ -93,14 +93,14 @@ const ContactUsButton = ({ label, body, iconType = "mail", onEstimateClick }: Co
                 className={styles.responsiveButton}
             >
                 {getIcon(iconType)}
-                <span style={{ margin: '0 auto' }}>{label} {body}</span>
+                <span style={{ margin: '0 auto', padding: '10px'}}>{label} {body}</span>
             </Button>
             
             {iconType !== "gauge" && (
                 isCopied ? (
                     <Check
                         className={styles.copyIcon}
-                        style={{cursor: 'default', color: 'green' }}
+                        style={{cursor: 'default'}}
                     />
                 ) : (
                     <Copy 
