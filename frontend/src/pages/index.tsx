@@ -138,15 +138,17 @@ export default function Home({
               <Image
                 src={content.src}
                 alt={content.heading}
-                width={isMobile ? 750 : 1920}
-                height={isMobile ? 600 : 1080}
+                width={isMobile ? 480 : 1920}
+                height={isMobile ? 270 : 1080}
                 quality={90}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 // priority={index === 0}
                 className={styles.carouselImage}
                 style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center',
+                  objectFit: isMobile ? 'fill' : 'cover',
+                  objectPosition: isMobile ? 'center' : 'center',
+                  transform: 'none',
+                  transformOrigin: 'center center',
                 }}
               />
             </div>
