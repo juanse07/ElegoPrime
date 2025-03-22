@@ -1,38 +1,41 @@
 // /components/Services.tsx
-import LastSection from '@/components/LastSection';
-import InfiniteCarousel from '@/components/slider';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import Category from '@/pages/category';
+import InfiniteSlider from "@/components/slider";
+
+import LastSection from '@/components/LastSection';
+
 import styles from '@/styles/services.module.css';
-import Image from 'next/image';
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useRouter } from 'next/router';
+
 const reviews = [
   <div key={1} className={styles.reviewItem}>
       <p>
-        &ldquo;Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
-        but they handled everything quickly and professionally.&rdquo;
+        "Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
+        but they handled everything quickly and professionally."
       </p>
     <div className={styles.customerContainer}>
-      <Image src="/emily.webp" alt="Emily R." className={styles.customerImage} width={50} height={50} />
+      <img src="/emily.webp" alt="Emily R." className={styles.customerImage} />
       <span>Emily R.</span>  
     </div>
   </div>,
   <div key={2} className={styles.reviewItem}>
       <p>
-        &ldquo;They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
-        and I was amazed by their attention to detail.&rdquo;
+        "They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
+        and I was amazed by their attention to detail."
       </p>
     <div className={styles.customerContainer}>
-      <Image src="/mark.webp" alt="Mark T." className={styles.customerImage} width={50} height={50} />
+      <img src="/mark.webp" alt="Mark T." className={styles.customerImage} />
       <span>Mark T.</span>  
     </div>
   </div>,
   <div key={3} className={styles.reviewItem}>
       <p>
-        &ldquo;Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.&rdquo;
+        "Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately."
       </p>
     <div className={styles.customerContainer}>
-      <Image src="/sarah.webp" alt="Sarah L." className={styles.customerImage} width={50} height={50} />
+      <img src="/sarah.webp" alt="Sarah L." className={styles.customerImage} />
       <span>Sarah L.</span>  
     </div>
   </div>
@@ -40,6 +43,7 @@ const reviews = [
 const Services: React.FC = () => {
   const [index, setIndex] = useState(0);
   const reviewSectionRef = useScrollAnimation();
+  const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,6 +52,14 @@ const Services: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 300);
+    }
+  }, [router.asPath]);
 
   return (
     <div className={styles.servicesPage}>
@@ -72,7 +84,7 @@ const Services: React.FC = () => {
           ))}
         </div>
       </section>
-      <InfiniteCarousel />
+      <InfiniteSlider />
       <LastSection />
     </div>
   );

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import styles from '../styles/handyService.module.css';
 
@@ -16,8 +16,6 @@ interface Service {
 }
 
 const HandyServiceSection: React.FC = () => {
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
-  
   const services: Service[] = [
     {
       label: 'Security',
@@ -51,14 +49,6 @@ const HandyServiceSection: React.FC = () => {
     }
   ];
 
-  const toggleExpand = (serviceLabel: string) => {
-    if (expandedCard === serviceLabel) {
-      setExpandedCard(null);
-    } else {
-      setExpandedCard(serviceLabel);
-    }
-  };
-
   return (
     <section className={styles.servicesSection}>
       <Container>
@@ -73,37 +63,27 @@ const HandyServiceSection: React.FC = () => {
         </p>
         <Row className="g-4">
           {services.map((service) => (
-            <Col key={service.label} xs={6} sm={6} md={3}>
-              <Link 
-                href={`/category?service=${encodeURIComponent(service.label)}&subservice=${encodeURIComponent(service.subservices[0].label)}`}
-                className="text-decoration-none"
-                onClick={(e) => {
-                  // For mobile: prevent navigation on first click to allow expanding
-                  if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    toggleExpand(service.label);
-                  }
-                }}
-              >
-                <Card className={`${styles.serviceCard} ${expandedCard === service.label ? styles.expanded : ''}`}>
-                  <div className={styles.imageWrapper}>
-                    <Image
-                      src={service.subservices[0].image}
-                      alt={service.label}
-                      fill
-                      className={styles.image}
-                      priority
-                    />
-                  </div>
-                  <div className={styles.content}>
-                    <div className={styles.label}>{service.subservices[0].label}</div>
-                    <h3 className={styles.title}>{service.label}</h3>
-                    <p className={styles.description}>
-                      {service.subservices[0].description}
-                    </p>
-                  </div>
-                </Card>
-              </Link>
+            <Col key={service.label} xs={12} sm={6} md={3}>
+              <Link href={`/services#${encodeURIComponent(service.label)}`} className="text-decoration-none">
+  <Card className={styles.serviceCard}>
+    <div className={styles.imageWrapper}>
+      <Image
+        src={service.subservices[0].image}
+        alt={service.label}
+        fill
+        className={styles.image}
+        priority
+      />
+    </div>
+    <div className={styles.content}>
+      <div className={styles.label}>{service.subservices[0].label}</div>
+      <h3 className={styles.title}>{service.label}</h3>
+      <p className={styles.description}>
+        {service.subservices[0].description}
+      </p>
+    </div>
+  </Card>
+</Link>
             </Col>
           ))}
         </Row>

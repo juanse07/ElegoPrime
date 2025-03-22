@@ -42,26 +42,27 @@ export default function NewServiceRequestForm() {
         switch (type) {
             case 'Fan/lamp ceiling mounting':
                 return <FaTools className={styles.serviceTypeIcon} />;
-            case 'Furniture assembly':
+            case 'Furniture/Murphy bed assembly':
                 return <FaCouch className={styles.serviceTypeIcon} />;
-            case 'Hanging pictures and shelves':
+            case 'Wall Fixture Setup':
                 return <FaImage className={styles.serviceTypeIcon} />;
-            case 'TV mounting':
+            case 'Tv install':
                 return <FaTv className={styles.serviceTypeIcon} />;
             case 'Security':
                 return <FaLock className={styles.serviceTypeIcon} />;
-            case 'SoundBars':
+            case 'SoundBars/Videobeam':
                 return <FaMusic className={styles.serviceTypeIcon} />;
-            case 'TV':
+            case 'Faucet/Toilet':
                 return <FaTv className={styles.serviceTypeIcon} />;
-            case 'Fans and Lighting':
+            case 'Interior/Exterior Painting':
                 return <FaFan className={styles.serviceTypeIcon} />;
-            case 'Home Theater':
+            case 'Multiple services':
                 return <FaHome className={styles.serviceTypeIcon} />;
             default:
                 return null;
         }
     };
+
 
     const validateForm = () => {
         const newErrors: Partial<FormData> = {};
@@ -74,7 +75,7 @@ export default function NewServiceRequestForm() {
         if (formData.serviceType === 'Fan/lamp ceiling mounting' && !formData.ceilingHeight) {
             newErrors.ceilingHeight = 'Ceiling height is required for this service';
         }
-        if (formData.serviceType === 'TV mounting' && !formData.tvInches) {
+        if (formData.serviceType === 'Tv install' && !formData.tvInches) {
             newErrors.tvInches = 'TV size is required for this service';
         }
 
@@ -193,8 +194,8 @@ export default function NewServiceRequestForm() {
     };
 
     const showCeilingHeight = formData.serviceType === 'Fan/lamp ceiling mounting';
-    const showTvInches = formData.serviceType === 'TV mounting';
-    const showNumberOfItems = ['Furniture assembly', 'Hanging pictures and shelves'].includes(formData.serviceType);
+    const showTvInches = formData.serviceType === 'Tv install';
+    const showNumberOfItems = ['Furniture/Murphy bed assembly', 'Wall Fixture Setup'].includes(formData.serviceType);
 
     return (
         <div className={styles.formContainer}>
@@ -213,7 +214,7 @@ export default function NewServiceRequestForm() {
                             required
                         >
                             <option value="">Select a service</option>
-                            {['Fan/lamp ceiling mounting', 'Furniture assembly', 'Hanging pictures and shelves', 'TV mounting', 'Security', 'SoundBars', 'TV', 'Fans and Lighting', 'Home Theater'].map((service) => (
+                            {['Fan/lamp ceiling mounting', 'Furniture/Murphy bed assembly', 'Wall Fixture Setup', 'Tv install', 'Security', 'SoundBars/Videobeam', 'Faucet/Toilet', 'Interior/Exterior Painting', 'Multiple services'].map((service) => (
                                 <option key={service} value={service}>
                                     {service}
                                 </option>

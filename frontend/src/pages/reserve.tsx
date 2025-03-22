@@ -1,7 +1,7 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import Image from 'next/image';
 import { useState } from 'react';
-import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
+import { FaLightbulb, FaCheck, FaCouch, FaTv, FaHome, FaImage, FaLock, FaMusic, FaSink, FaPaintRoller, FaUpload, FaTools } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 // import { LassoSelect, LassoSelectIcon } from 'lucide-react';
 import LastSection from '@/components/LastSection';
@@ -44,23 +44,23 @@ export default function NewServiceRequestForm() {
     const getServiceIcon = (type: string) => {
         switch (type) {
             case 'Fan/lamp ceiling mounting':
-                return <FaTools className={styles.serviceTypeIcon} />;
-            case 'Furniture assembly':
+                return <FaLightbulb className={styles.serviceTypeIcon} />;
+            case 'Furniture/Murphy bed assembly':
                 return <FaCouch className={styles.serviceTypeIcon} />;
-            case 'Hanging pictures and shelves':
+            case 'Wall Fixture Setup':
                 return <FaImage className={styles.serviceTypeIcon} />;
-            case 'TV mounting':
+            case 'Tv install':
                 return <FaTv className={styles.serviceTypeIcon} />;
             case 'Security':
                 return <FaLock className={styles.serviceTypeIcon} />;
-            case 'SoundBars':
+            case 'SoundBars/Videobeam':
                 return <FaMusic className={styles.serviceTypeIcon} />;
-            case 'TV':
-                return <FaTv className={styles.serviceTypeIcon} />;
-            case 'Fans and Lighting':
-                return <FaFan className={styles.serviceTypeIcon} />;
-            case 'Home Theater':
-                return <FaHome className={styles.serviceTypeIcon} />;
+            case 'Faucet/Toilet':
+                return <FaSink className={styles.serviceTypeIcon} />;
+            case 'Interior/Exterior Painting':
+                return <FaPaintRoller className={styles.serviceTypeIcon} />;
+            case 'Multiple services':
+                return <FaTools className={styles.serviceTypeIcon} />;
             default:
                 return null;
         }
@@ -77,7 +77,7 @@ export default function NewServiceRequestForm() {
         if (formData.serviceType === 'Fan/lamp ceiling mounting' && !formData.ceilingHeight) {
             newErrors.ceilingHeight = 'Ceiling height is required for this service';
         }
-        if (formData.serviceType === 'TV mounting' && !formData.tvInches) {
+        if (formData.serviceType === 'Tv install' && !formData.tvInches) {
             newErrors.tvInches = 'TV size is required for this service';
         }
 
@@ -196,8 +196,8 @@ export default function NewServiceRequestForm() {
     };
 
     const showCeilingHeight = formData.serviceType === 'Fan/lamp ceiling mounting';
-    const showTvInches = formData.serviceType === 'TV mounting';
-    const showNumberOfItems = ['Furniture assembly', 'Hanging pictures and shelves'].includes(formData.serviceType);
+    const showTvInches = formData.serviceType === 'Tv install';
+    const showNumberOfItems = ['Furniture/Murphy bed assembly', 'Wall Fixture Setup'].includes(formData.serviceType);
 
     return (
         <div>
@@ -217,7 +217,7 @@ export default function NewServiceRequestForm() {
                             required
                         >
                             <option value="">Select a service</option>
-                            {['Fan/lamp ceiling mounting', 'Furniture assembly', 'Hanging pictures and shelves', 'TV mounting', 'Security', 'SoundBars', 'TV', 'Fans and Lighting', 'Home Theater'].map((service) => (
+                            {['Fan/lamp ceiling mounting', 'Furniture/Murphy bed assembly', 'Wall Fixture Setup', 'Tv install', 'Security', 'SoundBars/Videobeam', 'Faucet/Toilet', 'Interior/Exterior Painting', 'Multiple services'].map((service) => (
                                 <option key={service} value={service}>
                                     {service}
                                 </option>

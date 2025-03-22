@@ -7,7 +7,7 @@ const NewServiceRequestSchema = new Schema({
             'Fan/lamp ceiling mounting',
             'Furniture assembly',
             'Hanging pictures and shelves',
-            'TV mounting',
+            'Tv install',
         ],
         required: true,
     },
