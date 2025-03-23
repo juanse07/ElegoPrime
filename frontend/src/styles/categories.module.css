@@ -50,6 +50,11 @@
   overflow: hidden;
 }
 
+.categoryContainer {
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
+
 .subserviceLabel {
   margin: 20px 0 10px 10px;
   font-size: 1.2rem;
@@ -67,6 +72,25 @@
   height: 250px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.subserviceLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e3c49;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  margin-top: 20px;
+}
+
+.subserviceLink:hover {
+  background-color: #ff8730;
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {

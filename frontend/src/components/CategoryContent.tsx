@@ -2,11 +2,16 @@
 import React from 'react';
 import styles from '../styles/categories.module.css';
 import Image from 'next/image';
+import Link from "next/link";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 interface Subservice {
   label: string;
   description: string;
   image: string;
+  link?: string;
 }
 
 interface CategoryContentProps {
@@ -27,9 +32,16 @@ const CategoryContent: React.FC<CategoryContentProps> = ({ subservices }) => {
               className={styles.subserviceImage} 
             />
           )}
-          <h4 className={styles.subserviceLabel}>{subservice.label}</h4>
-          <div className={styles.categoryDescription}>{subservice.description}</div>
-        </div>
+          <div className= {styles.categoryContainer}>
+            <h4 className={styles.subserviceLabel}>{subservice.label}</h4>
+              {subservice.link && (
+                  <Link href={subservice.link} className={styles.subserviceLink}>
+                    <FontAwesomeIcon icon={faCalendarDays}/>
+                  </Link>
+                )}
+              <div className={styles.categoryDescription}>{subservice.description}</div>
+            </div>
+          </div>
       ))}
     </div>
   );
