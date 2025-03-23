@@ -72,7 +72,7 @@ export default function Home({
     },
     {
       type: 'image',
-      src: '/carousel2.webp',
+      src: '/phonemockupReview.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     },
@@ -336,7 +336,7 @@ export const getStaticProps = async () => {
       },
       {
         type: 'image',
-        src: '/carrousel1.webp',
+        src: '/phonemockupReview.webp',
         heading: 'Special Events',
       },
       {

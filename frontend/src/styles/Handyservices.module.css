@@ -1,78 +1,172 @@
-.services-section {
+.servicesSection {
   padding: 4rem 0;
-  background-color: #f8f9fa;
+  background-color: #fff;
 }
 
-.services-title {
-  font-size: 2rem;
+.servicesTitle {
+  font-size: 2.5rem;
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 0;
 }
 
-.services-description {
+.servicesDescription {
   color: #718096;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  margin: 30px 0;
 }
 
-.service-card {
-  background: white;
-  border: none;
-  border-radius: 8px;
+.serviceCard {
+  background: #2d3748 !important;
+  border: none !important;
+  border-radius: 12px !important;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
+  height: 100%;
+  color: white;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+}
+
+.imageWrapper {
+  position: relative;
+  padding-bottom: 150%;
+  border-radius: 8px;
+  margin: 12px;
+  background: #2a2a2a;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
   height: 100%;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.content {
+  padding: 1rem;
+  background: transparent;
 }
 
-.service-image-container {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
+.label {
+  color: #ff8730;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
-.service-image {
-  object-fit: cover;
-}
-
-.service-title {
-  color: #2d3748;
-  font-size: 1.25rem;
+.title {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
-  margin: 1rem 0;
 }
 
-.service-description {
-  color: #718096;
-  font-size: 0.9rem;
+.description {
+  color: #a0aec0;
+  font-size: 1rem;
   line-height: 1.5;
+  margin-bottom: 0;
 }
 
-.see-all-link {
+.seeAllLink {
   color: #ff8730;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.see-all-link:hover {
-  color: #e66f1e;
+.seeAllLink:hover {
+  color: #ff9f5a;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
-  .services-section {
-    padding: 2rem 0;
+  .servicesSection {
+    padding: 2rem 1rem;
   }
 
-  .service-image-container {
-    height: 180px;
+  .title {
+    font-size: 1.1rem;
   }
 
-  .services-title {
-    font-size: 1.75rem;
+  .servicesTitle {
+    font-size: 1.5rem;
+  }
+
+  .servicesDescription {
+    font-size: 14px;
+    margin: 20px 0;
+  }
+  
+  .imageWrapper {
+    padding-bottom: 100%;
+    margin: 8px;
+  }
+  
+  .serviceCard {
+    margin-bottom: 15px;
+  }
+  
+  .content {
+    padding: 0.75rem;
+  }
+  
+  .label {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #ff8730;
+    font-weight: 600;
+  }
+  
+  .title {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    color: #ffffff;
+  }
+  
+  /* Hide description by default on mobile */
+  .description {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+  
+  /* Show description when card is expanded */
+  .serviceCard.expanded .description {
+    display: block;
+    height: auto;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #d0d0d0;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageWrapper {
+    padding-bottom: 120%; /* Make images larger */
+  }
+  
+  .content {
+    padding: 0.5rem;
+  }
+  
+  .label {
+    font-size: 0.7rem;
+    color: #ff8730;
+  }
+  
+  .title {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    color: #ffffff;
+  }
+  
+  .serviceCard.expanded .description {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: #d0d0d0;
   }
 } 

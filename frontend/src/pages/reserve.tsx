@@ -1,7 +1,7 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import Image from 'next/image';
 import { useState } from 'react';
-import { FaLightbulb, FaCheck, FaCouch, FaTv, FaHome, FaImage, FaLock, FaMusic, FaSink, FaPaintRoller, FaUpload, FaTools } from 'react-icons/fa';
+import { FaCheck, FaCouch, FaImage, FaLightbulb, FaLock, FaMusic, FaPaintRoller, FaSink, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 // import { LassoSelect, LassoSelectIcon } from 'lucide-react';
 import LastSection from '@/components/LastSection';
