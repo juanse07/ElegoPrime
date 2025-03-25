@@ -4,7 +4,6 @@
     max-height: 450px;
     width: 90%;
     border-radius: 250px 0 0 250px;
-    margin-top: 7rem;
     margin-bottom: 10rem;
     margin-left: auto;
     margin-right: 0rem;
@@ -28,7 +27,6 @@
     margin: 5rem 5rem 0 10rem;
     font-size: 1.1rem;
 }
-
 
 .phoneContainer {
     background: transparent;

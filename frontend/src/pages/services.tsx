@@ -12,8 +12,8 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 const reviews = [
   <div key={1} className={styles.reviewItem}>
       <p>
-        "Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
-        but they handled everything quickly and professionally."
+        &quot;Exceptional service from start to finish! I had several small repairs around my house that I kept postponing,
+        but they handled everything quickly and professionally.&quot;
       </p>
     <div className={styles.customerContainer}>
       <img src="/emily.webp" alt="Emily R." className={styles.customerImage} />
@@ -22,8 +22,8 @@ const reviews = [
   </div>,
   <div key={2} className={styles.reviewItem}>
       <p>
-        "They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
-        and I was amazed by their attention to detail."
+      &quot;They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
+        and I was amazed by their attention to detail.&quot;
       </p>
     <div className={styles.customerContainer}>
       <img src="/mark.webp" alt="Mark T." className={styles.customerImage} />
@@ -32,7 +32,7 @@ const reviews = [
   </div>,
   <div key={3} className={styles.reviewItem}>
       <p>
-        "Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately."
+      &quot;Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.&quot;
       </p>
     <div className={styles.customerContainer}>
       <img src="/sarah.webp" alt="Sarah L." className={styles.customerImage} />
