@@ -1,13 +1,13 @@
 // /components/Services.tsx
-import Category from '@/pages/category';
-import InfiniteSlider from "@/components/slider";
-
 import LastSection from '@/components/LastSection';
 import ReserveVideo from '@/components/ReserveVideo';
+import InfiniteSlider from "@/components/slider";
+import Category from '@/pages/category';
+import Image from 'next/image';
 
-import styles from '@/styles/services.module.css';
-import { useState, useEffect } from "react";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import styles from '@/styles/services.module.css';
+import { useEffect, useState } from "react";
 
 const reviews = [
   <div key={1} className={styles.reviewItem}>
@@ -16,26 +16,27 @@ const reviews = [
         but they handled everything quickly and professionally.&quot;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/emily.webp" alt="Emily R." className={styles.customerImage} />
+      <Image src="/emily.webp" alt="Emily R." width={50} height={50} className={styles.customerImage} />
       <span>Emily R.</span>  
     </div>
   </div>,
   <div key={2} className={styles.reviewItem}>
       <p>
-      &quot;They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
+
+        &quot;They went above and beyond to ensure everything was perfect! I needed some drywall repairs and painting done,
         and I was amazed by their attention to detail.&quot;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/mark.webp" alt="Mark T." className={styles.customerImage} />
+      <Image src="/mark.webp" alt="Mark T." width={50} height={50} className={styles.customerImage} />
       <span>Mark T.</span>  
     </div>
   </div>,
   <div key={3} className={styles.reviewItem}>
       <p>
-      &quot;Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.&quot;
+        &quot;Fast, affordable, and top-quality work! I had an emergency repair in my kitchen, and they responded immediately.&quot;
       </p>
     <div className={styles.customerContainer}>
-      <img src="/sarah.webp" alt="Sarah L." className={styles.customerImage} />
+      <Image src="/sarah.webp" alt="Sarah L." width={50} height={50} className={styles.customerImage} />
       <span>Sarah L.</span>  
     </div>
   </div>

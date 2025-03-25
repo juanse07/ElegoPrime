@@ -2,12 +2,11 @@ import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
 import ReserveVideo from '@/components/ReserveVideo';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import styles from '@/styles/facepage.module.css';
@@ -147,7 +146,6 @@ export default function Home({
                   marginTop: "0px !important",
                 }}
               >
-                  <ReserveVideo className={styles.reserveVideo} />
               </div>
               
             ) : (
