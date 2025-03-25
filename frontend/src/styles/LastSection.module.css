@@ -51,7 +51,7 @@
 }
 
 .footertext a {
-    color: #ffcf00;
+    color: #45c3d4;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -65,7 +65,7 @@
 }
 
 .footertext a:hover {
-    color: #45c3d4;
+    color: #ffcf00;
     text-decoration: none;
 }
 

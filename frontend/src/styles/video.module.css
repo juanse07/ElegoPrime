@@ -1,0 +1,61 @@
+.section{
+    background-color: #2e3c49;
+    display: grid;
+    max-height: 450px;
+    width: 90%;
+    border-radius: 250px 0 0 250px;
+    margin-top: 7rem;
+    margin-bottom: 10rem;
+    margin-left: auto;
+    margin-right: 0rem;
+    right: 0;
+    grid-template-columns: 60% 40%;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.highlight {
+    color: #45c3d4;
+    font-weight: 600;
+  }
+
+.textContainer {
+    color: #fff;
+    margin: 5rem 5rem 0 10rem;
+    font-size: 1.1rem;
+}
+
+
+.phoneContainer {
+    background: transparent;
+    position: relative;
+    transform: translateY(-12.5%);
+}
+  
+.phoneFrame {
+    position: relative;
+    width: 350px;
+    height: 600px;
+    display: flex;
+}
+  
+.phoneImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+  
+.video {
+    position: absolute;
+    width: 75%;
+    top: 15px;
+    left:40px;
+    z-index: 1;
+    border-radius: 20px;
+    object-fit: cover; 
+}

@@ -1,6 +1,7 @@
 import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
+import ReserveVideo from '@/components/ReserveVideo';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 
@@ -72,7 +73,7 @@ export default function Home({
     },
     {
       type: 'image',
-      src: '/phonemockupReview.webp',
+      src: '/carousel2.webp',
       heading: 'Special Events',
       subheading: 'Memorable Experiences'
     },
@@ -109,7 +110,7 @@ export default function Home({
       label: ""
     },
     {
-      body: "booking@denbar.online",
+      body: "booking@elegoprime.com",
       iconType: "mail" as const,
       label: ""
     },
@@ -313,6 +314,7 @@ export default function Home({
           onClickNavPath={service.onClickNavPath}
         />
       ))} */}
+      
       <ContactSection contactButtons={contactButtons} onEstimateClick={() => setShowServiceModal(true)} />
       <LastSection />
 
@@ -336,7 +338,7 @@ export const getStaticProps = async () => {
       },
       {
         type: 'image',
-        src: '/phonemockupReview.webp',
+        src: '/carousel2.webp',
         heading: 'Special Events',
       },
       {
