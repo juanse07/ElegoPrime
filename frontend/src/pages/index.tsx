@@ -1,7 +1,41 @@
 import ContactSection from '@/components/ContactSection';
 import HandyServiceSection from '@/components/HandyServiceSection';
 import LastSection from '@/components/LastSection';
-import ReserveVideo from '@/components/ReserveVideo';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 
