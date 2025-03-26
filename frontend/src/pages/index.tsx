@@ -134,41 +134,26 @@ export default function Home({
       <Carousel interval={5000} className={styles.carousel}>
         {heroContent.map((content, index) => (
           <Carousel.Item key={index} className={styles.carouselItem}>
-            {content.type === "video" ? (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "#2e3c49",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "0px !important",
-                }}
-              >
-              </div>
-              
-            ) : (
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={content.src}
-                  alt={content.heading || "Image"}
-                  width={isMobile ? 850 : 1920}
-                  height={isMobile ? 700 : 1080}
-                  quality={90}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  className={styles.carouselImage}
-                  priority={index === 0}
+          <div className={styles.imageWrapper}>
+            <Image
+              src={content.src}
+              alt={content.heading}
+              width={isMobile ? 850 : 1920}
+              height={isMobile ? 700 : 1080}
+              quality={90}
+              loading={index === 0 ? 'eager' : 'lazy'}
+             
+              className={styles.carouselImage}
+              priority={index === 0}
+
                   style={{
-                    objectFit: "cover",
-                    objectPosition: "center",
-                    transform: "none",
-                  }}
-                />
-              </div>
-            )}
+                    objectFit: isMobile ? 'cover' : 'cover',
+                    objectPosition: isMobile ? 'center' : 'center',
+                    transform: 'none',
+                 }}
+              />
+            </div>
             
-            {/* Componente opcional de Caption (comentado en el original) */}
             {/* <Carousel.Caption className={styles.carouselCaption}>
               <div className={styles.captionOverlay}>
                 <h1>{content.heading}</h1>
