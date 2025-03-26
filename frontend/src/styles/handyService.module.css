@@ -3,6 +3,12 @@
   background-color: #fff;
 }
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .servicesTitle {
   font-size: 2.5rem;
   font-weight: 600;
@@ -47,6 +53,14 @@
 .content {
   padding: 1rem;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.labelcontainer {
+  display: grid;
+  grid-template-columns: 90% 10%;
 }
 
 .label {
@@ -68,6 +82,25 @@
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 0;
+}
+
+.calendarIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0px 0px 5px 1px #45c3d4;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.calendarIcon:hover {
+  color: #fff;
+  background-color: #45c3d4;
+  transform: scale(1.1);
 }
 
 .seeAllLink {

@@ -57,3 +57,71 @@
     border-radius: 20px;
     object-fit: cover; 
 }
+
+@media (max-width: 768px) {
+    .section{
+        max-height: 470px;
+        width: 99%;
+        padding-right: 2.5rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+
+    .textContainer {
+        margin: 2rem 2rem 0 7rem;
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+    .phoneContainer {
+        transform: translateY(-9.5%);
+    }
+
+    .phoneFrame {
+        width: 330px;
+        height: 570px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+
+    .section{
+        background-image: linear-gradient( #2e3c49, 80%, #fff);
+        width: 100%;
+        border-radius: 0;
+        margin-bottom:2rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 900px;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .textContainer {
+        margin: 2rem;
+        font-size: 16px;
+    }
+
+    .phoneContainer {
+        background: transparent;
+        position: relative;
+        transform: translateY(0);
+        margin: 0 auto;
+    }
+
+    .phoneFrame {
+        width: 250px;
+        height: 430px;
+        
+    }
+    
+    .video {
+        left:30px;
+    }
+}
