@@ -24,7 +24,7 @@
 
 .textContainer {
     color: #fff;
-    margin: 5rem 5rem 0 10rem;
+    margin: 2rem 5rem 0 10rem;
     font-size: 1.1rem;
 }
 
@@ -51,7 +51,7 @@
 .video {
     position: absolute;
     width: 75%;
-    top: 15px;
+    top: 17px;
     left:40px;
     z-index: 1;
     border-radius: 20px;

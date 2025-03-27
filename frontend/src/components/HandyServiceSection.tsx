@@ -1,10 +1,10 @@
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import styles from '../styles/handyService.module.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 interface Subservice {
   label: string;
@@ -89,9 +89,15 @@ const HandyServiceSection: React.FC = () => {
                   <div className={styles.content}>
                     <div className={styles.labelcontainer}>
                       <div className={styles.label}>{service.subservices[0].label}</div>
-                        <Link href="/reserve" className={styles.calendarIcon}>
-                        <FontAwesomeIcon icon={faCalendarDays} />
-                        </Link>
+                        <div 
+                          className={styles.calendarIcon}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent triggering the parent Link's navigation
+                            window.location.href = '/reserve';
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faCalendarDays} />
+                        </div>
                     </div>
 
                   <div className={styles.titleContainer}>

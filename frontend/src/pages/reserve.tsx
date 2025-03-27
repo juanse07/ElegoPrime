@@ -1,7 +1,7 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import Image from 'next/image';
 import { useState } from 'react';
-import { FaCheck, FaCouch, FaImage, FaLightbulb, FaLock, FaMusic, FaPaintRoller, FaSink, FaTools, FaTv, FaUpload } from 'react-icons/fa';
+import { FaCheck, FaCouch, FaFan, FaImage, FaLock, FaMusic, FaPaintRoller, FaSink, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 // import { LassoSelect, LassoSelectIcon } from 'lucide-react';
 import LastSection from '@/components/LastSection';
@@ -44,7 +44,7 @@ export default function NewServiceRequestForm() {
     const getServiceIcon = (type: string) => {
         switch (type) {
             case 'Fan/lamp ceiling mounting':
-                return <FaLightbulb className={styles.serviceTypeIcon} />;
+                return <FaFan className={styles.serviceTypeIcon} />;
             case 'Furniture/Murphy bed assembly':
                 return <FaCouch className={styles.serviceTypeIcon} />;
             case 'Wall Fixture Setup':

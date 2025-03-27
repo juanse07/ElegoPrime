@@ -1,13 +1,13 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/LastSection.module.css';
-import { Container } from 'react-bootstrap';
 import Link from "next/link";
+import { Container } from 'react-bootstrap';
 
 const LastSection = () => {
   const animationRef = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '50px 0px',
-    once: false
+    once: true
   });
 
   return (

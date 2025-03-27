@@ -41,7 +41,7 @@ export default function NewServiceRequestForm() {
     const getServiceIcon = (type: string) => {
         switch (type) {
             case 'Fan/lamp ceiling mounting':
-                return <FaTools className={styles.serviceTypeIcon} />;
+                return <FaFan className={styles.serviceTypeIcon} />;
             case 'Furniture/Murphy bed assembly':
                 return <FaCouch className={styles.serviceTypeIcon} />;
             case 'Wall Fixture Setup':
@@ -53,9 +53,9 @@ export default function NewServiceRequestForm() {
             case 'SoundBars/Videobeam':
                 return <FaMusic className={styles.serviceTypeIcon} />;
             case 'Faucet/Toilet':
-                return <FaTv className={styles.serviceTypeIcon} />;
+                return <FaTools className={styles.serviceTypeIcon} />;
             case 'Interior/Exterior Painting':
-                return <FaFan className={styles.serviceTypeIcon} />;
+                return <FaTools className={styles.serviceTypeIcon} />;
             case 'Multiple services':
                 return <FaHome className={styles.serviceTypeIcon} />;
             default:
