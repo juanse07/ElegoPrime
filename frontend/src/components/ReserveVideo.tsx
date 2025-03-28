@@ -1,6 +1,6 @@
+import Image from "next/image";
 import React from "react";
 import styles from "../styles/video.module.css";
-import Image from "next/image";
 
 interface ReserveVideoProps {
   className?: string;
@@ -20,7 +20,10 @@ const ReserveVideo: React.FC<ReserveVideoProps> = ({ className }) => {
 
       <div className={styles.section}>
         <div className={styles.textContainer}>
-          <h2 className={styles.title}>Simple & Fast Booking</h2>
+          <h2 className={styles.title}>
+            <span className={styles.highlight}>Simple & Fast </span>
+            Booking
+          </h2>
           <p className={styles.description}>
             Booking our services is quick and 
             <span className={styles.highlight}> hassle-free! </span> 
@@ -29,6 +32,9 @@ const ReserveVideo: React.FC<ReserveVideoProps> = ({ className }) => {
             Our seamless process ensures a smooth experience from start to finish.
           </p>
           <p>Need assistance? Our team is always ready to help!</p>
+          <button className={styles.bookNowButton}>
+            Book Now <span className={styles.arrow}>→</span>
+          </button>
         </div>
 
         <div className={styles.phoneContainer}>

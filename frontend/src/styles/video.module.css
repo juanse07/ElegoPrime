@@ -9,6 +9,7 @@
     margin-right: 0rem;
     right: 0;
     grid-template-columns: 60% 40%;
+    
 }
 
 .title {
@@ -24,7 +25,7 @@
 
 .textContainer {
     color: #fff;
-    margin: 2rem 5rem 0 10rem;
+    margin: 0.5rem 2rem 0 7rem;
     font-size: 1.1rem;
 }
 
@@ -56,6 +57,72 @@
     z-index: 1;
     border-radius: 20px;
     object-fit: cover; 
+}
+
+.bookButton {
+    background: #45c3d4;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bookButton:hover {
+    background: #2ab0c2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(69, 195, 212, 0.4);
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.bookButton:hover .arrow {
+    transform: translateX(5px);
+}
+
+.buttonContainer {
+    position: absolute;
+    left: 55%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.bookNowButton {
+    background: #45c3d4;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+    align-self: flex-start;
+}
+
+.bookNowButton:hover {
+    background: #2ab0c2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(69, 195, 212, 0.4);
+}
+
+.bookNowButton:hover .arrow {
+    transform: translateX(5px);
 }
 
 @media (max-width: 768px) {
@@ -90,7 +157,11 @@
 @media (max-width: 480px) {
 
     .section{
-        background-image: linear-gradient( #2e3c49, 80%, #fff);
+        /* background-image: linear-gradient( #2e3c49, 80%, #fff); */
+        background-image: url('/azulejos.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         width: 100%;
         border-radius: 0;
         margin-bottom:2rem;
@@ -100,12 +171,27 @@
     }
 
     .title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        color: #e6e6e6;
     }
 
     .textContainer {
         margin: 2rem;
-        font-size: 16px;
+        font-size: 14px;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 1.5rem;
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .highlight {
+        color: #45c3d4;
     }
 
     .phoneContainer {
@@ -123,5 +209,20 @@
     
     .video {
         left:30px;
+    }
+
+    .buttonContainer {
+        position: static;
+        transform: none;
+        margin: 0 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bookNowButton {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+        margin-top: 1rem;
+        align-self: center;
     }
 }
