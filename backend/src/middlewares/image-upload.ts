@@ -15,7 +15,7 @@ const storage = multer.memoryStorage();
 export const jobImageUpload = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 10, // 10MB
+        fileSize: 1024 * 1024 * 25, // 25MB (increased from 10MB)
     },
     fileFilter: (req, file, cb) => {
         console.log("Multer processing file:", file.originalname, file.mimetype);

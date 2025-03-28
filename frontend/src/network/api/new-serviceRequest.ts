@@ -49,11 +49,30 @@ export async function createServiceRequest(input: ServiceRequestValues) {
         
         // Add images if they exist - using consistent field names
         if (input.imageUrl1 instanceof File) {
+            // Compress large images before upload if possible
+            try {
+                // Check if file is too large (>5MB)
+                if (input.imageUrl1.size > 5 * 1024 * 1024) {
+                    console.log('Image 1 is large, consider resizing before upload');
+                }
+            } catch (e) {
+                console.warn('Error checking file size:', e);
+            }
+            
             formData.append('image1', input.imageUrl1, input.imageUrl1.name);
             console.log(`Adding image1: ${input.imageUrl1.name} (${input.imageUrl1.size} bytes, ${input.imageUrl1.type})`);
         }
         
         if (input.imageUrl2 instanceof File) {
+            // Check if file is too large
+            try {
+                if (input.imageUrl2.size > 5 * 1024 * 1024) {
+                    console.log('Image 2 is large, consider resizing before upload');
+                }
+            } catch (e) {
+                console.warn('Error checking file size:', e);
+            }
+            
             formData.append('image2', input.imageUrl2, input.imageUrl2.name);
             console.log(`Adding image2: ${input.imageUrl2.name} (${input.imageUrl2.size} bytes, ${input.imageUrl2.type})`);
         }
@@ -67,13 +86,17 @@ export async function createServiceRequest(input: ServiceRequestValues) {
             }
         }
         
-        // Use axios with the correct content type
-        console.log('Sending request to:', '/new-service-request');
-        const response = await api.post('/new-service-request', formData, {
+        // Determine API endpoint for different environments
+        const apiUrl = '/new-service-request';
+        
+        console.log('Sending request to:', apiUrl);
+        const response = await api.post(apiUrl, formData, {
             headers: {
                 // Let browser set the Content-Type header with boundary
                 'Content-Type': 'multipart/form-data',
             },
+            // Increase timeout for large uploads
+            timeout: 60000, // 60 seconds
         });
         
         console.log('Response received:', response.status, response.statusText);
@@ -84,6 +107,13 @@ export async function createServiceRequest(input: ServiceRequestValues) {
         console.error('Error submitting service request:', error);
         
         if (error instanceof AxiosError) {
+            // Enhanced error handling
+            if (error.code === 'ERR_NETWORK') {
+                throw new Error('Network error. Please check your internet connection and try again.');
+            } else if (error.response?.status === 413) {
+                throw new Error('The images are too large. Please try with smaller images (under 5MB each).');
+            }
+            
             const errorMessage = error.response?.data?.message || 'Failed to create service request';
             throw new Error(errorMessage);
         }

@@ -8,7 +8,8 @@ import NewServiceRequestRoute from "./routes/ElegoRoute";
 const app = express();
 
 // Basic middleware - should be first
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));  // Increased JSON size limit
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));  // Added for form data with increased limit
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
@@ -16,16 +17,27 @@ app.use((req, res, next) => {
 
 // CORS configuration
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? [env.WEBSITE_URL] // In production, only allow the production URL
+    ? [env.WEBSITE_URL, 'https://www.elegoprime.com', 'https://elegoprime.com', 'http://localhost:3000'] // Include localhost for testing
     : ['http://localhost:3000']; // In development, allow localhost:3000
 
 console.log('Environment:', process.env.NODE_ENV);
 console.log('Allowed Origins:', allowedOrigins);
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) === -1) {
+            console.log('CORS blocked origin:', origin);
+            return callback(null, false);
+        }
+        
+        return callback(null, true);
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    maxAge: 86400, // CORS preflight request cache for 24 hours
 }));
 
 // Routes
