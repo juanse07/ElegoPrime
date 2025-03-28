@@ -14,7 +14,7 @@
 
 .title {
     font-size: 2.5rem;
-    margin-top: 2.5rem;
+    margin-top: 0.2rem;
     margin-bottom: 2rem;
 }
 
@@ -25,7 +25,7 @@
 
 .textContainer {
     color: #fff;
-    margin: 0.5rem 2rem 0 7rem;
+    margin: 3rem 2rem 0 7rem;
     font-size: 1.1rem;
 }
 
@@ -177,10 +177,10 @@
     }
 
     .textContainer {
-        margin: 2rem;
+        margin: 1.5rem;
         font-size: 14px;
         background: rgba(0, 0, 0, 0.4);
-        padding: 1.5rem;
+        padding: 1.2rem;
         border-radius: 15px;
         backdrop-filter: blur(5px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
