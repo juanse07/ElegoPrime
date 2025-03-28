@@ -1,6 +1,6 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 
@@ -52,9 +52,6 @@ export default function NewServiceRequestForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [previewUrls, setPreviewUrls] = useState<{[key: string]: string}>({});
-    const [showCamera, setShowCamera] = useState(false);
-    const [stream, setStream] = useState<MediaStream | null>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
 
     const getServiceIcon = (type: string) => {
         switch (type) {
@@ -352,49 +349,6 @@ export default function NewServiceRequestForm() {
     const showTvInches = formData.serviceType === 'Tv install';
     const showNumberOfItems = ['Furniture/Murphy bed assembly', 'Wall Fixture Setup'].includes(formData.serviceType);
 
-    const startCamera = async () => {
-        try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    facingMode: 'environment',
-                    width: { ideal: 1920 },
-                    height: { ideal: 1080 }
-                } 
-            });
-            setStream(mediaStream);
-            if (videoRef.current) {
-                videoRef.current.srcObject = mediaStream;
-            }
-            setShowCamera(true);
-        } catch (error) {
-            console.error('Camera access error:', error);
-            alert('Unable to access camera. Please check permissions or try uploading an image instead.');
-        }
-    };
-
-    const capturePhoto = () => {
-        if (videoRef.current) {
-            const canvas = document.createElement('canvas');
-            canvas.width = videoRef.current.videoWidth;
-            canvas.height = videoRef.current.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx?.drawImage(videoRef.current, 0, 0);
-            
-            canvas.toBlob((blob) => {
-                if (blob) {
-                    const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
-                    handleFileUpload(file, 'imageUrl1');
-                }
-            }, 'image/jpeg', 0.8);
-            
-            // Stop camera after capture
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-            }
-            setShowCamera(false);
-        }
-    };
-
     return (
         <div className={styles.formContainer}>
             <h2 className={styles.formTitle}>Request a Service</h2>
@@ -589,12 +543,10 @@ export default function NewServiceRequestForm() {
                                     className={styles.fileInput}
                                     onChange={handleChange}
                                     accept="image/*"
-                                    capture="environment"
-                                    onClick={() => startCamera()}
                                 />
                                 <label htmlFor="imageUrl1" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
-                                    <span>{formData.imageUrl1 ? 'Change Image' : 'Take Photo or Choose Image'}</span>
+                                    <span>{formData.imageUrl1 ? 'Change Image' : 'Choose Image'}</span>
                                 </label>
                                 {previewUrls.imageUrl1 && (
                                     <div className={styles.imagePreview}>
@@ -623,12 +575,10 @@ export default function NewServiceRequestForm() {
                                     className={styles.fileInput}
                                     onChange={handleChange}
                                     accept="image/*"
-                                    capture="environment"
-                                    onClick={() => startCamera()}
                                 />
                                 <label htmlFor="imageUrl2" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
-                                    <span>{formData.imageUrl2 ? 'Change Image' : 'Take Photo or Choose Image'}</span>
+                                    <span>{formData.imageUrl2 ? 'Change Image' : 'Choose Image'}</span>
                                 </label>
                                 {previewUrls.imageUrl2 && (
                                     <div className={styles.imagePreview}>
@@ -646,36 +596,6 @@ export default function NewServiceRequestForm() {
                         </div>
                     </div>
                 </div>
-
-                {showCamera && (
-                    <div className={styles.cameraContainer}>
-                        <video
-                            ref={videoRef}
-                            autoPlay
-                            playsInline
-                            className={styles.cameraPreview}
-                        />
-                        <button 
-                            type="button" 
-                            onClick={capturePhoto}
-                            className={styles.captureButton}
-                        >
-                            Take Photo
-                        </button>
-                        <button 
-                            type="button" 
-                            onClick={() => {
-                                if (stream) {
-                                    stream.getTracks().forEach(track => track.stop());
-                                }
-                                setShowCamera(false);
-                            }}
-                            className={styles.cancelButton}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                )}
 
                 <button
                     type="submit"
