@@ -1,6 +1,6 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 
@@ -17,6 +17,20 @@ interface FormData {
     imageUrl1: string | File;
     imageUrl2: string | File;
     requestedDate: string;
+}
+
+interface ApiError {
+    response?: {
+        status?: number;
+        data?: unknown;
+    };
+}
+
+interface NetworkInformation extends Navigator {
+    connection?: {
+        effectiveType: string;
+        downlink: number;
+    };
 }
 
 export default function NewServiceRequestForm() {
@@ -38,6 +52,9 @@ export default function NewServiceRequestForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [previewUrls, setPreviewUrls] = useState<{[key: string]: string}>({});
+    const [showCamera, setShowCamera] = useState(false);
+    const [stream, setStream] = useState<MediaStream | null>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     const getServiceIcon = (type: string) => {
         switch (type) {
@@ -112,6 +129,58 @@ export default function NewServiceRequestForm() {
         }
     };
 
+    const compressImage = async (file: File): Promise<File> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new window.Image();
+                img.src = event.target?.result as string;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx?.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob(
+                        (blob) => {
+                            if (blob) {
+                                const compressedFile = new File([blob], file.name, {
+                                    type: 'image/jpeg',
+                                    lastModified: Date.now(),
+                                });
+                                resolve(compressedFile);
+                            } else {
+                                reject(new Error('Canvas to Blob conversion failed'));
+                            }
+                        },
+                        'image/jpeg',
+                        0.7  // compression quality
+                    );
+                };
+            };
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
     const handleFileUpload = async (file: File, fieldName: string) => {
         try {
             // Validate file type
@@ -119,32 +188,28 @@ export default function NewServiceRequestForm() {
                 throw new Error('Only JPEG and PNG images are allowed');
             }
             
-            // Validate file size (5MB max)
-            if (file.size > 5 * 1024 * 1024) {
-                throw new Error('File size exceeds 5MB limit');
-            }
+            // Compress image before upload
+            const compressedFile = await compressImage(file);
+            console.log(`Original size: ${file.size / 1024 / 1024}MB, Compressed size: ${compressedFile.size / 1024 / 1024}MB`);
             
-            console.log(`Handling file upload for ${fieldName}:`, file.name, file.type, file.size);
-            
-            // Create a preview URL for the image
-            const previewUrl = URL.createObjectURL(file);
+            // Create a preview URL for the compressed image
+            const previewUrl = URL.createObjectURL(compressedFile);
             setPreviewUrls(prev => ({
                 ...prev,
                 [fieldName]: previewUrl
             }));
 
-            // Store the actual file object
+            // Store the compressed file
             setFormData(prev => ({
                 ...prev,
-                [fieldName]: file
+                [fieldName]: compressedFile
             }));
             
-            console.log(`Successfully added file to ${fieldName}`);
         } catch (error) {
-            console.error(`Error uploading file to ${fieldName}:`, error);
+            console.error(`Error processing file:`, error);
             setErrors(prev => ({
                 ...prev,
-                [fieldName]: error instanceof Error ? error.message : 'Error uploading file'
+                [fieldName]: error instanceof Error ? error.message : 'Error processing file'
             }));
         }
     };
@@ -155,6 +220,27 @@ export default function NewServiceRequestForm() {
 
         if (validateForm()) {
             try {
+                // Log device info to help with debugging
+                console.log('Device Info:', {
+                    userAgent: navigator.userAgent,
+                    viewport: {
+                        width: window.innerWidth,
+                        height: window.innerHeight
+                    },
+                    connection: (navigator as NetworkInformation).connection ? {
+                        type: (navigator as NetworkInformation).connection?.effectiveType,
+                        downlink: (navigator as NetworkInformation).connection?.downlink
+                    } : 'Not available'
+                });
+
+                // Log file sizes before upload
+                if (formData.imageUrl1 instanceof File) {
+                    console.log('Image 1 size:', formData.imageUrl1.size / 1024 / 1024, 'MB');
+                }
+                if (formData.imageUrl2 instanceof File) {
+                    console.log('Image 2 size:', formData.imageUrl2.size / 1024 / 1024, 'MB');
+                }
+
                 // Define a proper interface for the request data
                 interface ServiceRequestData {
                     serviceType: string;
@@ -225,13 +311,35 @@ export default function NewServiceRequestForm() {
                     setPreviewUrls({});
                     setSubmitSuccess(false);
                 }, 3000);
-            } catch (error) {
-                console.error('Form submission error:', error);
+            } catch (error: unknown) {
+                const apiError = error as ApiError;
+                console.error('Submission Error Details:', {
+                    type: error instanceof Error ? error.name : 'Unknown',
+                    message: error instanceof Error ? error.message : String(error),
+                    stack: error instanceof Error ? error.stack : undefined,
+                    isNetworkError: error instanceof TypeError && error.message === 'Network Error',
+                    status: apiError.response?.status,
+                    responseData: apiError.response?.data
+                });
+
+                let errorMessage = 'Failed to submit the form. ';
+                if (!navigator.onLine) {
+                    errorMessage += 'Please check your internet connection.';
+                } else if (error instanceof TypeError && error.message === 'Network Error') {
+                    errorMessage += 'Network connection issue. Please try again.';
+                } else if (apiError.response?.status === 413) {
+                    errorMessage += 'Images are too large. Please use smaller images.';
+                } else {
+                    errorMessage += 'Please try again or use smaller images.';
+                }
+
                 setErrors(prev => ({
                     ...prev,
-                    submit: error instanceof Error ? error.message : 'An unknown error occurred'
+                    submit: errorMessage
                 }));
-                alert(`Error submitting form: ${error instanceof Error ? error.message : 'Unknown error'}`);
+                
+                // Show user-friendly error
+                alert(errorMessage);
             } finally {
                 setIsSubmitting(false);
             }
@@ -243,6 +351,49 @@ export default function NewServiceRequestForm() {
     const showCeilingHeight = formData.serviceType === 'Fan/lamp ceiling mounting';
     const showTvInches = formData.serviceType === 'Tv install';
     const showNumberOfItems = ['Furniture/Murphy bed assembly', 'Wall Fixture Setup'].includes(formData.serviceType);
+
+    const startCamera = async () => {
+        try {
+            const mediaStream = await navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'environment',
+                    width: { ideal: 1920 },
+                    height: { ideal: 1080 }
+                } 
+            });
+            setStream(mediaStream);
+            if (videoRef.current) {
+                videoRef.current.srcObject = mediaStream;
+            }
+            setShowCamera(true);
+        } catch (error) {
+            console.error('Camera access error:', error);
+            alert('Unable to access camera. Please check permissions or try uploading an image instead.');
+        }
+    };
+
+    const capturePhoto = () => {
+        if (videoRef.current) {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoRef.current.videoWidth;
+            canvas.height = videoRef.current.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx?.drawImage(videoRef.current, 0, 0);
+            
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
+                    handleFileUpload(file, 'imageUrl1');
+                }
+            }, 'image/jpeg', 0.8);
+            
+            // Stop camera after capture
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            setShowCamera(false);
+        }
+    };
 
     return (
         <div className={styles.formContainer}>
@@ -437,11 +588,13 @@ export default function NewServiceRequestForm() {
                                     id="imageUrl1"
                                     className={styles.fileInput}
                                     onChange={handleChange}
-                                    accept="image/png, image/jpeg"
+                                    accept="image/*"
+                                    capture="environment"
+                                    onClick={() => startCamera()}
                                 />
                                 <label htmlFor="imageUrl1" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
-                                    <span>{formData.imageUrl1 ? 'Change Image' : 'Choose Image'}</span>
+                                    <span>{formData.imageUrl1 ? 'Change Image' : 'Take Photo or Choose Image'}</span>
                                 </label>
                                 {previewUrls.imageUrl1 && (
                                     <div className={styles.imagePreview}>
@@ -469,11 +622,13 @@ export default function NewServiceRequestForm() {
                                     id="imageUrl2"
                                     className={styles.fileInput}
                                     onChange={handleChange}
-                                    accept="image/png, image/jpeg"
+                                    accept="image/*"
+                                    capture="environment"
+                                    onClick={() => startCamera()}
                                 />
                                 <label htmlFor="imageUrl2" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
-                                    <span>{formData.imageUrl2 ? 'Change Image' : 'Choose Image'}</span>
+                                    <span>{formData.imageUrl2 ? 'Change Image' : 'Take Photo or Choose Image'}</span>
                                 </label>
                                 {previewUrls.imageUrl2 && (
                                     <div className={styles.imagePreview}>
@@ -491,6 +646,36 @@ export default function NewServiceRequestForm() {
                         </div>
                     </div>
                 </div>
+
+                {showCamera && (
+                    <div className={styles.cameraContainer}>
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            playsInline
+                            className={styles.cameraPreview}
+                        />
+                        <button 
+                            type="button" 
+                            onClick={capturePhoto}
+                            className={styles.captureButton}
+                        >
+                            Take Photo
+                        </button>
+                        <button 
+                            type="button" 
+                            onClick={() => {
+                                if (stream) {
+                                    stream.getTracks().forEach(track => track.stop());
+                                }
+                                setShowCamera(false);
+                            }}
+                            className={styles.cancelButton}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
 
                 <button
                     type="submit"
