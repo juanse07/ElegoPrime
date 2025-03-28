@@ -1,4 +1,5 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
+import Image from 'next/image';
 import { useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
@@ -13,8 +14,8 @@ interface FormData {
     tvInches: string;
     additionalInfo: string;
     state: string;
-    imageUrl1: string;
-    imageUrl2: string;
+    imageUrl1: string | File;
+    imageUrl2: string | File;
     requestedDate: string;
 }
 
@@ -113,6 +114,18 @@ export default function NewServiceRequestForm() {
 
     const handleFileUpload = async (file: File, fieldName: string) => {
         try {
+            // Validate file type
+            if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
+                throw new Error('Only JPEG and PNG images are allowed');
+            }
+            
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                throw new Error('File size exceeds 5MB limit');
+            }
+            
+            console.log(`Handling file upload for ${fieldName}:`, file.name, file.type, file.size);
+            
             // Create a preview URL for the image
             const previewUrl = URL.createObjectURL(file);
             setPreviewUrls(prev => ({
@@ -120,16 +133,18 @@ export default function NewServiceRequestForm() {
                 [fieldName]: previewUrl
             }));
 
-            // For now, we'll just store the file name
+            // Store the actual file object
             setFormData(prev => ({
                 ...prev,
-                [fieldName]: file.name
+                [fieldName]: file
             }));
+            
+            console.log(`Successfully added file to ${fieldName}`);
         } catch (error) {
             console.error(`Error uploading file to ${fieldName}:`, error);
             setErrors(prev => ({
                 ...prev,
-                [fieldName]: 'Error uploading file'
+                [fieldName]: error instanceof Error ? error.message : 'Error uploading file'
             }));
         }
     };
@@ -140,7 +155,24 @@ export default function NewServiceRequestForm() {
 
         if (validateForm()) {
             try {
-                const requestData = {
+                // Define a proper interface for the request data
+                interface ServiceRequestData {
+                    serviceType: string;
+                    zipCode: string;
+                    name: string;
+                    phone: string;
+                    ceilingHeight?: string;
+                    numberOfItems?: number;
+                    tvInches?: string;
+                    additionalInfo?: string;
+                    requestedDate?: string;
+                    state: string;
+                    imageUrl1?: File;
+                    imageUrl2?: File;
+                }
+                
+                // Prepare request data with all form values
+                const requestData: ServiceRequestData = {
                     serviceType: formData.serviceType,
                     zipCode: formData.zipCode,
                     name: formData.name,
@@ -149,16 +181,31 @@ export default function NewServiceRequestForm() {
                     numberOfItems: formData.numberOfItems || undefined,
                     tvInches: formData.tvInches || undefined,
                     additionalInfo: formData.additionalInfo || undefined,
-                    furnitureImageUrl: formData.imageUrl1 || undefined,
                     requestedDate: formData.requestedDate || undefined,
                     state: 'pending'
                 };
+                
+                // Only add images if they are File objects
+                if (formData.imageUrl1 instanceof File) {
+                    requestData.imageUrl1 = formData.imageUrl1;
+                }
+                
+                if (formData.imageUrl2 instanceof File) {
+                    requestData.imageUrl2 = formData.imageUrl2;
+                }
 
-                console.log('Submitting service request:', requestData);
+                console.log('Submitting service request:', {
+                    ...requestData,
+                    imageUrl1: formData.imageUrl1 instanceof File ? 
+                        `File: ${formData.imageUrl1.name} (${formData.imageUrl1.size} bytes)` : formData.imageUrl1,
+                    imageUrl2: formData.imageUrl2 instanceof File ? 
+                        `File: ${formData.imageUrl2.name} (${formData.imageUrl2.size} bytes)` : formData.imageUrl2
+                });
+                
                 const response = await createServiceRequest(requestData);
                 console.log('Service request response:', response);
                 setSubmitSuccess(true);
-
+                
                 // Reset form after successful submission
                 setTimeout(() => {
                     setFormData({
@@ -179,12 +226,12 @@ export default function NewServiceRequestForm() {
                     setSubmitSuccess(false);
                 }, 3000);
             } catch (error) {
-                console.error('Error submitting form:', error);
-                const errorMessage = error instanceof Error ? error.message : 'Failed to submit service request. Please try again.';
+                console.error('Form submission error:', error);
                 setErrors(prev => ({
                     ...prev,
-                    submit: errorMessage
+                    submit: error instanceof Error ? error.message : 'An unknown error occurred'
                 }));
+                alert(`Error submitting form: ${error instanceof Error ? error.message : 'Unknown error'}`);
             } finally {
                 setIsSubmitting(false);
             }
@@ -390,7 +437,7 @@ export default function NewServiceRequestForm() {
                                     id="imageUrl1"
                                     className={styles.fileInput}
                                     onChange={handleChange}
-                                    accept="image/*"
+                                    accept="image/png, image/jpeg"
                                 />
                                 <label htmlFor="imageUrl1" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
@@ -398,7 +445,13 @@ export default function NewServiceRequestForm() {
                                 </label>
                                 {previewUrls.imageUrl1 && (
                                     <div className={styles.imagePreview}>
-                                        <img src={previewUrls.imageUrl1} alt="Preview 1" />
+                                        <Image 
+                                            src={previewUrls.imageUrl1} 
+                                            alt="Preview 1" 
+                                            width={100}
+                                            height={100}
+                                            style={{ objectFit: 'cover' }}
+                                        />
                                         <FaCheck className={styles.checkIcon} />
                                     </div>
                                 )}
@@ -416,7 +469,7 @@ export default function NewServiceRequestForm() {
                                     id="imageUrl2"
                                     className={styles.fileInput}
                                     onChange={handleChange}
-                                    accept="image/*"
+                                    accept="image/png, image/jpeg"
                                 />
                                 <label htmlFor="imageUrl2" className={styles.fileInputLabel}>
                                     <FaUpload className={styles.uploadIcon} />
@@ -424,7 +477,13 @@ export default function NewServiceRequestForm() {
                                 </label>
                                 {previewUrls.imageUrl2 && (
                                     <div className={styles.imagePreview}>
-                                        <img src={previewUrls.imageUrl2} alt="Preview 2" />
+                                        <Image 
+                                            src={previewUrls.imageUrl2} 
+                                            alt="Preview 2" 
+                                            width={100}
+                                            height={100}
+                                            style={{ objectFit: 'cover' }}
+                                        />
                                         <FaCheck className={styles.checkIcon} />
                                     </div>
                                 )}

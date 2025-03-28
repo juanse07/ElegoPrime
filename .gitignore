@@ -147,3 +147,4 @@ dist/
 .next
 dist
 build
+uploads/*

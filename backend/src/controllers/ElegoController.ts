@@ -1,8 +1,9 @@
 import { RequestHandler } from 'express';
+import mongoose from 'mongoose';
+import sharp from 'sharp';
 import BarServiceQuotationModel from '../models/BarServiceQuotation';
 import NewServiceRequestModel from '../models/NewServiceRequest';
 import { io } from "../server";
-
 export const getBarServiceQuotations: RequestHandler = async (req, res, next) => {
   try {
     const allBarServiceQuotations = await BarServiceQuotationModel.find().exec();
@@ -66,25 +67,136 @@ export const getNewServiceRequestsByState: RequestHandler = async (req, res, nex
 
 export const createNewServiceRequest: RequestHandler = async (req, res, next) => {
   try {
-    // Log the incoming request
-    console.log("Received POST request to /new-service-request");
-    console.log("Headers:", req.headers);
-
-    const serviceRequestData = req.body;
-    console.log("Service request data before creation:", serviceRequestData);
-
-    // Use your actual model name here, e.g. `NewServiceRequestModel`
+    console.log("\n\n==== HANDLING NEW SERVICE REQUEST ====");
+    
+    // Log the entire request
+    console.log("Request received:");
+    console.log("- Method:", req.method);
+    console.log("- URL:", req.url);
+    console.log("- Content-Type:", req.headers['content-type']);
+    
+    // Check if we have files - if not, that's the issue
+    if (!req.files || typeof req.files !== 'object' || Object.keys(req.files).length === 0) {
+      console.error("❌ NO FILES RECEIVED! This is likely the cause of the problem.");
+      console.log("Request body:", req.body);
+      console.log("Files object:", req.files);
+    } else {
+      console.log("✅ Files received:", Object.keys(req.files));
+    }
+    
+    // Get the uploaded files
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    
+    // Create a new ObjectId for the service request
+    const newServiceId = new mongoose.Types.ObjectId();
+    console.log("Generated new service ID:", newServiceId.toString());
+    
+    // Parse JSON data if it was sent as a string field
+    let serviceData = req.body;
+    
+    if (req.body.data && typeof req.body.data === 'string') {
+      try {
+        serviceData = JSON.parse(req.body.data);
+        console.log("✅ Successfully parsed JSON data");
+      } catch (e) {
+        console.error("❌ Error parsing JSON data:", e);
+      }
+    }
+    
+    // Setup for file saving
+    const fs = require('fs');
+    const path = require('path');
+    const uploadDir = path.resolve(__dirname, '../../uploads/jobServiceImages');
+    
+    console.log("Upload directory:", uploadDir);
+    
+    // Ensure directory exists
+    if (!fs.existsSync(uploadDir)) {
+      console.log("Creating upload directory");
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    
+    // Initialize image paths
+    let image1Path = '';
+    let image2Path = '';
+    
+    // Helper function for processing images
+    const processImage = async (file: Express.Multer.File, imageNumber: number) => {
+      try {
+        const fileName = `${newServiceId.toString()}-image${imageNumber}.png`;
+        const filePath = path.join(uploadDir, fileName);
+        
+        console.log(`Processing image${imageNumber}:`, file.originalname);
+        console.log(`Saving to:`, filePath);
+        
+        // Save the file
+        await sharp(file.buffer)
+          .resize({ width: 800, height: 600, fit: 'inside' })
+          .toFormat('png')
+          .toFile(filePath);
+        
+        // Check if file was created
+        if (fs.existsSync(filePath)) {
+          console.log(`✅ Image${imageNumber} saved successfully`);
+          // Get file stats
+          const stats = fs.statSync(filePath);
+          console.log(`File size: ${stats.size} bytes`);
+          
+          return `/uploads/jobServiceImages/${fileName}`;
+        } else {
+          console.error(`❌ Failed to save image${imageNumber} - file doesn't exist after save`);
+          return '';
+        }
+      } catch (err) {
+        console.error(`❌ Error processing image${imageNumber}:`, err);
+        return '';
+      }
+    };
+    
+    // Process first image if it exists
+    if (files && files.image1 && files.image1[0]) {
+      console.log("Processing image1");
+      image1Path = await processImage(files.image1[0], 1);
+    } else {
+      console.log("No image1 found in request");
+    }
+    
+    // Process second image if it exists
+    if (files && files.image2 && files.image2[0]) {
+      console.log("Processing image2");
+      image2Path = await processImage(files.image2[0], 2);
+    } else {
+      console.log("No image2 found in request");
+    }
+    
+    // Prepare the service request data with image paths
+    const serviceRequestData = {
+      ...serviceData,
+      _id: newServiceId,
+      image1Path: image1Path || undefined,
+      image2Path: image2Path || undefined,
+      createdAt: new Date().toISOString()
+    };
+    
+    console.log("Final service request data to save:");
+    console.log("- ID:", serviceRequestData._id);
+    console.log("- Service Type:", serviceRequestData.serviceType);
+    console.log("- Image1Path:", serviceRequestData.image1Path);
+    console.log("- Image2Path:", serviceRequestData.image2Path);
+    
+    // Create the new service request in the database
     const newServiceRequest = await NewServiceRequestModel.create(serviceRequestData);
-    console.log("Created service request:", newServiceRequest);
-
+    console.log("✅ Service request created in database");
+    
+    // Send the response
     res.status(201).json(newServiceRequest);
-
-    console.log("About to emit socket event for service request:", newServiceRequest._id);
-    // Adjust the event name if you also wish to rename it
+    
+    // Emit socket event
     io.emit("newBarServiceRequest", newServiceRequest);
     console.log("Socket event emitted successfully");
+    console.log("==== SERVICE REQUEST HANDLING COMPLETE ====\n\n");
   } catch (error) {
-    console.error("Error creating service request:", error);
+    console.error("❌ ERROR CREATING SERVICE REQUEST:", error);
     next(error);
   }
 };

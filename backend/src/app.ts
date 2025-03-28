@@ -1,6 +1,7 @@
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import path from "path";
 import env from "./env";
 import NewServiceRequestRoute from "./routes/ElegoRoute";
 
@@ -28,7 +29,7 @@ app.use(cors({
 }));
 
 // Routes
-
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/new-service-request", NewServiceRequestRoute);
 
 // app.use("/bar-service-quotations", BarServicequotationRoutes);

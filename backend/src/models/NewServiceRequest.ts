@@ -53,13 +53,15 @@ const NewServiceRequestSchema = new Schema({
         default: 'pending',
         required: true,
     },
-    imageUrl1: {
+    image1Path: {
         type: String,
         trim: true,
+        required: true,
     },
-    imageUrl2: {
+    image2Path: {
         type: String,
         trim: true,
+        required: true,
     },
     requestedDate: {
         type: Date,
