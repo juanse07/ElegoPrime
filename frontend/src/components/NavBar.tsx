@@ -132,7 +132,7 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                         <Nav.Link 
                             className={styles.NavStyle}
                             as={Link}
-                            href='/reserve' 
+                            href='/booking' 
                             active={router.pathname === "/reserve"}>
                             Book Now
                         </Nav.Link>

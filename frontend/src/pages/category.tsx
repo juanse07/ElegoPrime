@@ -25,85 +25,85 @@ const Category: React.FC = () => {
     {
       label: 'All',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/cameraservices.webp', link: '/reserve'},
-        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/doorbell.webp', link: '/reserve' },
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbar.webp', link: '/reserve' },
-        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/videobeam.webp', link: '/reserve' },
-        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp', link: '/reserve' },
-        { label: 'Oversized TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/oversizedTv.webp', link: '/reserve' },
-        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/cables.webp', link: '/reserve' },
-        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/electricbase.webp', link: '/reserve' },
-        { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp', link: '/reserve' },
-        { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp', link: '/reserve' },
-        { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.', image: '/furnitureAssembly.webp', link: '/reserve' },
-        { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.', image: '/murphyBed.webp', link: '/reserve' },
-        { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '/shelf.webp', link: '/reserve' },
-        { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '/mirror.webp', link: '/reserve' },
-        { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '/art.webp', link: '/reserve' },
-        { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp', link: '/reserve' },
-        { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp', link: '/reserve' },
-        { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '/interiorPainting.webp', link: '/reserve' },
-        { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/reserve' }
+        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/cameraservices.webp', link: '/booking'},
+        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/doorbell.webp', link: '/booking' },
+        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbar.webp', link: '/booking' },
+        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/videobeam.webp', link: '/booking' },
+        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp', link: '/booking' },
+        { label: 'Oversized TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/oversizedTv.webp', link: '/booking' },
+        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/cables.webp', link: '/booking' },
+        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/electricbase.webp', link: '/booking' },
+        { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp', link: '/booking' },
+        { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp', link: '/booking' },
+        { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.', image: '/furnitureAssembly.webp', link: '/booking' },
+        { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.', image: '/murphyBed.webp', link: '/booking' },
+        { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '/shelf.webp', link: '/booking' },
+        { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '/mirror.webp', link: '/booking' },
+        { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '/art.webp', link: '/booking' },
+        { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp', link: '/booking' },
+        { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp', link: '/booking' },
+        { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '/interiorPainting.webp', link: '/booking' },
+        { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/booking' }
       ]
     },
     {
       label: 'Security',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/cameraservices.webp', link: '/reserve' },
-        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/doorbell.webp', link: '/reserve' }
+        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/cameraservices.webp', link: '/booking' },
+        { label: 'Doorbell install', description: 'Install and maintain doorbell systems.', image:'/doorbell.webp', link: '/booking' }
       ]
     },
     {
       label: 'Videobeam',
       subservices: [
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbar.webp', link: '/reserve' },
-        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/videobeam.webp', link: '/reserve' }
+        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbar.webp', link: '/booking' },
+        { label: 'Videobeam projectors', description: 'High-quality projectors.', image: '/videobeam.webp', link: '/booking' }
       ]
     },
     {
       label: 'TV',
       
       subservices: [
-        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp', link: '/reserve' },
-        { label: 'Oversized TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/oversizedTv.webp', link: '/reserve' },
-        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/cables.webp', link: '/reserve' },
-        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/electricbase.webp', link: '/reserve' }
+        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tv-mounting.webp', link: '/booking' },
+        { label: 'Oversized TV', description: 'Expert installation of overhead TVs for an elevated viewing experience and space-saving design.', image: '/oversizedTv.webp', link: '/booking' },
+        { label: 'Electric base TV', description: 'Installation and maintenance of electric base TVs, ensuring smooth operation and durability.', image: '/cables.webp', link: '/booking' },
+        { label: 'Hide cables', description: 'Neat and efficient cable management to hide and organize wires for a clean and tidy space.', image: '/electricbase.webp', link: '/booking' }
       ]
     },
     {
         label: 'Fans and Lighting',
         subservices: [
-          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp', link: '/reserve' },
-          { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp', link: '/reserve' }
+          { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp', link: '/booking' },
+          { label: 'Lamps and lights install', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp', link: '/booking' }
         ]
       },
       {
         label: 'Assembling',
         subservices: [
-          { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.', image: '/furnitureAssembly.webp', link: '/reserve' },
-          { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.', image: '/murphyBed.webp', link: '/reserve' }
+          { label: 'Furniture assembly', description: 'Efficient and professional assembly of furniture pieces, ensuring durability and proper setup.', image: '/furnitureAssembly.webp', link: '/booking' },
+          { label: 'Murphy bed assembly', description: 'Expert installation and assembly of space-saving Murphy beds, maximizing your rooms functionality.', image: '/murphyBed.webp', link: '/booking' }
         ]
       },
       {
         label: 'Wall Fixture Setup',
         subservices: [
-          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '/shelf.webp', link: '/reserve' },
-          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '/mirror.webp', link: '/reserve' },
-          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '/art.webp', link: '/reserve' }
+          { label: 'Shelf install', description: 'Professional installation of shelves, ensuring secure and stylish placement for your storage needs.', image: '/shelf.webp', link: '/booking' },
+          { label: 'Mirror install', description: 'Expert mirror installation with precision and care for a perfect, seamless fit.', image: '/mirror.webp', link: '/booking' },
+          { label: 'Art install', description: 'Secure and visually appealing installation of artwork to enhance your space with creativity.', image: '/art.webp', link: '/booking' }
         ]
       },
       {
         label: 'Faucet and toilet',
         subservices: [
-          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp', link: '/reserve' },
-          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp', link: '/reserve' }
+          { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp', link: '/booking' },
+          { label: 'Toilet Install', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp', link: '/booking' }
         ]
       },
       {
         label: 'Painting',
         subservices: [
-          { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '/interiorPainting.webp', link: '/reserve' },
-          { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/reserve' }
+          { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '/interiorPainting.webp', link: '/booking' },
+          { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/booking' }
         ]
       },
   ];
