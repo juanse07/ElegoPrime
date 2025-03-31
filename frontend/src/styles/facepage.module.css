@@ -167,6 +167,7 @@
     }
 
     .carousel {
+      
       clip-path: polygon(
         0 0,
         100% 0,
