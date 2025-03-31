@@ -256,4 +256,111 @@
 .select {
     position: relative;
     padding-right: 3.5rem;
+}
+
+.busySlotsInfo {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.busySlotsInfo h4 {
+    margin: 0 0 0.5rem 0;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.busySlotsInfo ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.busySlotsInfo li {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #ffebee;
+}
+
+.timeSlotsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.timeSlotButton {
+    position: relative;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.timeSlotButton:hover:not(:disabled) {
+    border-color: #4299e1;
+    background-color: #f7fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeSlotButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.timeSlotSelected {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.timeSlotUnavailable {
+    border-color: #fed7d7;
+    background-color: #fff5f5;
+}
+
+.timeSlotContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.timeSlotTime {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.timeSlotStatus {
+    font-size: 0.875rem;
+    color: #e53e3e;
+}
+
+.loadingMessage {
+    padding: 1rem;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    color: #4a5568;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.warningMessage {
+    padding: 1rem;
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    color: #c53030;
+    text-align: center;
+    margin: 1rem 0;
 } 

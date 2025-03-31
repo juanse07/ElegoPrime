@@ -1,28 +1,48 @@
 import { RequestHandler } from 'express';
 import BusyTimeSlotModel from '../models/busyTimeSlot';
 
-interface BusyTimeQuery {
-    startTime?: {
-        $gte: Date;
-        $lte: Date;
-    };
-}
-
 export const getBusyTimeSlots: RequestHandler = async (req, res) => {
     try {
         const { startTime, endTime } = req.query;
         
-        const query: BusyTimeQuery = {};
+        console.log('Received query params:', { startTime, endTime });
         
-        if (startTime && endTime) {
-            query.startTime = {
-                $gte: new Date(startTime as string),
-                $lte: new Date(endTime as string)
-            };
+        if (!startTime || !endTime) {
+            console.log('Missing required parameters');
+            res.status(400).json({ message: 'startTime and endTime are required' });
+            return;
         }
+
+        const queryStartTime = new Date(startTime as string);
+        queryStartTime.setHours(0, 0, 0, 0);  // Start of day
+        const queryEndTime = new Date(endTime as string);
+        queryEndTime.setHours(23, 59, 59, 999);  // End of day
         
-        const busyTimeSlots = await BusyTimeSlotModel.find(query).sort({ startTime: 1 });
-        res.status(200).json(busyTimeSlots);
+        console.log('Parsed query dates:', {
+            queryStartTime: queryStartTime.toISOString(),
+            queryEndTime: queryEndTime.toISOString()
+        });
+
+        // First get all slots to see what's in the database
+        const allSlots = await BusyTimeSlotModel.find({}).sort({ startTime: 1 });
+        console.log('All slots in database:', JSON.stringify(allSlots, null, 2));
+
+        // Then get the filtered slots with limited fields
+        const busySlots = await BusyTimeSlotModel.find({
+            $or: [
+                { startTime: { $lte: queryEndTime } },
+                { endTime: { $gte: queryStartTime } }
+            ]
+        })
+        .select('startTime endTime') // Only select necessary fields
+        .sort({ startTime: 1 });
+
+        // Log only the time ranges without personal info
+        console.log('Found busy slots:', busySlots.map(slot => ({
+            timeRange: `${new Date(slot.startTime).toLocaleTimeString()} - ${new Date(slot.endTime).toLocaleTimeString()}`
+        })));
+        
+        res.status(200).json(busySlots);
     } catch (error: unknown) {
         console.error('Error fetching busy time slots:', error);
         res.status(500).json({ message: 'Error fetching busy time slots' });

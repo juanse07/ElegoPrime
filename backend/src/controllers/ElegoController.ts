@@ -1,9 +1,12 @@
 import { RequestHandler } from 'express';
+import fs from 'fs';
 import mongoose from 'mongoose';
+import path from 'path';
 import sharp from 'sharp';
 import BarServiceQuotationModel from '../models/BarServiceQuotation';
 import NewServiceRequestModel from '../models/NewServiceRequest';
 import { io } from "../server";
+
 export const getBarServiceQuotations: RequestHandler = async (req, res, next) => {
   try {
     const allBarServiceQuotations = await BarServiceQuotationModel.find().exec();
@@ -104,8 +107,6 @@ export const createNewServiceRequest: RequestHandler = async (req, res, next) =>
     }
     
     // Setup for file saving
-    const fs = require('fs');
-    const path = require('path');
     const uploadDir = path.resolve(__dirname, '../../uploads/jobServiceImages');
     
     console.log("Upload directory:", uploadDir);
