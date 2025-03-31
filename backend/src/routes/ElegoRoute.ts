@@ -17,6 +17,7 @@ router.use((req, res, next) => {
 router.get("/",NewServiceRequestController.getNewServiceRequestsByState);
 // router.post("/",BarServiceQuotationController.createBarServiceQuotation);
 router.get("/busy-time-slots", BusyTimeController.getBusyTimeSlots);
+router.post("/busy-time-slots", BusyTimeController.createBusyTimeSlot);
 router.patch("/:id", NewServiceRequestController.updateNewServiceRequest);
 
 // Update route to handle multiple images - using array to simplify

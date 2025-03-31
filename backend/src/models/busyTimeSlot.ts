@@ -12,6 +12,10 @@ export interface IBusyTimeSlot extends Document {
 
 const BusyTimeSlotSchema: Schema = new Schema(
   {
+    _id: {
+      type: String,
+      required: true,
+    },
     date: {
       type: Date,
       required: true,
