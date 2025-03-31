@@ -1,5 +1,6 @@
 import express from "express";
 import * as NewServiceRequestController from "../controllers/ElegoController";
+import * as BusyTimeController from "../controllers/busyTimeController";
 import { jobImageUpload } from "../middlewares/image-upload";
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.use((req, res, next) => {
 
 router.get("/",NewServiceRequestController.getNewServiceRequestsByState);
 // router.post("/",BarServiceQuotationController.createBarServiceQuotation);
-
+router.get("/busy-time-slots", BusyTimeController.getBusyTimeSlots);
 router.patch("/:id", NewServiceRequestController.updateNewServiceRequest);
 
 // Update route to handle multiple images - using array to simplify

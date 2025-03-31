@@ -4,6 +4,7 @@ import express from "express";
 import path from "path";
 import env from "./env";
 import NewServiceRequestRoute from "./routes/ElegoRoute";
+import BusyTimeSlotsRoute from "./routes/busyTimeSlotsRoute";
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(cors({
 // Routes
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/new-service-request", NewServiceRequestRoute);
+app.use("/busy-time-slots", BusyTimeSlotsRoute);
 
 // app.use("/bar-service-quotations", BarServicequotationRoutes);
 
