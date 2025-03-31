@@ -1,10 +1,9 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IBusyTimeSlot extends Document {
-  date: Date;
-  startTime: string;
-  endTime: string;
-  title?: string;
+  startTime: Date;
+  endTime: Date;
+  title: string;
   description?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -12,27 +11,21 @@ export interface IBusyTimeSlot extends Document {
 
 const BusyTimeSlotSchema: Schema = new Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-    },
-    date: {
+    startTime: {
       type: Date,
       required: true,
     },
-    startTime: {
-      type: String,
-      required: true,
-    },
     endTime: {
-      type: String,
+      type: Date,
       required: true,
     },
     title: {
       type: String,
+      required: true,
     },
     description: {
       type: String,
+      default: '',
     },
   },
   {
@@ -40,4 +33,4 @@ const BusyTimeSlotSchema: Schema = new Schema(
   }
 );
 
-export default mongoose.model<IBusyTimeSlot>('BusyTimeSlot', BusyTimeSlotSchema); 
+export default mongoose.model<IBusyTimeSlot>('BusyTimeSlot', BusyTimeSlotSchema);
