@@ -1,6 +1,7 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import axios from 'axios';
 import { isValid, parseISO } from 'date-fns';
+import { format, toZonedTime } from 'date-fns-tz';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
@@ -48,6 +49,8 @@ interface NetworkInformation extends Navigator {
     };
 }
 
+const TIMEZONE = 'America/Denver';
+
 export default function NewServiceRequestForm() {
     const [formData, setFormData] = useState<FormData>({
         serviceType: '',
@@ -84,14 +87,13 @@ export default function NewServiceRequestForm() {
     const fetchBusyTimeSlots = async (retryCount = 0) => {
         setIsLoadingTimeSlots(true);
         try {
-            setNetworkError(null); // Clear any previous errors
-            // Create date object using date-fns for reliable parsing
-            const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000Z`);
+            setNetworkError(null);
+            const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000`);
             
-            // Create start/end with consistent UTC handling
+            // Convert local time to UTC for API request
             const startTime = new Date(selectedDate);
             startTime.setUTCHours(0, 0, 0, 0);
-            
+
             const endTime = new Date(selectedDate);
             endTime.setUTCHours(23, 59, 59, 999);
 
@@ -107,21 +109,26 @@ export default function NewServiceRequestForm() {
                     startTime: startTime.toISOString(),
                     endTime: endTime.toISOString()
                 },
-                timeout: 10000, // Increased timeout for mobile networks
+                timeout: 10000,
                 headers: {
                     'Cache-Control': 'no-cache',
                     'Pragma': 'no-cache'
                 }
             });
             
-            // Process response data...
-            const processedBusySlots = response.data.map((slot: BusyTimeSlot) => ({
-                ...slot,
-                _localStartTime: new Date(slot.startTime).toLocaleString(),
-                _localEndTime: new Date(slot.endTime).toLocaleString(),
-                _startHour: new Date(slot.startTime).getHours(),
-                _endHour: new Date(slot.endTime).getHours()
-            }));
+            // Convert UTC times from API to local timezone
+            const processedBusySlots = response.data.map((slot: BusyTimeSlot) => {
+                const localStartTime = toZonedTime(new Date(slot.startTime), TIMEZONE);
+                const localEndTime = toZonedTime(new Date(slot.endTime), TIMEZONE);
+                
+                return {
+                    ...slot,
+                    _localStartTime: format(localStartTime, 'h:mm a', { timeZone: TIMEZONE }),
+                    _localEndTime: format(localEndTime, 'h:mm a', { timeZone: TIMEZONE }),
+                    _startHour: localStartTime.getHours(),
+                    _endHour: localEndTime.getHours()
+                };
+            });
             
             setBusyTimeSlots(processedBusySlots);
             generateAvailableTimeSlots(processedBusySlots);
@@ -154,73 +161,52 @@ export default function NewServiceRequestForm() {
 
     const generateAvailableTimeSlots = (busySlots: BusyTimeSlot[]) => {
         const slots: { time: string; isAvailable: boolean; conflictReason?: string }[] = [];
-        const startHour = 8;  // Start at 8 AM
-        const endHour = 18;   // End at 6 PM
+        const startHour = 8;  // Start at 8 AM MT
+        const endHour = 18;   // End at 6 PM MT
         
         // Selected date from form
-        const selectedDate = new Date(formData.requestedDate);
+        const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000`);
         
         console.log('Generating time slots for date:', selectedDate.toDateString());
         
         // Generate all possible 30-minute time slots
         for (let hour = startHour; hour < endHour; hour++) {
             for (const minute of [0, 30]) {
-                // Create time slot
+                // Create time slot in local time
                 const slotDate = new Date(selectedDate);
                 slotDate.setHours(hour, minute, 0, 0);
                 
                 // Format for display
-                const timeString = `${hour % 12 || 12}:${minute.toString().padStart(2, '0')} ${hour >= 12 ? 'PM' : 'AM'}`;
+                const timeString = format(slotDate, 'h:mm a', { timeZone: TIMEZONE });
                 
-                // Create slot end time (30 minutes after start)
-                const slotEnd = new Date(slotDate);
-                slotEnd.setMinutes(slotDate.getMinutes() + 30);
+                // Convert all times to minutes since midnight for easier comparison
+                const slotStartMinutes = hour * 60 + minute;
+                const slotEndMinutes = slotStartMinutes + 30;
                 
-                // Check if this slot is busy (overlaps with any busy slot)
+                // Check if this slot is busy
                 let isSlotBusy = false;
                 let conflictReason = '';
                 
                 for (const busySlot of busySlots) {
-                    // Parse busy slot times from UTC time directly
-                    const busyStart = new Date(busySlot.startTime);
-                    const busyEnd = new Date(busySlot.endTime);
+                    const busyStart = toZonedTime(new Date(busySlot.startTime), TIMEZONE);
+                    const busyEnd = toZonedTime(new Date(busySlot.endTime), TIMEZONE);
                     
-                    // Get hours in UTC for comparison - matching the display logic
-                    const busyStartHour = busyStart.getUTCHours();
-                    const busyStartMinute = busyStart.getUTCMinutes();
-                    const busyEndHour = busyEnd.getUTCHours();
-                    const busyEndMinute = busyEnd.getUTCMinutes();
+                    // Convert all times to minutes since midnight for easier comparison
+                    const busyStartMinutes = busyStart.getHours() * 60 + busyStart.getMinutes();
+                    const busyEndMinutes = busyEnd.getHours() * 60 + busyEnd.getMinutes();
                     
-                    console.log(`Checking slot ${timeString} against busy slot "${busySlot.title}":`, {
-                        slotHour: hour,
-                        slotMinute: minute,
-                        busyStartHour,
-                        busyStartMinute,
-                        busyEndHour,
-                        busyEndMinute
-                    });
-                    
-                    // Check if this slot falls within the busy time
-                    // Using the same UTC hour/minute logic as the display
-                    const slotTimeInMinutes = (hour * 60) + minute;
-                    const busyStartInMinutes = (busyStartHour * 60) + busyStartMinute;
-                    const busyEndInMinutes = (busyEndHour * 60) + busyEndMinute;
-                    
-                    // Overlap if slot starts during busy time or spans into busy time
-                    const overlaps = (
-                        (slotTimeInMinutes >= busyStartInMinutes && slotTimeInMinutes < busyEndInMinutes) ||
-                        ((slotTimeInMinutes + 30) > busyStartInMinutes && slotTimeInMinutes < busyEndInMinutes)
-                    );
-                    
-                    if (overlaps) {
+                    // Check for overlap
+                    if (
+                        (slotStartMinutes >= busyStartMinutes && slotStartMinutes < busyEndMinutes) ||
+                        (slotEndMinutes > busyStartMinutes && slotEndMinutes <= busyEndMinutes) ||
+                        (slotStartMinutes <= busyStartMinutes && slotEndMinutes >= busyEndMinutes)
+                    ) {
                         isSlotBusy = true;
                         conflictReason = busySlot.title;
-                        console.log(`❌ Slot ${timeString} overlaps with ${busySlot.title} at ${busyStartHour}:${busyStartMinute} - ${busyEndHour}:${busyEndMinute}`);
                         break;
                     }
                 }
                 
-                // Add the slot to our array
                 slots.push({
                     time: timeString,
                     isAvailable: !isSlotBusy,
@@ -602,18 +588,21 @@ export default function NewServiceRequestForm() {
     };
 
     const handleTimeSelect = (time: string) => {
-        // Convert the time string to a full datetime for the selected date
+        // Parse the selected time
         const [timeStr, period] = time.split(' ');
         const [hours, minutes] = timeStr.split(':');
         let hour = parseInt(hours);
         
-        // Convert to 24-hour format if needed
-        if (period === 'PM' && hour !== 12) hour += 12;
-        if (period === 'AM' && hour === 12) hour = 0;
+        // Convert to 24-hour format
+        if (period.toLowerCase() === 'pm' && hour !== 12) hour += 12;
+        if (period.toLowerCase() === 'am' && hour === 12) hour = 0;
 
-        const selectedDate = new Date(formData.requestedDate);
-        selectedDate.setHours(hour, parseInt(minutes), 0, 0);
+        // Create a date object in the local timezone
+        const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000`);
+        const localDateTime = new Date(selectedDate);
+        localDateTime.setHours(hour, parseInt(minutes), 0, 0);
 
+        // Store the time in the form
         handleChange({
             target: {
                 name: 'timeSlot',
