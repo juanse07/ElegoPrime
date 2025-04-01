@@ -77,12 +77,43 @@ export default function NewServiceRequestForm() {
     const [selectedMonth, setSelectedMonth] = useState(new Date());
     const [showDebugPanel, setShowDebugPanel] = useState(false);
     const [networkError, setNetworkError] = useState<string | null>(null);
+    const [fullyBookedDates, setFullyBookedDates] = useState<Set<string>>(new Set());
+    const [isCheckingDates, setIsCheckingDates] = useState(false);
 
     useEffect(() => {
         if (formData.requestedDate) {
             fetchBusyTimeSlots();
         }
     }, [formData.requestedDate]);
+
+    useEffect(() => {
+        const checkDatesInMonth = async () => {
+            setIsCheckingDates(true);
+            const dates = getDaysInMonth(selectedMonth);
+            const newFullyBookedDates = new Set<string>();
+
+            // Process dates in smaller batches to avoid overwhelming the server
+            const batchSize = 5;
+            for (let i = 0; i < dates.length; i += batchSize) {
+                const batch = dates.slice(i, i + batchSize);
+                await Promise.all(
+                    batch.map(async (date) => {
+                        if (isDateAvailable(date)) {
+                            const isBooked = await checkDateAvailability(date);
+                            if (isBooked) {
+                                newFullyBookedDates.add(date.toISOString().split('T')[0]);
+                            }
+                        }
+                    })
+                );
+            }
+
+            setFullyBookedDates(newFullyBookedDates);
+            setIsCheckingDates(false);
+        };
+
+        checkDatesInMonth();
+    }, [selectedMonth]);
 
     const fetchBusyTimeSlots = async (retryCount = 0) => {
         setIsLoadingTimeSlots(true);
@@ -612,6 +643,70 @@ export default function NewServiceRequestForm() {
         } as React.ChangeEvent<HTMLInputElement>);
     };
 
+    const checkDateAvailability = async (date: Date): Promise<boolean> => {
+        try {
+            const startTime = new Date(date);
+            startTime.setUTCHours(0, 0, 0, 0);
+            
+            const endTime = new Date(date);
+            endTime.setUTCHours(23, 59, 59, 999);
+
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+            if (!backendUrl) {
+                return false;
+            }
+
+            const response = await axios.get(`${backendUrl}/busy-time-slots`, {
+                params: {
+                    startTime: startTime.toISOString(),
+                    endTime: endTime.toISOString()
+                }
+            });
+
+            const busySlots = response.data;
+            if (!busySlots.length) return false;
+
+            // Convert times to Denver time for comparison
+            const workingHours = {
+                start: 8, // 8 AM
+                end: 17.5 // 5:30 PM
+            };
+
+            // Check each 30-minute slot in the working hours
+            const totalSlots = ((workingHours.end - workingHours.start) * 2); // 30-minute intervals
+            let bookedSlots = 0;
+
+            for (let hour = workingHours.start; hour < workingHours.end; hour += 0.5) {
+                const slotStart = new Date(date);
+                slotStart.setHours(Math.floor(hour), (hour % 1) * 60, 0, 0);
+                
+                const slotEnd = new Date(slotStart);
+                slotEnd.setMinutes(slotStart.getMinutes() + 30);
+
+                // Check if this slot overlaps with any busy slot
+                const isSlotBusy = busySlots.some((busy: BusyTimeSlot) => {
+                    const busyStart = new Date(busy.startTime);
+                    const busyEnd = new Date(busy.endTime);
+
+                    return (slotStart >= busyStart && slotStart < busyEnd) ||
+                           (slotEnd > busyStart && slotEnd <= busyEnd) ||
+                           (slotStart <= busyStart && slotEnd >= busyEnd);
+                });
+
+                if (isSlotBusy) {
+                    bookedSlots++;
+                }
+            }
+
+            // Consider the date fully booked if all slots are taken
+            return bookedSlots >= totalSlots;
+
+        } catch (error) {
+            console.error('Error checking date availability:', error);
+            return false;
+        }
+    };
+
     return (
         <div className={styles.formContainer}>
             <h2 className={styles.formTitle}>Request a Service</h2>
@@ -805,22 +900,36 @@ export default function NewServiceRequestForm() {
                             </div>
 
                             <div className={styles.calendar}>
-                                {getDaysInMonth(selectedMonth).map((date, index) => (
-                                    <button
-                                        key={`${date.toISOString()}-${index}`}
-                                        type="button"
-                                        className={`
-                                            ${styles.calendarDay}
-                                            ${isDateAvailable(date) ? styles.available : styles.unavailable}
-                                            ${formData.requestedDate === date.toISOString().split('T')[0] ? styles.selected : ''}
-                                        `}
-                                        onClick={() => handleDateSelect(date)}
-                                        disabled={!isDateAvailable(date)}
-                                    >
-                                        <span className={styles.dayNumber}>{date.getDate()}</span>
-                                        {isDateAvailable(date) && <span className={styles.availabilityDot}></span>}
-                                    </button>
-                                ))}
+                                {getDaysInMonth(selectedMonth).map((date, index) => {
+                                    const dateStr = date.toISOString().split('T')[0];
+                                    const isAvail = isDateAvailable(date);
+                                    const isFullyBooked = fullyBookedDates.has(dateStr);
+                                    
+                                    return (
+                                        <button
+                                            key={`${date.toISOString()}-${index}`}
+                                            type="button"
+                                            className={`
+                                                ${styles.calendarDay}
+                                                ${isAvail ? styles.available : styles.unavailable}
+                                                ${formData.requestedDate === dateStr ? styles.selected : ''}
+                                                ${isFullyBooked ? styles.fullyBooked : ''}
+                                                ${isCheckingDates ? styles.checking : ''}
+                                            `}
+                                            onClick={() => handleDateSelect(date)}
+                                            disabled={!isAvail}
+                                        >
+                                            <span className={styles.dayNumber}>{date.getDate()}</span>
+                                            {isAvail && (
+                                                <span className={`
+                                                    ${styles.availabilityDot}
+                                                    ${isFullyBooked ? styles.fullyBookedDot : ''}
+                                                    ${isCheckingDates ? styles.checkingDot : ''}
+                                                `}></span>
+                                            )}
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
 
