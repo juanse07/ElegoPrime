@@ -1,6 +1,6 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
 import axios from 'axios';
-import { format, isValid, parseISO } from 'date-fns';
+import { isValid, parseISO } from 'date-fns';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
@@ -73,6 +73,7 @@ export default function NewServiceRequestForm() {
     const [busyTimeSlots, setBusyTimeSlots] = useState<BusyTimeSlot[]>([]);
     const [selectedMonth, setSelectedMonth] = useState(new Date());
     const [showDebugPanel, setShowDebugPanel] = useState(false);
+    const [networkError, setNetworkError] = useState<string | null>(null);
 
     useEffect(() => {
         if (formData.requestedDate) {
@@ -80,20 +81,12 @@ export default function NewServiceRequestForm() {
         }
     }, [formData.requestedDate]);
 
-    const fetchBusyTimeSlots = async () => {
+    const fetchBusyTimeSlots = async (retryCount = 0) => {
         setIsLoadingTimeSlots(true);
         try {
+            setNetworkError(null); // Clear any previous errors
             // Create date object using date-fns for reliable parsing
             const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000Z`);
-            
-            console.log('Fetching busy slots for selected date:', {
-                requestedDate: formData.requestedDate,
-                selectedDateObj: selectedDate.toString(),
-                dayOfWeek: format(selectedDate, 'EEEE'),
-                dayOfMonth: format(selectedDate, 'd'),
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                timezoneOffset: new Date().getTimezoneOffset()
-            });
             
             // Create start/end with consistent UTC handling
             const startTime = new Date(selectedDate);
@@ -102,73 +95,58 @@ export default function NewServiceRequestForm() {
             const endTime = new Date(selectedDate);
             endTime.setUTCHours(23, 59, 59, 999);
 
-            console.log('Query time range:', {
-                startTime: startTime.toISOString(),
-                endTime: endTime.toISOString(),
-                localStartTime: startTime.toString(),
-                localEndTime: endTime.toString()
-            });
-
             const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
             if (!backendUrl) {
                 throw new Error('Backend URL is not configured');
             }
 
             const url = `${backendUrl}/busy-time-slots`;
-            console.log('Fetching from:', url);
             
             const response = await axios.get(url, {
                 params: {
                     startTime: startTime.toISOString(),
                     endTime: endTime.toISOString()
+                },
+                timeout: 10000, // Increased timeout for mobile networks
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
                 }
             });
             
-            // Log raw data for debugging
-            console.log('Raw response data:', response.data);
+            // Process response data...
+            const processedBusySlots = response.data.map((slot: BusyTimeSlot) => ({
+                ...slot,
+                _localStartTime: new Date(slot.startTime).toLocaleString(),
+                _localEndTime: new Date(slot.endTime).toLocaleString(),
+                _startHour: new Date(slot.startTime).getHours(),
+                _endHour: new Date(slot.endTime).getHours()
+            }));
             
-            // Process the busy slots with date-fns
-            const processedBusySlots = response.data.map((slot: BusyTimeSlot) => {
-                // Parse dates properly with date-fns
-                const startDate = parseISO(slot.startTime);
-                const endDate = parseISO(slot.endTime);
-                
-                return {
-                    ...slot,
-                    // Add debug info
-                    // Format dates for debugging
-                    _localStartTime: startDate.toLocaleString(),
-                    _localEndTime: endDate.toLocaleString(),
-                    _startHour: startDate.getHours(),
-                    _endHour: endDate.getHours()
-                };
-            });
-            
-            // Store the busy slots for display
             setBusyTimeSlots(processedBusySlots);
-            
-            console.log('Processed busy slots:', {
-                count: processedBusySlots.length,
-                slots: processedBusySlots.map((slot: BusyTimeSlot) => ({
-                    _id: slot._id,
-                    title: slot.title,
-                    startTime: slot.startTime,
-                    endTime: slot.endTime,
-                    localStart: slot._localStartTime,
-                    localEnd: slot._localEndTime,
-                    startHour: slot._startHour,
-                    endHour: slot._endHour
-                }))
-            });
-            
             generateAvailableTimeSlots(processedBusySlots);
+            
         } catch (error) {
             console.error('Error fetching busy time slots:', error);
-            setAvailableTimeSlots([]);
-            setErrors(prev => ({
-                ...prev,
-                timeSlot: 'Unable to connect to the server. Please make sure the backend is running.'
-            }));
+            if (axios.isAxiosError(error)) {
+                // Only show network error for persistent failures
+                if (retryCount >= 2) {
+                    if (error.code === 'ECONNABORTED') {
+                        setNetworkError('Connection is slow. Please try again.');
+                    } else if (error.message === 'Network Error') {
+                        setNetworkError('Please check your connection and try again.');
+                    }
+                }
+                
+                // Retry logic with increased delay for mobile
+                if (retryCount < 3) {
+                    const delay = Math.pow(2, retryCount) * 2000; // Increased delay between retries
+                    setTimeout(() => fetchBusyTimeSlots(retryCount + 1), delay);
+                    return;
+                }
+            }
+            // Set empty busy slots but don't show error on first attempts
+            setBusyTimeSlots([]);
         } finally {
             setIsLoadingTimeSlots(false);
         }
@@ -877,48 +855,9 @@ export default function NewServiceRequestForm() {
                                         {/* Display busy slots summary if there are any */}
                                         {busyTimeSlots.length > 0 && (
                                             <div className={styles.busySlotsInfo}>
-                                                <h4>Scheduled Events for this Day:</h4>
-                                                <ul>
-                                                    {busyTimeSlots.map((slot) => {
-                                                        try {
-                                                            // Create Date objects from the ISO strings
-                                                            const startDate = new Date(slot.startTime);
-                                                            const endDate = new Date(slot.endTime);
-                                                            
-                                                            // Extract hours and minutes from UTC time to match the mobile app
-                                                            const startHours = startDate.getUTCHours();
-                                                            const startMinutes = startDate.getUTCMinutes();
-                                                            const endHours = endDate.getUTCHours();
-                                                            const endMinutes = endDate.getUTCMinutes();
-                                                            
-                                                            // Format in 12-hour with AM/PM to match the app display
-                                                            const displayStartTime = `${startHours % 12 || 12}:${startMinutes.toString().padStart(2, '0')} ${startHours >= 12 ? 'PM' : 'AM'}`;
-                                                            const displayEndTime = `${endHours % 12 || 12}:${endMinutes.toString().padStart(2, '0')} ${endHours >= 12 ? 'PM' : 'AM'}`;
-                                                            
-                                                            console.log('Event time display:', {
-                                                                title: slot.title,
-                                                                rawStartTime: slot.startTime,
-                                                                rawEndTime: slot.endTime,
-                                                                appDisplayStart: displayStartTime, // Will match mobile app (UTC)
-                                                                appDisplayEnd: displayEndTime,     // Will match mobile app (UTC)
-                                                                browserTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                                                            });
-                                                            
-                                                            return (
-                                                                <li key={slot._id} className={styles.busySlotItem}>
-                                                                    <strong>{slot.title}</strong>: {displayStartTime} - {displayEndTime}
-                                                                </li>
-                                                            );
-                                                        } catch (error) {
-                                                            console.error('Error rendering busy slot:', error, slot);
-                                                            return (
-                                                                <li key={slot._id || 'error'} className={styles.busySlotItem}>
-                                                                    <strong>{slot.title || 'Unknown Event'}</strong>: Time format error
-                                                                </li>
-                                                            );
-                                                        }
-                                                    })}
-                                                </ul>
+                                                <p className={styles.unavailableMessage}>
+                                                    Time slots marked in red are currently unavailable
+                                                </p>
                                             </div>
                                         )}
                                         
@@ -1044,6 +983,18 @@ export default function NewServiceRequestForm() {
                 {submitSuccess && (
                     <div className={styles.successMessage}>
                         Your service request has been submitted successfully!
+                    </div>
+                )}
+
+                {networkError && (
+                    <div className={styles.networkError}>
+                        <p>{networkError}</p>
+                        <button 
+                            className={styles.retryButton}
+                            onClick={() => fetchBusyTimeSlots()}
+                        >
+                            Retry Connection
+                        </button>
                     </div>
                 )}
 
