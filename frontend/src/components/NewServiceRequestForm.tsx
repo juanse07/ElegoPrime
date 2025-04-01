@@ -1,7 +1,9 @@
 import { createServiceRequest } from '@/network/api/new-serviceRequest';
+import axios from 'axios';
+import { format, isValid, parseISO } from 'date-fns';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { FaCheck, FaClock, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
+import { FaCheck, FaCouch, FaFan, FaHome, FaImage, FaLock, FaMusic, FaTools, FaTv, FaUpload } from 'react-icons/fa';
 import styles from '../styles/NewServiceRequestForm.module.css';
 
 interface FormData {
@@ -26,6 +28,10 @@ interface BusyTimeSlot {
     endTime: string;
     title: string;
     description: string;
+    _localStartTime?: string;
+    _localEndTime?: string;
+    _startHour?: number;
+    _endHour?: number;
 }
 
 interface ApiError {
@@ -62,9 +68,11 @@ export default function NewServiceRequestForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [previewUrls, setPreviewUrls] = useState<{[key: string]: string}>({});
-    const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+    const [availableTimeSlots, setAvailableTimeSlots] = useState<{ time: string; isAvailable: boolean; conflictReason?: string }[]>([]);
     const [isLoadingTimeSlots, setIsLoadingTimeSlots] = useState(false);
     const [busyTimeSlots, setBusyTimeSlots] = useState<BusyTimeSlot[]>([]);
+    const [selectedMonth, setSelectedMonth] = useState(new Date());
+    const [showDebugPanel, setShowDebugPanel] = useState(false);
 
     useEffect(() => {
         if (formData.requestedDate) {
@@ -75,15 +83,30 @@ export default function NewServiceRequestForm() {
     const fetchBusyTimeSlots = async () => {
         setIsLoadingTimeSlots(true);
         try {
-            const startTime = new Date(formData.requestedDate);
-            startTime.setHours(0, 0, 0, 0);
-            const endTime = new Date(formData.requestedDate);
-            endTime.setHours(23, 59, 59, 999);
-
-            console.log('Fetching busy slots for date:', {
+            // Create date object using date-fns for reliable parsing
+            const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000Z`);
+            
+            console.log('Fetching busy slots for selected date:', {
                 requestedDate: formData.requestedDate,
+                selectedDateObj: selectedDate.toString(),
+                dayOfWeek: format(selectedDate, 'EEEE'),
+                dayOfMonth: format(selectedDate, 'd'),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                timezoneOffset: new Date().getTimezoneOffset()
+            });
+            
+            // Create start/end with consistent UTC handling
+            const startTime = new Date(selectedDate);
+            startTime.setUTCHours(0, 0, 0, 0);
+            
+            const endTime = new Date(selectedDate);
+            endTime.setUTCHours(23, 59, 59, 999);
+
+            console.log('Query time range:', {
                 startTime: startTime.toISOString(),
-                endTime: endTime.toISOString()
+                endTime: endTime.toISOString(),
+                localStartTime: startTime.toString(),
+                localEndTime: endTime.toString()
             });
 
             const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -91,25 +114,54 @@ export default function NewServiceRequestForm() {
                 throw new Error('Backend URL is not configured');
             }
 
-            const url = `${backendUrl}/busy-time-slots?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
+            const url = `${backendUrl}/busy-time-slots`;
             console.log('Fetching from:', url);
             
-            const response = await fetch(url);
+            const response = await axios.get(url, {
+                params: {
+                    startTime: startTime.toISOString(),
+                    endTime: endTime.toISOString()
+                }
+            });
             
-            if (!response.ok) {
-                const text = await response.text();
-                console.error('Server response:', text);
-                throw new Error(`Server error: ${response.status} ${response.statusText}`);
-            }
+            // Log raw data for debugging
+            console.log('Raw response data:', response.data);
             
-            const data = await response.json();
-            console.log('Received busy slots:', data);
+            // Process the busy slots with date-fns
+            const processedBusySlots = response.data.map((slot: BusyTimeSlot) => {
+                // Parse dates properly with date-fns
+                const startDate = parseISO(slot.startTime);
+                const endDate = parseISO(slot.endTime);
+                
+                return {
+                    ...slot,
+                    // Add debug info
+                    // Format dates for debugging
+                    _localStartTime: startDate.toLocaleString(),
+                    _localEndTime: endDate.toLocaleString(),
+                    _startHour: startDate.getHours(),
+                    _endHour: endDate.getHours()
+                };
+            });
             
-            if (!Array.isArray(data)) {
-                throw new Error('Invalid response format from server');
-            }
+            // Store the busy slots for display
+            setBusyTimeSlots(processedBusySlots);
             
-            generateAvailableTimeSlots(data);
+            console.log('Processed busy slots:', {
+                count: processedBusySlots.length,
+                slots: processedBusySlots.map((slot: BusyTimeSlot) => ({
+                    _id: slot._id,
+                    title: slot.title,
+                    startTime: slot.startTime,
+                    endTime: slot.endTime,
+                    localStart: slot._localStartTime,
+                    localEnd: slot._localEndTime,
+                    startHour: slot._startHour,
+                    endHour: slot._endHour
+                }))
+            });
+            
+            generateAvailableTimeSlots(processedBusySlots);
         } catch (error) {
             console.error('Error fetching busy time slots:', error);
             setAvailableTimeSlots([]);
@@ -123,64 +175,84 @@ export default function NewServiceRequestForm() {
     };
 
     const generateAvailableTimeSlots = (busySlots: BusyTimeSlot[]) => {
-        console.log('Generating slots with busy slots:', busySlots);
-        console.log('Requested date:', formData.requestedDate);
-        const slots: string[] = [];
-        const startHour = 8; // 8 AM
-        const endHour = 18; // 6 PM
-        const interval = 2; // 2-hour intervals
-
-        // Convert busy slots to the same date as the requested date for proper comparison
-        const normalizedBusySlots = busySlots.map(slot => ({
-            ...slot,
-            startTime: new Date(slot.startTime),
-            endTime: new Date(slot.endTime)
-        }));
-
-        for (let hour = startHour; hour <= endHour - interval; hour += interval) {
-            const slotStart = `${hour.toString().padStart(2, '0')}:00`;
-            const slotEnd = `${(hour + interval).toString().padStart(2, '0')}:00`;
-            const timeSlot = `${slotStart} - ${slotEnd}`;
-
-            // Create Date objects for the current slot
-            const slotStartTime = new Date(`${formData.requestedDate}T${slotStart}`);
-            const slotEndTime = new Date(`${formData.requestedDate}T${slotEnd}`);
-
-            // Check if this slot overlaps with any busy slots
-            const isSlotAvailable = !normalizedBusySlots.some(busySlot => {
-                // A slot is unavailable if:
-                // 1. The busy slot starts during our slot
-                // 2. The busy slot ends during our slot
-                // 3. The busy slot completely contains our slot
-                const busyStart = busySlot.startTime;
-                const busyEnd = busySlot.endTime;
+        const slots: { time: string; isAvailable: boolean; conflictReason?: string }[] = [];
+        const startHour = 8;  // Start at 8 AM
+        const endHour = 18;   // End at 6 PM
+        
+        // Selected date from form
+        const selectedDate = new Date(formData.requestedDate);
+        
+        console.log('Generating time slots for date:', selectedDate.toDateString());
+        
+        // Generate all possible 30-minute time slots
+        for (let hour = startHour; hour < endHour; hour++) {
+            for (const minute of [0, 30]) {
+                // Create time slot
+                const slotDate = new Date(selectedDate);
+                slotDate.setHours(hour, minute, 0, 0);
                 
-                const overlaps = (
-                    (busyStart >= slotStartTime && busyStart < slotEndTime) || // Busy slot starts during our slot
-                    (busyEnd > slotStartTime && busyEnd <= slotEndTime) ||     // Busy slot ends during our slot
-                    (busyStart <= slotStartTime && busyEnd >= slotEndTime)     // Busy slot contains our slot
-                );
-
-                console.log(`Checking slot ${timeSlot} against busy slot:`, {
-                    busyStart: busyStart.toISOString(),
-                    busyEnd: busyEnd.toISOString(),
-                    slotStartTime: slotStartTime.toISOString(),
-                    slotEndTime: slotEndTime.toISOString(),
-                    overlaps
+                // Format for display
+                const timeString = `${hour % 12 || 12}:${minute.toString().padStart(2, '0')} ${hour >= 12 ? 'PM' : 'AM'}`;
+                
+                // Create slot end time (30 minutes after start)
+                const slotEnd = new Date(slotDate);
+                slotEnd.setMinutes(slotDate.getMinutes() + 30);
+                
+                // Check if this slot is busy (overlaps with any busy slot)
+                let isSlotBusy = false;
+                let conflictReason = '';
+                
+                for (const busySlot of busySlots) {
+                    // Parse busy slot times from UTC time directly
+                    const busyStart = new Date(busySlot.startTime);
+                    const busyEnd = new Date(busySlot.endTime);
+                    
+                    // Get hours in UTC for comparison - matching the display logic
+                    const busyStartHour = busyStart.getUTCHours();
+                    const busyStartMinute = busyStart.getUTCMinutes();
+                    const busyEndHour = busyEnd.getUTCHours();
+                    const busyEndMinute = busyEnd.getUTCMinutes();
+                    
+                    console.log(`Checking slot ${timeString} against busy slot "${busySlot.title}":`, {
+                        slotHour: hour,
+                        slotMinute: minute,
+                        busyStartHour,
+                        busyStartMinute,
+                        busyEndHour,
+                        busyEndMinute
+                    });
+                    
+                    // Check if this slot falls within the busy time
+                    // Using the same UTC hour/minute logic as the display
+                    const slotTimeInMinutes = (hour * 60) + minute;
+                    const busyStartInMinutes = (busyStartHour * 60) + busyStartMinute;
+                    const busyEndInMinutes = (busyEndHour * 60) + busyEndMinute;
+                    
+                    // Overlap if slot starts during busy time or spans into busy time
+                    const overlaps = (
+                        (slotTimeInMinutes >= busyStartInMinutes && slotTimeInMinutes < busyEndInMinutes) ||
+                        ((slotTimeInMinutes + 30) > busyStartInMinutes && slotTimeInMinutes < busyEndInMinutes)
+                    );
+                    
+                    if (overlaps) {
+                        isSlotBusy = true;
+                        conflictReason = busySlot.title;
+                        console.log(`❌ Slot ${timeString} overlaps with ${busySlot.title} at ${busyStartHour}:${busyStartMinute} - ${busyEndHour}:${busyEndMinute}`);
+                        break;
+                    }
+                }
+                
+                // Add the slot to our array
+                slots.push({
+                    time: timeString,
+                    isAvailable: !isSlotBusy,
+                    conflictReason: isSlotBusy ? conflictReason : undefined
                 });
-                
-                return overlaps;
-            });
-
-            console.log(`Slot ${timeSlot} is ${isSlotAvailable ? 'available' : 'unavailable'}`);
-            if (isSlotAvailable) {
-                slots.push(timeSlot);
             }
         }
-
-        console.log('Final available slots:', slots);
+        
+        console.log('Generated time slots:', slots);
         setAvailableTimeSlots(slots);
-        setBusyTimeSlots(busySlots);
     };
 
     const getServiceIcon = (type: string) => {
@@ -481,6 +553,98 @@ export default function NewServiceRequestForm() {
     const showTvInches = formData.serviceType === 'Tv install';
     const showNumberOfItems = ['Furniture/Murphy bed assembly', 'Wall Fixture Setup'].includes(formData.serviceType);
 
+    const getDaysInMonth = (date: Date) => {
+        const days: Date[] = [];
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        
+        // Get first day of the month
+        const firstDay = new Date(year, month, 1);
+        // Get last day of the month
+        const lastDay = new Date(year, month + 1, 0);
+
+        // Add empty slots for days before the first day of the month
+        const firstDayOfWeek = firstDay.getDay();
+        for (let i = 0; i < firstDayOfWeek; i++) {
+            const prevDate = new Date(year, month, -i);
+            days.unshift(prevDate);
+        }
+
+        // Add all days of the month
+        for (let d = 1; d <= lastDay.getDate(); d++) {
+            days.push(new Date(year, month, d));
+        }
+
+        // Add empty slots for days after the last day of the month
+        const lastDayOfWeek = lastDay.getDay();
+        for (let i = 1; i < 7 - lastDayOfWeek; i++) {
+            const nextDate = new Date(year, month + 1, i);
+            days.push(nextDate);
+        }
+
+        return days;
+    };
+
+    const isDateAvailable = (date: Date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const checkDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        checkDate.setHours(0, 0, 0, 0);
+        
+        // Don't allow past dates
+        if (checkDate < today) return false;
+        
+        // Only block Sundays (0)
+        if (checkDate.getDay() === 0) return false;
+        
+        return true;
+    };
+
+    const handleDateSelect = (date: Date) => {
+        // Format date in YYYY-MM-DD for the input value
+        const formattedDate = date.toISOString().split('T')[0];
+        
+        // Log selected date for debugging
+        console.log('Selected date:', {
+            rawDate: date.toString(),
+            formattedDate: formattedDate,
+            day: date.getDate(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear(),
+            weekday: date.toLocaleDateString('en-US', { weekday: 'long' })
+        });
+        
+        // Clear any previously selected time slot when date changes
+        setFormData(prev => ({
+            ...prev,
+            requestedDate: formattedDate,
+            timeSlot: '' // Reset time slot when date changes
+        }));
+    };
+
+    const handleTimeSelect = (time: string) => {
+        // Convert the time string to a full datetime for the selected date
+        const [timeStr, period] = time.split(' ');
+        const [hours, minutes] = timeStr.split(':');
+        let hour = parseInt(hours);
+        
+        // Convert to 24-hour format if needed
+        if (period === 'PM' && hour !== 12) hour += 12;
+        if (period === 'AM' && hour === 12) hour = 0;
+
+        const selectedDate = new Date(formData.requestedDate);
+        selectedDate.setHours(hour, parseInt(minutes), 0, 0);
+
+        handleChange({
+            target: {
+                name: 'timeSlot',
+                value: time,
+                type: 'time'
+            }
+        } as React.ChangeEvent<HTMLInputElement>);
+    };
+
     return (
         <div className={styles.formContainer}>
             <h2 className={styles.formTitle}>Request a Service</h2>
@@ -641,73 +805,141 @@ export default function NewServiceRequestForm() {
                 </div>
 
                 {formData.requestedDate && (
-                    <div className={styles.formGroup}>
-                        <label className={`${styles.label} ${styles.requiredField}`}>
-                            <FaClock className={styles.sectionIcon} /> Select Time Slot
-                        </label>
-                        {isLoadingTimeSlots ? (
-                            <div className={styles.loadingMessage}>Loading available time slots...</div>
-                        ) : (
-                            <>
-                                <div className={styles.timeSlotsGrid}>
-                                    {Array.from({ length: 5 }, (_, i) => {
-                                        const hour = 8 + (i * 2); // Start from 8 AM
-                                        const slotStart = `${hour.toString().padStart(2, '0')}:00`;
-                                        const slotEnd = `${(hour + 2).toString().padStart(2, '0')}:00`;
-                                        const timeSlot = `${slotStart} - ${slotEnd}`;
-                                        const isAvailable = availableTimeSlots.includes(timeSlot);
+                    <div className={styles.appointmentSelector}>
+                        <div className={styles.calendarSection}>
+                            <div className={styles.calendarHeader}>
+                                <button 
+                                    className={styles.monthNavigator}
+                                    onClick={() => setSelectedMonth(new Date(selectedMonth.setMonth(selectedMonth.getMonth() - 1)))}
+                                    type="button"
+                                >
+                                    <svg width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                                    </svg>
+                                </button>
+                                <h3 className={styles.monthDisplay}>
+                                    {selectedMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                                </h3>
+                                <button 
+                                    className={styles.monthNavigator}
+                                    onClick={() => setSelectedMonth(new Date(selectedMonth.setMonth(selectedMonth.getMonth() + 1)))}
+                                    type="button"
+                                >
+                                    <svg width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div className={styles.weekDays}>
+                                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                                    <span key={day} className={styles.weekDay}>{day}</span>
+                                ))}
+                            </div>
+
+                            <div className={styles.calendar}>
+                                {getDaysInMonth(selectedMonth).map((date, index) => (
+                                    <button
+                                        key={`${date.toISOString()}-${index}`}
+                                        type="button"
+                                        className={`
+                                            ${styles.calendarDay}
+                                            ${isDateAvailable(date) ? styles.available : styles.unavailable}
+                                            ${formData.requestedDate === date.toISOString().split('T')[0] ? styles.selected : ''}
+                                        `}
+                                        onClick={() => handleDateSelect(date)}
+                                        disabled={!isDateAvailable(date)}
+                                    >
+                                        <span className={styles.dayNumber}>{date.getDate()}</span>
+                                        {isDateAvailable(date) && <span className={styles.availabilityDot}></span>}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {formData.requestedDate && (
+                            <div className={styles.timeSection}>
+                                <h4 className={styles.timeHeader}>
+                                    Available Times
+                                    <span className={styles.selectedDate}>
+                                        {formData.requestedDate ? new Date(formData.requestedDate + 'T00:00:00').toLocaleDateString('en-US', { 
+                                            weekday: 'long',
+                                            month: 'long',
+                                            day: 'numeric'
+                                        }) : ''}
+                                    </span>
+                                </h4>
+                                
+                                {isLoadingTimeSlots ? (
+                                    <div className={styles.loadingMessage}>Loading available time slots...</div>
+                                ) : (
+                                    <>
+                                        {/* Display busy slots summary if there are any */}
+                                        {busyTimeSlots.length > 0 && (
+                                            <div className={styles.busySlotsInfo}>
+                                                <h4>Scheduled Events for this Day:</h4>
+                                                <ul>
+                                                    {busyTimeSlots.map((slot) => {
+                                                        try {
+                                                            // Create Date objects from the ISO strings
+                                                            const startDate = new Date(slot.startTime);
+                                                            const endDate = new Date(slot.endTime);
+                                                            
+                                                            // Extract hours and minutes from UTC time to match the mobile app
+                                                            const startHours = startDate.getUTCHours();
+                                                            const startMinutes = startDate.getUTCMinutes();
+                                                            const endHours = endDate.getUTCHours();
+                                                            const endMinutes = endDate.getUTCMinutes();
+                                                            
+                                                            // Format in 12-hour with AM/PM to match the app display
+                                                            const displayStartTime = `${startHours % 12 || 12}:${startMinutes.toString().padStart(2, '0')} ${startHours >= 12 ? 'PM' : 'AM'}`;
+                                                            const displayEndTime = `${endHours % 12 || 12}:${endMinutes.toString().padStart(2, '0')} ${endHours >= 12 ? 'PM' : 'AM'}`;
+                                                            
+                                                            console.log('Event time display:', {
+                                                                title: slot.title,
+                                                                rawStartTime: slot.startTime,
+                                                                rawEndTime: slot.endTime,
+                                                                appDisplayStart: displayStartTime, // Will match mobile app (UTC)
+                                                                appDisplayEnd: displayEndTime,     // Will match mobile app (UTC)
+                                                                browserTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                                                            });
+                                                            
+                                                            return (
+                                                                <li key={slot._id} className={styles.busySlotItem}>
+                                                                    <strong>{slot.title}</strong>: {displayStartTime} - {displayEndTime}
+                                                                </li>
+                                                            );
+                                                        } catch (error) {
+                                                            console.error('Error rendering busy slot:', error, slot);
+                                                            return (
+                                                                <li key={slot._id || 'error'} className={styles.busySlotItem}>
+                                                                    <strong>{slot.title || 'Unknown Event'}</strong>: Time format error
+                                                                </li>
+                                                            );
+                                                        }
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        )}
                                         
-                                        console.log(`Rendering slot ${timeSlot}:`, {
-                                            isAvailable,
-                                            availableTimeSlots
-                                        });
-                                        
-                                        return (
-                                            <button
-                                                key={timeSlot}
-                                                type="button"
-                                                className={`${styles.timeSlotButton} ${!isAvailable ? styles.timeSlotUnavailable : ''} ${formData.timeSlot === timeSlot ? styles.timeSlotSelected : ''}`}
-                                                onClick={() => isAvailable && handleChange({
-                                                    target: {
-                                                        name: 'timeSlot',
-                                                        value: timeSlot,
-                                                        type: 'select-one'
-                                                    }
-                                                } as React.ChangeEvent<HTMLSelectElement>)}
-                                                disabled={!isAvailable}
-                                            >
-                                                <div className={styles.timeSlotContent}>
-                                                    <span className={styles.timeSlotTime}>{timeSlot}</span>
-                                                    {!isAvailable && (
-                                                        <span className={styles.timeSlotStatus}>Unavailable</span>
-                                                    )}
-                                                </div>
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                                {errors.timeSlot && (
-                                    <div className={styles.errorMessage}>{errors.timeSlot}</div>
-                                )}
-                                {availableTimeSlots.length === 0 && !isLoadingTimeSlots && (
-                                    <div className={styles.warningMessage}>
-                                        No available time slots for this date. Please select a different date.
-                                    </div>
-                                )}
-                                {busyTimeSlots && busyTimeSlots.length > 0 && availableTimeSlots.length < 5 && (
-                                    <div className={styles.busySlotsInfo}>
-                                        <h4>Unavailable Time Slots:</h4>
-                                        <ul>
-                                            {busyTimeSlots.map((slot) => (
-                                                <li key={slot._id}>
-                                                    {new Date(slot.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - 
-                                                    {new Date(slot.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                </li>
+                                        <div className={styles.timeGrid}>
+                                            {availableTimeSlots.map((slot, index) => (
+                                                <button
+                                                    key={index}
+                                                    className={`${styles.timeButton} ${
+                                                        formData.timeSlot === slot.time ? styles.selected : ''
+                                                    } ${!slot.isAvailable ? styles.unavailable : ''}`}
+                                                    onClick={() => handleTimeSelect(slot.time)}
+                                                    disabled={!slot.isAvailable}
+                                                    title={slot.isAvailable ? 'Available' : slot.conflictReason ? `Not available: ${slot.conflictReason}` : 'This time slot is not available'}
+                                                >
+                                                    {slot.time}
+                                                </button>
                                             ))}
-                                        </ul>
-                                    </div>
+                                        </div>
+                                    </>
                                 )}
-                            </>
+                            </div>
                         )}
                     </div>
                 )}
@@ -812,6 +1044,77 @@ export default function NewServiceRequestForm() {
                 {submitSuccess && (
                     <div className={styles.successMessage}>
                         Your service request has been submitted successfully!
+                    </div>
+                )}
+
+                {/* Add debug panel toggle (only visible in development) */}
+                {process.env.NODE_ENV === 'development' && (
+                    <div className={styles.debugSection}>
+                        <button
+                            type="button"
+                            className={styles.debugToggle}
+                            onClick={() => setShowDebugPanel(!showDebugPanel)}
+                        >
+                            {showDebugPanel ? 'Hide Debug Info' : 'Show Debug Info'}
+                        </button>
+                        
+                        {showDebugPanel && (
+                            <div className={styles.debugPanel}>
+                                <h4>Debug Information</h4>
+                                <div className={styles.debugRow}>
+                                    <strong>Browser Timezone:</strong> {Intl.DateTimeFormat().resolvedOptions().timeZone}
+                                </div>
+                                <div className={styles.debugRow}>
+                                    <strong>Timezone Offset:</strong> {new Date().getTimezoneOffset()} minutes
+                                </div>
+                                <div className={styles.debugRow}>
+                                    <strong>Selected Date:</strong> {formData.requestedDate}
+                                </div>
+                                {formData.requestedDate && (
+                                    <>
+                                        <div className={styles.debugRow}>
+                                            <strong>Date Object:</strong> {new Date(formData.requestedDate).toString()}
+                                        </div>
+                                        <div className={styles.debugRow}>
+                                            <strong>Date-fns Parsed:</strong> {parseISO(`${formData.requestedDate}T00:00:00.000Z`).toString()}
+                                        </div>
+                                    </>
+                                )}
+                                <h5>Busy Slots:</h5>
+                                {busyTimeSlots.length > 0 ? (
+                                    <div className={styles.debugTable}>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Raw Start</th>
+                                                    <th>Raw End</th>
+                                                    <th>Parsed Start</th>
+                                                    <th>Parsed End</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {busyTimeSlots.map(slot => {
+                                                    const startDate = parseISO(slot.startTime);
+                                                    const endDate = parseISO(slot.endTime);
+                                                    return (
+                                                        <tr key={slot._id}>
+                                                            <td>{slot.title}</td>
+                                                            <td>{slot.startTime}</td>
+                                                            <td>{slot.endTime}</td>
+                                                            <td>{isValid(startDate) ? startDate.toString() : 'Invalid'}</td>
+                                                            <td>{isValid(endDate) ? endDate.toString() : 'Invalid'}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : (
+                                    <div>No busy slots for this date</div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
             </form>

@@ -5,7 +5,12 @@ export const getBusyTimeSlots: RequestHandler = async (req, res) => {
     try {
         const { startTime, endTime } = req.query;
         
-        console.log('Received query params:', { startTime, endTime });
+        console.log('Received query params for busy time slots:', { 
+            startTime, 
+            endTime,
+            rawStartTime: startTime ? new Date(startTime as string).toString() : 'invalid',
+            rawEndTime: endTime ? new Date(endTime as string).toString() : 'invalid'
+        });
         
         if (!startTime || !endTime) {
             console.log('Missing required parameters');
@@ -13,36 +18,84 @@ export const getBusyTimeSlots: RequestHandler = async (req, res) => {
             return;
         }
 
+        // Create dates from the query params - normalize by creating new UTC dates
         const queryStartTime = new Date(startTime as string);
-        queryStartTime.setHours(0, 0, 0, 0);  // Start of day
         const queryEndTime = new Date(endTime as string);
-        queryEndTime.setHours(23, 59, 59, 999);  // End of day
         
-        console.log('Parsed query dates:', {
+        console.log('Parsed query times:', {
             queryStartTime: queryStartTime.toISOString(),
-            queryEndTime: queryEndTime.toISOString()
+            queryEndTime: queryEndTime.toISOString(),
+            localStartTime: queryStartTime.toString(),
+            localEndTime: queryEndTime.toString()
         });
 
-        // First get all slots to see what's in the database
-        const allSlots = await BusyTimeSlotModel.find({}).sort({ startTime: 1 });
-        console.log('All slots in database:', JSON.stringify(allSlots, null, 2));
+        // Get all busy slots for debugging
+        const allBusySlots = await BusyTimeSlotModel.find({})
+            .select('startTime endTime title')
+            .sort({ startTime: 1 });
+            
+        console.log('All busy slots in database:', allBusySlots.length);
+        allBusySlots.forEach(slot => {
+            console.log('DB Slot:', {
+                id: slot._id,
+                title: slot.title,
+                start: new Date(slot.startTime).toISOString(),
+                startFormatted: new Date(slot.startTime).toLocaleString(),
+                end: new Date(slot.endTime).toISOString(),
+                endFormatted: new Date(slot.endTime).toLocaleString()
+            });
+        });
 
-        // Then get the filtered slots with limited fields
+        // Find busy slots that overlap with the requested time range
+        // Use a more robust query that's more tolerant of different date formats
         const busySlots = await BusyTimeSlotModel.find({
             $or: [
-                { startTime: { $lte: queryEndTime } },
-                { endTime: { $gte: queryStartTime } }
+                // Slot starts during the requested range
+                {
+                    startTime: {
+                        $gte: queryStartTime,
+                        $lt: queryEndTime
+                    }
+                },
+                // Slot ends during the requested range
+                {
+                    endTime: {
+                        $gt: queryStartTime,
+                        $lte: queryEndTime
+                    }
+                },
+                // Slot spans the entire requested range
+                {
+                    startTime: { $lt: queryStartTime },
+                    endTime: { $gt: queryEndTime }
+                }
             ]
         })
-        .select('startTime endTime') // Only select necessary fields
+        .select('startTime endTime title description')
         .sort({ startTime: 1 });
 
-        // Log only the time ranges without personal info
-        console.log('Found busy slots:', busySlots.map(slot => ({
-            timeRange: `${new Date(slot.startTime).toLocaleTimeString()} - ${new Date(slot.endTime).toLocaleTimeString()}`
-        })));
+        console.log('Found overlapping busy slots:', busySlots.length);
+        busySlots.forEach(slot => {
+            console.log('Matching slot:', {
+                id: slot._id,
+                title: slot.title,
+                start: new Date(slot.startTime).toISOString(),
+                startFormatted: new Date(slot.startTime).toLocaleString(),
+                end: new Date(slot.endTime).toISOString(),
+                endFormatted: new Date(slot.endTime).toLocaleString()
+            });
+        });
         
-        res.status(200).json(busySlots);
+        // Format the busy slots to ensure consistent date format
+        const formattedBusySlots = busySlots.map(slot => ({
+            _id: slot._id,
+            title: slot.title,
+            description: slot.description,
+            startTime: new Date(slot.startTime).toISOString(),
+            endTime: new Date(slot.endTime).toISOString()
+        }));
+        
+        res.status(200).json(formattedBusySlots);
     } catch (error: unknown) {
         console.error('Error fetching busy time slots:', error);
         res.status(500).json({ message: 'Error fetching busy time slots' });
@@ -53,6 +106,13 @@ export const createBusyTimeSlot: RequestHandler = async (req, res) => {
     try {
         const { startTime, endTime, title, description } = req.body;
         
+        console.log('Creating busy time slot with input:', {
+            startTime,
+            endTime,
+            title,
+            description
+        });
+        
         // Validate required fields
         if (!startTime || !endTime || !title) {
             res.status(400).json({ 
@@ -61,15 +121,46 @@ export const createBusyTimeSlot: RequestHandler = async (req, res) => {
             return;
         }
         
+        // Parse dates explicitly and normalize to ISO
+        const parsedStartTime = new Date(startTime);
+        const parsedEndTime = new Date(endTime);
+        
+        console.log('Parsed dates:', {
+            parsedStartTime: parsedStartTime.toISOString(),
+            parsedEndTime: parsedEndTime.toISOString(),
+            localStartTime: parsedStartTime.toString(),
+            localEndTime: parsedEndTime.toString()
+        });
+        
         // Create new slot with parsed dates
         const newSlot = await BusyTimeSlotModel.create({
-            startTime: new Date(startTime),
-            endTime: new Date(endTime),
+            startTime: parsedStartTime,
+            endTime: parsedEndTime,
             title,
             description: description || ''
         });
         
-        res.status(201).json(newSlot);
+        console.log('Created busy time slot:', {
+            id: newSlot._id,
+            startTime: new Date(newSlot.startTime).toISOString(), 
+            startTimeFormatted: new Date(newSlot.startTime).toLocaleString(),
+            endTime: new Date(newSlot.endTime).toISOString(),
+            endTimeFormatted: new Date(newSlot.endTime).toLocaleString(),
+            title: newSlot.title
+        });
+        
+        // Return normalized ISO format dates
+        const formattedSlot = {
+            _id: newSlot._id,
+            title: newSlot.title,
+            description: newSlot.description,
+            startTime: new Date(newSlot.startTime).toISOString(),
+            endTime: new Date(newSlot.endTime).toISOString(),
+            createdAt: newSlot.createdAt,
+            updatedAt: newSlot.updatedAt
+        };
+        
+        res.status(201).json(formattedSlot);
     } catch (error: unknown) {
         console.error('Error creating busy time slot:', error);
         res.status(500).json({ message: 'Error creating busy time slot' });
