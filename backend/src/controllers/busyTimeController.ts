@@ -18,15 +18,15 @@ export const getBusyTimeSlots: RequestHandler = async (req, res) => {
             return;
         }
 
-        // Create dates from the query params - normalize by creating new UTC dates
+        // Create dates from the query params - these are already in UTC from frontend
         const queryStartTime = new Date(startTime as string);
         const queryEndTime = new Date(endTime as string);
         
-        console.log('Parsed query times:', {
+        console.log('Query times in UTC:', {
             queryStartTime: queryStartTime.toISOString(),
             queryEndTime: queryEndTime.toISOString(),
-            localStartTime: queryStartTime.toString(),
-            localEndTime: queryEndTime.toString()
+            queryStartTimeLocal: queryStartTime.toLocaleString('en-US', { timeZone: 'America/Denver' }),
+            queryEndTimeLocal: queryEndTime.toLocaleString('en-US', { timeZone: 'America/Denver' })
         });
 
         // Get all busy slots for debugging
@@ -47,7 +47,6 @@ export const getBusyTimeSlots: RequestHandler = async (req, res) => {
         });
 
         // Find busy slots that overlap with the requested time range
-        // Use a more robust query that's more tolerant of different date formats
         const busySlots = await BusyTimeSlotModel.find({
             $or: [
                 // Slot starts during the requested range
@@ -79,10 +78,10 @@ export const getBusyTimeSlots: RequestHandler = async (req, res) => {
             console.log('Matching slot:', {
                 id: slot._id,
                 title: slot.title,
-                start: new Date(slot.startTime).toISOString(),
-                startFormatted: new Date(slot.startTime).toLocaleString(),
-                end: new Date(slot.endTime).toISOString(),
-                endFormatted: new Date(slot.endTime).toLocaleString()
+                startUTC: new Date(slot.startTime).toISOString(),
+                startDenver: new Date(slot.startTime).toLocaleString('en-US', { timeZone: 'America/Denver' }),
+                endUTC: new Date(slot.endTime).toISOString(),
+                endDenver: new Date(slot.endTime).toLocaleString('en-US', { timeZone: 'America/Denver' })
             });
         });
         

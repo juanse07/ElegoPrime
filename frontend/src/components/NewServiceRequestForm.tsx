@@ -121,17 +121,32 @@ export default function NewServiceRequestForm() {
             setNetworkError(null);
             const selectedDate = parseISO(`${formData.requestedDate}T00:00:00.000`);
             
-            // Convert local time to UTC for API request
-            const startTime = new Date(selectedDate);
-            startTime.setUTCHours(0, 0, 0, 0);
+            // Convert the date to UTC for the API request while preserving the same calendar date
+            const startTime = new Date(Date.UTC(
+                selectedDate.getFullYear(),
+                selectedDate.getMonth(),
+                selectedDate.getDate(),
+                0, 0, 0, 0
+            ));
 
-            const endTime = new Date(selectedDate);
-            endTime.setUTCHours(23, 59, 59, 999);
+            const endTime = new Date(Date.UTC(
+                selectedDate.getFullYear(),
+                selectedDate.getMonth(),
+                selectedDate.getDate(),
+                23, 59, 59, 999
+            ));
 
             const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
             if (!backendUrl) {
                 throw new Error('Backend URL is not configured');
             }
+
+            console.log('Sending API request with times:', {
+                startTime: startTime.toISOString(),
+                endTime: endTime.toISOString(),
+                localStartTime: startTime.toLocaleString(),
+                localEndTime: endTime.toLocaleString()
+            });
 
             const url = `${backendUrl}/busy-time-slots`;
             
@@ -147,7 +162,7 @@ export default function NewServiceRequestForm() {
                 }
             });
             
-            // Convert UTC times from API to local timezone
+            // Convert UTC times from API to Denver timezone
             const processedBusySlots = response.data.map((slot: BusyTimeSlot) => {
                 const localStartTime = toZonedTime(new Date(slot.startTime), TIMEZONE);
                 const localEndTime = toZonedTime(new Date(slot.endTime), TIMEZONE);
@@ -160,6 +175,8 @@ export default function NewServiceRequestForm() {
                     _endHour: localEndTime.getHours()
                 };
             });
+
+            console.log('Processed busy slots:', processedBusySlots);
             
             setBusyTimeSlots(processedBusySlots);
             generateAvailableTimeSlots(processedBusySlots);
@@ -203,26 +220,33 @@ export default function NewServiceRequestForm() {
         // Generate all possible 30-minute time slots
         for (let hour = startHour; hour < endHour; hour++) {
             for (const minute of [0, 30]) {
-                // Create time slot in local time
-                const slotDate = new Date(selectedDate);
+                // Create time slot in Denver time
+                const slotDate = toZonedTime(new Date(selectedDate), TIMEZONE);
                 slotDate.setHours(hour, minute, 0, 0);
                 
                 // Format for display
                 const timeString = format(slotDate, 'h:mm a', { timeZone: TIMEZONE });
-                
-                // Convert all times to minutes since midnight for easier comparison
-                const slotStartMinutes = hour * 60 + minute;
-                const slotEndMinutes = slotStartMinutes + 30;
                 
                 // Check if this slot is busy
                 let isSlotBusy = false;
                 let conflictReason = '';
                 
                 for (const busySlot of busySlots) {
+                    // Convert busy slot times to Denver time for comparison
                     const busyStart = toZonedTime(new Date(busySlot.startTime), TIMEZONE);
                     const busyEnd = toZonedTime(new Date(busySlot.endTime), TIMEZONE);
                     
-                    // Convert all times to minutes since midnight for easier comparison
+                    // Debug logging
+                    console.log(`Checking slot ${timeString} against busy slot "${busySlot.title}":`, {
+                        slotTime: timeString,
+                        slotDate: slotDate.toLocaleString('en-US', { timeZone: TIMEZONE }),
+                        busyStartTime: busyStart.toLocaleString('en-US', { timeZone: TIMEZONE }),
+                        busyEndTime: busyEnd.toLocaleString('en-US', { timeZone: TIMEZONE })
+                    });
+
+                    // Convert all times to minutes since midnight for comparison
+                    const slotStartMinutes = hour * 60 + minute;
+                    const slotEndMinutes = slotStartMinutes + 30;
                     const busyStartMinutes = busyStart.getHours() * 60 + busyStart.getMinutes();
                     const busyEndMinutes = busyEnd.getHours() * 60 + busyEnd.getMinutes();
                     
@@ -234,6 +258,7 @@ export default function NewServiceRequestForm() {
                     ) {
                         isSlotBusy = true;
                         conflictReason = busySlot.title;
+                        console.log(`❌ Slot ${timeString} overlaps with ${busySlot.title} at ${format(busyStart, 'h:mm a', { timeZone: TIMEZONE })} - ${format(busyEnd, 'h:mm a', { timeZone: TIMEZONE })}`);
                         break;
                     }
                 }
