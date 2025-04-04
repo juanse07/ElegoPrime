@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styles from "../styles/video.module.css";
+import Link from 'next/link';
 
 interface ReserveVideoProps {
   className?: string;
@@ -32,9 +33,9 @@ const ReserveVideo: React.FC<ReserveVideoProps> = ({ className }) => {
             Our seamless process ensures a smooth experience from start to finish.
           </p>
           <p>Need assistance? Our team is always ready to help!</p>
-          <button className={styles.bookNowButton}>
-            Book Now <span className={styles.arrow}>→</span>
-          </button>
+          <Link href="/booking" className={styles.bookNowButton}>
+  Book Now <span className={styles.arrow}>→</span>
+</Link>
         </div>
 
         <div className={styles.phoneContainer}>

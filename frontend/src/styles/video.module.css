@@ -25,7 +25,7 @@
 
 .textContainer {
     color: #fff;
-    margin: 3rem 2rem 0 7rem;
+    margin: 5rem 2rem 0 7rem;
     font-size: 1.1rem;
 }
 
@@ -101,6 +101,7 @@
     background: #45c3d4;
     color: white;
     border: none;
+    width: 150px;
     padding: 10px 24px;
     border-radius: 25px;
     font-size: 1rem;

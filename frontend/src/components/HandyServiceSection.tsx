@@ -56,7 +56,7 @@ const HandyServiceSection: React.FC = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2 className={styles.servicesTitle}>Professional Services</h2>
-          <Link href="/services" className={styles.seeAllLink}>
+          <Link href="/reserve" className={styles.seeAllLink}>
             See All Services &gt;
           </Link>
         </div>
@@ -87,25 +87,24 @@ const HandyServiceSection: React.FC = () => {
                     />
                   </div>
                   <div className={styles.content}>
-                    <div className={styles.labelcontainer}>
-                      <div className={styles.label}>{service.subservices[0].label}</div>
-                        <div 
-                          className={styles.calendarIcon}
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent triggering the parent Link's navigation
-                            window.location.href = '/reserve';
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faCalendarDays} />
-                        </div>
-                    </div>
+                    <div className={styles.label}>{service.subservices[0].label}</div>
 
-                  <div className={styles.titleContainer}>
-                  <h3 className={styles.title}>{service.label}</h3>
-                </div>
-                    <p className={styles.description}>
-                      {service.subservices[0].description}
-                    </p>
+                    <div className={styles.titleRow}>
+  <h3 className={styles.title}>{service.label}</h3>
+  <div 
+    className={styles.calendarIcon}
+    onClick={(e) => {
+      e.stopPropagation(); // Previene que se active el enlace padre
+      window.location.href = '/booking';
+    }}
+  >
+    <FontAwesomeIcon icon={faCalendarDays} />
+  </div>
+</div>
+
+<p className={styles.description}>
+  {service.subservices[0].description}
+</p>
                   </div>
                 </Card>
               </Link>

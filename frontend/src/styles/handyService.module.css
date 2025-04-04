@@ -70,11 +70,24 @@
   font-weight: 500;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: nowrap;
+}
+
 .title {
   color: white;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
   font-weight: 600;
+  margin: 0;
+  flex: 1; /* Toma el espacio disponible */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
@@ -85,16 +98,17 @@
 }
 
 .calendarIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   color: white;
   box-shadow: 0px 0px 5px 1px #45c3d4;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  flex-shrink: 0; /* No se reduce */
 }
 
 .calendarIcon:hover {
@@ -188,7 +202,7 @@
   
   .label {
     font-size: 0.7rem;
-    color: #ff8730;
+    color: #45c3d4;
   }
   
   .title {
@@ -201,5 +215,19 @@
     font-size: 0.7rem;
     line-height: 1.3;
     color: #d0d0d0;
+  }
+
+  .titleRow {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .calendarIcon {
+    width: 28px;
+    height: 28px;
   }
 } 
