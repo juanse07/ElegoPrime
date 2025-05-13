@@ -114,12 +114,12 @@ export default function Home({
       label: ""
     },
     {
-      body: "7201234567",
+      body: "(786) 490-3003 / (303) 596-2833",
       iconType: "phone" as const,
       label: "phone"
     },
     {
-      body: "7201234567",
+      body: "(786) 490-3003 / (303) 596-2833",
       iconType: "messageCircle" as const,
       label: "text"
     }

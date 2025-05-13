@@ -95,12 +95,12 @@ export const getStaticProps = async () => {
         },
         {
           label: "Text Us",
-          body: "786 123456789",
+          body: "(786) 490-3003 / (303) 596-2833",
           iconType: "messageCircle"
         },
         {
           label: "Call Us",
-          body: "786 123456789",
+          body: "(786) 490-3003 / (303) 596-2833",
           iconType: "phone"
         }
       ]
