@@ -108,6 +108,10 @@
     padding: 0 1rem;
     margin-bottom: 2rem;
     border-right: 0;
+    position: relative;
+    top: 0px;
+    align-self: flex-start;
+    height: fit-content;
   }
 
   .categoriesRight {

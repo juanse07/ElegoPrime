@@ -28,9 +28,9 @@ const HandyServiceSection: React.FC = () => {
       ]
     },
     {
-      label: 'SoundBars',
+      label: 'Residential',
       subservices: [
-        { label: 'Soundbars installation', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbarhome.webp' },
+        { label: 'Residential cleaning', description: 'A full home cleaning service covering every room for a spotless, refreshed living space.', image: '/residentialindex.webp' },
       ]
     },
     {
@@ -56,7 +56,7 @@ const HandyServiceSection: React.FC = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2 className={styles.servicesTitle}>Professional Services</h2>
-          <Link href="/reserve" className={styles.seeAllLink}>
+          <Link href="/category" className={styles.seeAllLink}>
             See All Services &gt;
           </Link>
         </div>
