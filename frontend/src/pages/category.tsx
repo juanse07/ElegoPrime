@@ -43,7 +43,12 @@ const Category: React.FC = () => {
         { label: 'Maintenance', description: 'Regular maintenance to ensure proper functioning and longevity of fixtures.', image: '/faucet.webp', link: '/booking' },
         { label: 'Toilet installation', description: 'Installing new toilets, including standard, eco-friendly, or smart toilets.', image: '/toilet.webp', link: '/booking' },
         { label: 'Interior ', description: 'Painting of walls, ceilings, and trim inside homes and commercial spaces.', image: '/interiorPainting.webp', link: '/booking' },
-        { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/booking' }
+        { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/booking' },
+        { label: 'House', description: 'Complete home cleaning package included.', image: '/house.webp', link: '/booking' },
+        { label: 'Bedroom', description: 'Dust-free, fresh-smelling bedrooms thanks to our meticulous cleaning service.', image: '/bedroomcleaning.webp', link: '/booking' },
+        { label: 'Living room', description: 'Refresh your living space with expert dusting, vacuuming, and surface cleaning.', image: '/livingcleaning.webp', link: '/booking' },
+        { label: 'Bathroom', description: 'Enjoy a spotless bathroom with our detailed cleaning service focused on hygiene and shine.', image: '/bathcleaning.webp', link: '/booking' },
+        { label: 'Kitchen', description: 'Thorough kitchen care to remove grease, stains, and odors for a refreshed space.', image: '/kitchencleaning.webp', link: '/booking' }
       ]
     },
     {
@@ -71,7 +76,7 @@ const Category: React.FC = () => {
       ]
     },
     {
-        label: 'Fans and Lighting',
+        label: 'Ceiling fans and light fixtures',
         subservices: [
           { label: 'Fans installation', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fansinstall.webp', link: '/booking' },
           { label: 'Lamps and lights installation', description: 'Expert installation of lamps and light fixtures, enhancing the ambiance and lighting in your space.', image: '/lightingInstallation.webp', link: '/booking' }
@@ -106,12 +111,23 @@ const Category: React.FC = () => {
           { label: 'Exterior ', description: 'Painting of exterior surfaces such as walls, doors, windows, and fences.', image: '/exteriorPainting.webp', link: '/booking' }
         ]
       },
+      {
+        label: 'Residential',
+        subservices: [
+          { label: 'House', description: 'Complete home cleaning package included.', image: '/house.webp', link: '/booking' },
+          { label: 'Bedroom', description: 'Dust-free, fresh-smelling bedrooms thanks to our meticulous cleaning service.', image: '/bedroomcleaning.webp', link: '/booking' },
+          { label: 'Living room', description: 'Refresh your living space with expert dusting, vacuuming, and surface cleaning.', image: '/livingcleaning.webp', link: '/booking' },
+          { label: 'Bathroom', description: 'Enjoy a spotless bathroom with our detailed cleaning service focused on hygiene and shine.', image: '/bathcleaning.webp', link: '/booking' },
+          { label: 'Kitchen', description: 'Thorough kitchen care to remove grease, stains, and odors for a refreshed space.', image: '/kitchencleaning.webp', link: '/booking' }
+        ]
+      },
   ];
 
   const handleCategoryClick = (label: string) => {
     router.push(`/services#${label}`, undefined, { shallow: true }); // Actualiza la URL sin recargar la página
     setSelectedCategory(label);
   };
+  
 
   const selectedCategoryContent = categories.find(category => category.label === selectedCategory);
 
@@ -131,11 +147,12 @@ const Category: React.FC = () => {
         {selectedCategoryContent && (
           <CategoryContent subservices={selectedCategoryContent.subservices} />
         )}
+        
       </div>
 
     </div>
+    
   );
-
 };
 
 export default Category;

@@ -316,6 +316,7 @@ export default function Home({
       ))} */}
       
       <ContactSection contactButtons={contactButtons} onEstimateClick={() => setShowServiceModal(true)} />
+
       <LastSection />
 
       <ServiceRequestModal 
@@ -324,6 +325,7 @@ export default function Home({
       />
 
     </div>
+    
   );
 }
 
@@ -351,7 +353,9 @@ export const getStaticProps = async () => {
         src: '/carousel4.webp',
         heading: 'Special Events',
       }
+      
     ];
+
   
 
     // const services: Service[] = [
@@ -443,6 +447,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         // services,
+        
         heroContent:desktopContent,
         
       },
@@ -452,10 +457,12 @@ export const getStaticProps = async () => {
     console.error('Error in getStaticProps:', error);
     return {
       props: {
+        
         services: [],
         heroContent: [],
       },
       revalidate: 86400,
     };
   }
+  
 };

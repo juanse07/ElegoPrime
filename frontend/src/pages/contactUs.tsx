@@ -4,6 +4,8 @@ import LastSection from '@/components/LastSection';
 import ServiceRequestModal from '@/components/ServiceRequestModal';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import type { NextPage } from 'next';
+
+
 import { useState } from 'react';
 
 
@@ -37,6 +39,7 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
   // const lastSectionRef = useScrollAnimation();
 
   return (
+    
     <div className={styles.pageContainer}>
       <div ref={heroRef} className={`fade-in-section`}>
         <HeroSection 
@@ -56,6 +59,7 @@ const Desktop: NextPage<ContactPageProps> = ({ heroContent, contactInfo }) => {
         onHide={() => setShowServiceModal(false)}
       />
     </div>
+    
   );
 };
 
@@ -130,6 +134,7 @@ export const getStaticProps = async () => {
       revalidate: 86400,
     };
   }
+  
 };
 
 export default Desktop;

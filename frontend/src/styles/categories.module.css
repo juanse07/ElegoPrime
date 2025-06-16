@@ -13,6 +13,10 @@
   max-width: 300px;
   padding: 1rem;
   border-right: 2px solid #e1e1e1;
+  position: sticky;
+  top: 190px;
+  align-self: flex-start;
+  height: fit-content;
 }
 
 .categoryItem {

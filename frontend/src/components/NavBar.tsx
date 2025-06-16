@@ -112,7 +112,7 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                                 <Link href="/services#TV" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>TV</span>
                                 </Link>
-                                <Link href="/services#Fans and Lighting" onClick={handleServiceClick}>
+                                <Link href="/services#Ceiling fans and light fixtures" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Ceiling fans and light fixtures</span>
                                 </Link>
                                 <Link href="/services#Assembling" onClick={handleServiceClick}>
@@ -121,11 +121,14 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                                 <Link href="/services#Wall Fixture Setup" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Wall Fixture Setup</span>
                                 </Link>
-                                <Link href="/services#Faucet and Toilet" onClick={handleServiceClick}>
+                                <Link href="/services#Faucet and toilet" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Faucet and Toilet</span>
                                 </Link>
                                 <Link href="/services#Painting" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Painting</span>
+                                </Link>
+                                <Link href="/services#Residential" onClick={handleServiceClick}>
+                                    <span className={styles.NavStyle}>Residential</span>
                                 </Link>
                             </div>
                         </div>
