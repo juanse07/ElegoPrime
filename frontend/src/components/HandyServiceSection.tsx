@@ -24,25 +24,25 @@ const HandyServiceSection: React.FC = () => {
     {
       label: 'Security',
       subservices: [
-        { label: 'Camera install', description: 'Security camera installation and maintenance.', image:'/camerahome.webp'},
+        { label: 'Camera installation', description: 'Security camera installation and maintenance.', image:'/camerahome.webp'},
       ]
     },
     {
       label: 'SoundBars',
       subservices: [
-        { label: 'Soundbars install', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbarhome.webp' },
+        { label: 'Soundbars installation', description: 'Immersive sound in your home with professional soundbar installation', image: '/soundbarhome.webp' },
       ]
     },
     {
       label: 'TV',
       subservices: [
-        { label: 'Tv install', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tvinstallhome.webp' },
+        { label: 'Tv installation', description: 'Professional TV mounting and installation for a sleek, secure setup in any room.', image: '/tvinstallhome.webp' },
       ]
     },
     {
-      label: 'Fans and Lighting',
+      label: 'Ceiling fans and light fixtures',
       subservices: [
-        { label: 'Fans install', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fanshome.webp' },
+        { label: 'Fans installation', description: 'Professional installation of ceiling or stand fans to ensure proper air circulation and comfort.', image: '/fanshome.webp' },
       ]
     }
   ];

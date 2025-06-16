@@ -113,7 +113,7 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                                     <span className={styles.NavStyle}>TV</span>
                                 </Link>
                                 <Link href="/services#Fans and Lighting" onClick={handleServiceClick}>
-                                    <span className={styles.NavStyle}>Fans and Lighting</span>
+                                    <span className={styles.NavStyle}>Ceiling fans and light fixtures</span>
                                 </Link>
                                 <Link href="/services#Assembling" onClick={handleServiceClick}>
                                     <span className={styles.NavStyle}>Assembling</span>
@@ -133,7 +133,7 @@ export default function NavBar({ onEstimateClick }: NavBarProps) {
                             className={styles.NavStyle}
                             as={Link}
                             href='/booking' 
-                            active={router.pathname === "/reserve"}>
+                            active={router.pathname === "/booking"}>
                             Book Now
                         </Nav.Link>
                         <Nav.Link 

@@ -90,17 +90,17 @@ export const getStaticProps = async () => {
         },
         {
           label: "Email",
-          body: "booking@elegoprime.com",
+          body: "elegoprime@gmail.com",
           iconType: "mail"
         },
         {
           label: "Text Us",
-          body: "(786) 490-3003 / (303) 596-2833",
+          body: "(786) 490-3942 / (303) 596-2833",
           iconType: "messageCircle"
         },
         {
           label: "Call Us",
-          body: "(786) 490-3003 / (303) 596-2833",
+          body: "(786) 490-3942 / (303) 596-2833",
           iconType: "phone"
         }
       ]

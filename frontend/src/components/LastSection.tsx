@@ -47,9 +47,9 @@ const LastSection = () => {
             </div>
             <div className={`${styles.footerright} text-muted`}>
               <h6 className="mb-2">SOCIAL</h6>
-              <p className="mb-2">Email: booking@elegoprime.com</p>
-              <p className="mb-2">Phone: (786) 490-3003 / (303) 596-2833</p>
-              <p className="mb-2">Text: (786) 490-3003 / (303) 596-2833</p>
+              <p className="mb-2">Email: elegoprime@gmail.com</p>
+              <p className="mb-2">Phone: (786) 490-3942 / (303) 596-2833</p>
+              <p className="mb-2">Text: (786) 490-3942 / (303) 596-2833</p>
             </div>
           </div>
         </div>

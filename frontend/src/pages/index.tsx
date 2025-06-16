@@ -109,17 +109,17 @@ export default function Home({
       label: ""
     },
     {
-      body: "booking@elegoprime.com",
+      body: "elegoprime@gmail.com",
       iconType: "mail" as const,
       label: ""
     },
     {
-      body: "(786) 490-3003 / (303) 596-2833",
+      body: "(786) 490-3942 / (303) 596-2833",
       iconType: "phone" as const,
       label: "phone"
     },
     {
-      body: "(786) 490-3003 / (303) 596-2833",
+      body: "(786) 490-3942 / (303) 596-2833",
       iconType: "messageCircle" as const,
       label: "text"
     }

@@ -41,7 +41,7 @@ const Terms: NextPage = () => {
           We reserve the right to modify these Terms and Conditions at any time. Any changes will be posted on our website.
           <br />
           9. Contact  
-          If you have any questions about these terms, you can contact us via booking@elegoprime.com or (720) 123-4567.
+          If you have any questions about these terms, you can contact us via elegoprime@gmail.com.com or (786) 490-3942 / (303) 596-2833.
 
           Effective Date: [Date]
         </p>
