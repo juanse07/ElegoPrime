@@ -60,7 +60,7 @@ const Services: React.FC = () => {
       <section ref={reviewSectionRef} className={`${styles.reviewSection} ${`fade-in-section`}`}>
         <div className={styles.reviewTitle}>
           <h2>Customer Testimonials</h2>
-          <p>Opiniones de nuestros clientes</p>
+          <p>Customer reviews</p>
         </div>
 
         <div className={styles.carouselContainer}>

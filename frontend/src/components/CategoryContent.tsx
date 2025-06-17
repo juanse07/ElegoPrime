@@ -12,6 +12,7 @@ interface Subservice {
   description: string;
   image: string;
   link?: string;
+  readMore?: boolean;
 }
 
 interface CategoryContentProps {
@@ -34,12 +35,21 @@ const CategoryContent: React.FC<CategoryContentProps> = ({ subservices }) => {
           )}
           <div className= {styles.categoryContainer}>
             <h4 className={styles.subserviceLabel}>{subservice.label}</h4>
-              {subservice.link && (
+             {subservice.link && (
+                <div className={styles.linkWrapper}>
                   <Link href={subservice.link} className={styles.subserviceLink}>
-                    <FontAwesomeIcon icon={faCalendarDays}/>
+                    <FontAwesomeIcon icon={faCalendarDays} />
                   </Link>
-                )}
+                </div>
+            )}
               <div className={styles.categoryDescription}>{subservice.description}</div>
+              {subservice.readMore && (
+                <div className={styles.readMore}>
+                  <Link href="/residential">
+                    Read more
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
       ))}

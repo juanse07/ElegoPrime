@@ -114,7 +114,7 @@ const Category: React.FC = () => {
       {
         label: 'Residential',
         subservices: [
-          { label: 'House', description: 'Complete home cleaning package included.', image: '/house.webp', link: '/booking' },
+          { label: 'House', description: 'Complete home cleaning package included.', image: '/house.webp', link: '/booking', readMore: true }, 
           { label: 'Bedroom', description: 'Dust-free, fresh-smelling bedrooms thanks to our meticulous cleaning service.', image: '/bedroomcleaning.webp', link: '/booking' },
           { label: 'Living room', description: 'Refresh your living space with expert dusting, vacuuming, and surface cleaning.', image: '/livingcleaning.webp', link: '/booking' },
           { label: 'Bathroom', description: 'Enjoy a spotless bathroom with our detailed cleaning service focused on hygiene and shine.', image: '/bathcleaning.webp', link: '/booking' },
@@ -144,11 +144,13 @@ const Category: React.FC = () => {
       </div>
 
       <div className={styles.categoriesRight}>
-        {selectedCategoryContent && (
-          <CategoryContent subservices={selectedCategoryContent.subservices} />
-        )}
         
-      </div>
+  {selectedCategoryContent && (
+    <>
+      <CategoryContent subservices={selectedCategoryContent.subservices} />
+    </>
+  )}
+</div>
 
     </div>
     

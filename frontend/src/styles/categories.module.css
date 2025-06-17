@@ -56,7 +56,8 @@
 
 .categoryContainer {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 80% 20%;
+  color: #2e3c49;
 }
 
 .subserviceLabel {
@@ -78,6 +79,12 @@
   border-radius: 8px;
 }
 
+.linkWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: start;
+}
+
 .subserviceLink {
   display: inline-flex;
   align-items: center;
@@ -95,6 +102,21 @@
 .subserviceLink:hover {
   background-color: #ff8730;
   transform: scale(1.1);
+}
+
+.readMore {
+  text-align: left;
+  font-size: 16px;
+  text-align: right;
+}
+
+.readMore a {
+  color: #b1b1b1;
+  transition: color 0.3s ease;
+}
+
+.readMore a:hover {
+  color: #ff8730;
 }
 
 @media (max-width: 768px) {

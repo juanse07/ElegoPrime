@@ -1,0 +1,50 @@
+
+.box {
+    color: #2e3c49;
+    display: grid;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin: 4rem 1rem;
+    padding: 0px 180px 0px 128px;
+    gap: 3rem;
+}
+
+.box h2 {
+    font-size: 40px;
+    font-weight:600;
+    margin-bottom: 2.5rem;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 30px;
+  font-size: 17.6px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 1px #e3e3e3;
+}
+
+.card h4 {
+    font-size: 25.6px;
+    margin-bottom: 1.2rem;
+    color: #ff8730;
+}
+
+.highlight {
+    color: #ff8730;
+    font-weight:600;
+}
+
+.containerTwo img {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
