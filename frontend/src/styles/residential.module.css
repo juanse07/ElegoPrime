@@ -1,7 +1,5 @@
-
 .box {
     color: #2e3c49;
-    display: grid;
     display: grid;
     grid-template-columns: 60% 40%;
     margin: 4rem 1rem;
@@ -47,4 +45,26 @@
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .box {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 2rem;
+    padding: 0px 0px;
+    }
+
+    .box h2 {
+    font-size: 2rem;
+    text-align: center;
+    }   
+
+    .card {
+    font-size: 1rem;
+    }
+
+    .card h4 {
+    font-size: 20px;
+}
 }

@@ -13,7 +13,6 @@ const Residential = () => {
                     <h4>
                         Tailored Cleaning Services for a Higher Standard of Living
                     </h4>
-                    <p>
                         <p>
                             Providing a clean, organized, and healthy home environment is our priority.
                             Our residential cleaning service is designed for those who value their time and want to keep their home in top condition without the stress.
@@ -23,7 +22,6 @@ const Residential = () => {
                             Hiring us not only improves the appearance of your home but also contributes to your overall well-being and peace of mind.
                             It&apos;s an investment in health, comfort, and quality of life.
                         </p>
-                    </p>
                 </div>
                 <div className={styles.card}>
                     <h4>
