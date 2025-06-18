@@ -60,7 +60,7 @@ const HomeService = () => {
                     Inside cabinets<br/>
                     Inside fridge<br/>
                     Inside oven<br/>
-                    Laundry wash & dry<br/>
+                    Laundry wash and dry<br/>
                     Interior windows
                     </p>
                 </div>
