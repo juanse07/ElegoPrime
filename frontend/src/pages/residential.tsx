@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/residential.module.css';
 import LastSection from '@/components/LastSection';
+import HomeService from '@/components/HomeService';
 
 const Residential = () => {
   return (
@@ -42,6 +43,7 @@ const Residential = () => {
         <img src="/residentialimage.webp" alt="" />
       </div>
     </section>
+    <HomeService />
     <LastSection />
   </div>
 );

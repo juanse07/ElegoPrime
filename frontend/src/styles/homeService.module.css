@@ -1,0 +1,66 @@
+.pageContainer {
+  margin: 8rem 6rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.boxCustom {
+  background-color: #2e3c49;
+  box-shadow: 0px 0px 5px 1px #e3e3e3;
+  border-radius: 12px;
+  padding: 3rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: visible;
+  padding-top: 3.5rem;
+}
+
+.iconWrapper {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #45c3d4;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid white;
+}
+
+.iconCustom {
+  color: white;
+  font-size: 35px;
+}
+
+.textContent {
+  margin-top: 1rem;
+}
+
+.boxCustom h4 {
+  font-size: 25px;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+  color: #45c3d4;
+  padding-top: 5px;
+}
+
+.boxCustom p {
+  color: #fff;
+  font-size: 17.6px;
+  margin: 0;
+  line-height: 1.5;
+  padding: 8px 16px; 
+  text-align: left;
+}
+
+.content li {
+  list-style-type:none;
+}
