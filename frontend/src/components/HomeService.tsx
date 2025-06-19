@@ -1,11 +1,14 @@
 import styles from '../styles/homeService.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faSoap, faShower, faSink } from "@fortawesome/free-solid-svg-icons";
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 
 const HomeService = () => {
+const servicesSectionRef = useScrollAnimation();
   return (
     <div className={styles.pageContainer}>
-      <section className={styles.content}>
+    <section ref={servicesSectionRef} className={`${styles.content} fade-in-section`}>
                 <li className={styles.boxCustom}>
                 <div className={styles.iconWrapper}>
                     <FontAwesomeIcon icon={faBed} className={styles.iconCustom} />
@@ -60,7 +63,7 @@ const HomeService = () => {
                     Inside cabinets<br/>
                     Inside fridge<br/>
                     Inside oven<br/>
-                    Laundry wash and dry<br/>
+                    Laundry wash & fold<br/>
                     Interior windows
                     </p>
                 </div>

@@ -47,6 +47,34 @@
   object-fit: cover;
 }
 
+.bookNowButton {
+    background: #ff8730;
+    color: white;
+    border: none;
+    width: 150px;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+    align-self: flex-start;
+}
+
+.bookNowButton:hover {
+    background: #ff7f24;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #ff863085;
+}
+
+.bookNowButton:hover .arrow {
+    transform: translateX(5px);
+}
+
 @media (max-width: 768px) {
     .box {
     display: flex;

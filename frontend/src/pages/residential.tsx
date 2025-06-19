@@ -2,11 +2,39 @@ import React from 'react';
 import styles from '../styles/residential.module.css';
 import LastSection from '@/components/LastSection';
 import HomeService from '@/components/HomeService';
+import Features from '@/components/Features';
+import Testimonials from '@/components/Testimonials';
+import ContactSection from '@/components/ContactSection';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Link from 'next/link';
 
 const Residential = () => {
+const residentialSectionRef = useScrollAnimation();
+  const contactButtons = [
+    {
+      body: "Get an estimate",
+      iconType: "gauge" as const,
+      label: ""
+    },
+    {
+      body: "elegoprime@gmail.com",
+      iconType: "mail" as const,
+      label: ""
+    },
+    {
+      body: "(786) 490-3942 / (303) 596-2833",
+      iconType: "phone" as const,
+      label: "phone"
+    },
+    {
+      body: "(786) 490-3942 / (303) 596-2833",
+      iconType: "messageCircle" as const,
+      label: "text"
+    }
+  ];
   return (
   <div>
-    <section className={styles.box}>
+    <section ref={residentialSectionRef} className={`${styles.box} fade-in-section`}>
       <div className={styles.containerOne}>
         <h2>Residential Cleaning</h2>
             <div className={styles.cards}>
@@ -35,6 +63,9 @@ const Residential = () => {
                         We specialize in professional house cleaning, with a team that is trained, trustworthy, and committed to creating clean, healthy, and welcoming environments for every household we serve.
                         We know that your home is your most personal space, and we treat it as such—cleaning thoroughly, working efficiently, and <span className={styles.highlight}>always putting your comfort first</span>.
                     </p>
+                    <Link href="/booking" className={styles.bookNowButton}>
+                    Book Now <span className={styles.arrow}>→</span>
+                    </Link>
                 </div>
             </div>
       </div>
@@ -44,6 +75,9 @@ const Residential = () => {
       </div>
     </section>
     <HomeService />
+    <Features />
+    <Testimonials/>
+      <ContactSection contactButtons={contactButtons} onEstimateClick={() => setShowServiceModal(true)} />
     <LastSection />
   </div>
 );

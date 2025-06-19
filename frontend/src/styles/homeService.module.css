@@ -67,7 +67,7 @@
 
 @media (max-width: 768px) {
   .pageContainer {
-    margin: 4rem 1rem;
+    margin: 4rem 1rem 2rem 1rem;
   }
 
   .content {

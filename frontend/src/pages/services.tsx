@@ -4,6 +4,7 @@ import ReserveVideo from '@/components/ReserveVideo';
 import InfiniteSlider from "@/components/slider";
 import Category from '@/pages/category';
 import Image from 'next/image';
+import Testimonials from '@/components/Testimonials';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/services.module.css';
@@ -57,25 +58,7 @@ const Services: React.FC = () => {
     <div className={styles.servicesPage}>
       <Category />
       <ReserveVideo/>
-      <section ref={reviewSectionRef} className={`${styles.reviewSection} ${`fade-in-section`}`}>
-        <div className={styles.reviewTitle}>
-          <h2>Customer Testimonials</h2>
-          <p>Customer reviews</p>
-        </div>
-
-        <div className={styles.carouselContainer}>
-          {reviews.map((review, i) => (
-            <p
-              key={i}
-              className={`${styles.reviewText} ${
-                i === index ? styles.active : ""
-              }`}
-            >
-              {review}
-            </p>
-          ))}
-        </div>
-      </section>
+      <Testimonials/>
       <InfiniteSlider />
       <LastSection />
     </div>
